@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Learning 3D Human Shape and Pose from Dense Body Parts">
+  <meta name="keywords" content="SMPL, DensePose2SMPL, DensePose to SMPL, DaNet, Human Pose and Shape, Dense Correspondence">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning 3D Human Shape and Pose from Dense Body Parts</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://hongwenzhang.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hongwenzhang.github.io/pymaf">
+            PyMAF
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning 3D Human Shape and Pose from Dense Body Parts</h1>
+          <div class="is-size-3 publication-authors">
+                <span class="author-block">TPAMI, 2020</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/HongwenZhang" target="_blank">Hongwen Zhang</a>,</span>
+            <span class="author-block">
+              <a href="https://ttxsjie.github.io" target="_blank">Jie Cao</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://guolusjtu.github.io/guoluhomepage" target="_blank">Guo Lu</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://wlouyang.github.io" target="_blank">Wanli Ouyang</a>,
+            </span>
+            <span class="author-block">
+              <a href="http://cripac.ia.ac.cn/people/znsun/index.html" target="_blank">Zhenan Sun</a>
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/1912.13344.pdf"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+<!--               <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www."
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/HongwenZhang/DaNet-DensePose2SMPL"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-8">
+        <!-- <video id="teaser" autoplay muted loop height="100%">
+          <source src="https://teaser.mp4"
+                  type="video/mp4">
+        </video> -->
+        <img width=90% src="img/framework.png" class="center">
+        <h2 class="subtitle has-text-centered">
+          Overview of the proposed Decompose-and-aggregate Network (DaNet)
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Reconstructing 3D human shape and pose from monocular images is challenging despite the promising results achieved by the most recent learning-based methods. The commonly occurred misalignment comes from the facts that the mapping from images to the model space is highly non-linear and the rotation-based pose representation of body models is prone to result in the drift of joint positions. In this work, we investigate learning 3D human shape and pose from dense correspondences of body parts and propose a Decompose-and-aggregate Network (DaNet) to address these issues. DaNet adopts the dense correspondence maps, which densely build a bridge between 2D pixels and 3D vertices, as intermediate representations to facilitate the learning of 2D-to-3D mapping. The prediction modules of DaNet are decomposed into one global stream and multiple local streams to enable global and fine-grained perceptions for the shape and pose predictions, respectively. Messages from local streams are further aggregated to enhance the robust prediction of the rotation-based poses, where a position-aided rotation feature refinement strategy is proposed to exploit spatial relationships between body joints. Moreover, a Part-based Dropout (PartDrop) strategy is introduced to drop out dense information from intermediate representations during training, encouraging the network to focus on more complementary body parts as well as neighboring position features. The efficacy of the proposed method is validated on both indoor and real-world datasets including Human3.6M, UP3D, COCO, and 3DPW, showing that our method could significantly improve the reconstruction performance in comparison with previous state-of-the-art methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ Abstract. -->
+  <p></p>
+  <!-- Paper video. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-two-thirds">
+      <h2 class="title is-2">Results</h2>
+        <h3 align="center" class="title is-4">Results on 3DPW</h3>
+          <img width=90% src="img/demo_3dpw.png" class="center">
+        <h3 align="center" class="title is-4">Results on UP3D</h3>
+          <img width=90% src="img/demo_up3d.png" class="center">
+        <h3 align="center" style="margin-top:40px;"  class="title is-4">Results on COCO</h3>
+            <img width=90% src="img/demo_coco.png" class="center">      
+      <!-- <div class="publication-video">
+        <iframe src="https://www.you"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div> -->
+    </div>
+  </div>
+  <!--/ Paper video. -->
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+@article{zhang2020densepose2smpl,
+  title={Learning 3D Human Shape and Pose from Dense Body Parts},
+  author={Zhang, Hongwen and Cao, Jie and Lu, Guo and Ouyang, Wanli and Sun, Zhenan},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume={44},
+  number={5},
+  pages={2610--2627},
+  year={2022},
+}
+</code></pre>
+  </div>
+</section>
+
+<section class="section" id="ConcurrentWork">
+  <div class="container content">
+    <h2 class="title">Concurrent Work</h2>
+                    <p class="text-justify">
+A number of interesting and different efforts have been made concurrently and independently with ours. Please refer to the following papers for more details.<br />
+<br />
+N. Kolotouros, G. Pavlakos, and K.  Daniilidis. Convolutional  Mesh Regression for Single-image Human Shape Reconstruction, in CVPR, 2019<br />
+Y. Rong, Z. Liu, C. Li, K. Cao, and C. C. Loy. Delving Deep into Hybridannotations for 3D Human Recovery in the Wild, in ICCV, 2019<br />
+Y. Xu, S.-C. Zhu, and T. Tung. DenseRaC: Joint 3D Pose and Shape Estimation by Dense Render-and-compare. in ICCV, 2019
+                </p>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://arxiv.org/pdf/1912.13344.pdf" target="_blank">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/HongwenZhang/DaNet-DensePose2SMPL" class="external-link" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div align="center" class="container">
+      <div class="columns is-centered">
+          <div class="content">
+              The website template is borrowed from <a href="https://nerfies.github.io" target="_blank">nerfies</a>. Thanks to the original authors.
+          </div>
+        </div>
+      </div>
+  </div>
+</footer>
+
+<a ><img style="height:0;" src="//clustrmaps.com/map_v2.png?cl=ffffff&w=a&t=n&d=xhd81d6n0myL-i2i89vLEv_3iIhQ39uu8s5JjJICkxw"/></a>
+
+</body>
+</html>
