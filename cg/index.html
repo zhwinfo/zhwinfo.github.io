@@ -1,0 +1,832 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0075)http://staff.ustc.edu.cn/~lgliu/Courses/GAMES102_2020/default.html#Resource -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>计算机图形学课程主页-张鸿文</title>
+<style type="text/css">
+.ys01 {
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #57524C;
+}
+.ys02 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #6293A2;
+	text-align: center;
+}
+.ys2 {
+}
+.ys2 {
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #6293A2;
+	text-align: center;
+}
+.ys2 sup {
+	color: #57524C;
+}
+.ys3 {
+	font-weight: bold;
+}
+.ys3 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.ys3 {
+	text-align: center;
+	color: #57524C;
+}
+.ys3 {
+}
+.ys4 {
+	text-align: center;
+}
+.ys2 .ys2 {
+	color: #57524C;
+}
+.ys5 {
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.ys6 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.ys7 {
+	text-align: center;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+.teaser {
+	font-weight: bold;
+	font-family: "Times New Roman", Times, serif;
+	color: #57524C;
+	text-align: left;
+}
+.text {
+	font-family: "Times New Roman", Times, serif;
+	color: #57524C;
+	text-align: justify;
+	font-weight: normal;
+}
+.title1 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #6293A2;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+}
+.text2 {
+	text-align: justify;
+	font-family: "Times New Roman", Times, serif;
+	color: #57524C;
+	font-weight: normal;
+}
+.title1 .teaser {
+	text-align: justify;
+}
+.copyright {
+	font-family: "Times New Roman", Times, serif;
+	color: #57524C;
+	text-align: right;
+}
+.copy {
+	font-family: "Times New Roman", Times, serif;
+	text-align: right;
+	color: #57524C;
+}
+.download {
+}
+.download {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.download {
+	font-weight: bold;
+}
+.download {
+	color: #6293A2;
+}
+body {
+	background-color: #DDDDEB;
+	text-align: center;
+}
+.teaser {
+	text-align: justify;
+}
+.copy1 {
+	text-align: right;
+	color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+ table.MsoNormalTable
+	{mso-style-parent:"";
+	font-size:10.5pt;
+	font-family:"Calibri","sans-serif";
+	}
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.5pt;
+	font-family:等线;
+	}
+</style>
+<style type="text/css">/* Copyright 2014-present Evernote Corporation. All rights reserved. */
+@keyframes caretBlink {
+    from { opacity: 1.0; }
+    to { opacity: 0.0; }
+}
+
+@keyframes rotateSpinner {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+#text-tool-caret {
+    animation-name: caretBlink;  
+    animation-iteration-count: infinite;  
+    animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+    animation-duration: 1s; 
+}
+
+#en-markup-loading-spinner {
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+    width: 32px;
+    height: 32px;
+}
+
+#en-markup-loading-spinner img {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    animation-name: rotateSpinner;
+    animation-duration: 0.6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+</style><style type="text/css">/* Copyright 2014-present Evernote Corporation. All rights reserved. */
+.skitchToastBoxContainer {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 30px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    pointer-events: none;
+}
+
+.skitchToastBox {
+    width: 200px;
+    height: 16px;
+    padding: 12px;
+    background-color: rgba(47, 55, 61, 0.95);
+    border-radius: 4px;
+    color: white;
+    cursor: default;
+    font-size: 10pt;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.32);
+    font-family: 'Soleil', Helvetica, Arial, sans-serif;
+    border: 2px rgba(255, 255, 255, 0.38) solid;
+}
+
+.lang-zh-cn .skitchToastBox {
+    font-family: '微软雅黑', 'Microsoft YaHei', SimSun,
+        '&#x30E1;&#x30A4;&#x30EA;&#x30AA;', Meiryo, 'MS PGothic', 'Soleil',
+        Helvetica, Arial, sans-serif;
+}
+
+.lang-ja-jp .skitchToastBox {
+    font-family: '&#x30E1;&#x30A4;&#x30EA;&#x30AA;', Meiryo, 'MS PGothic',
+        '微软雅黑', 'Microsoft YaHei', SimSun, 'Soleil', Helvetica, Arial,
+        sans-serif;
+}
+
+.skitchToast {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: inline-block;
+    height: 10px;
+    color: #f1f5f8;
+    text-align: center;
+}
+
+.skitchVisible {
+    /* Don't remove this class it's a hack used by the Evernote Clipper */
+}
+</style><style type="text/css">/* Copyright 2014-present Evernote Corporation. All rights reserved. */
+
+@font-face {
+	font-family: 'Soleil';
+	font-weight: normal;
+	font-style: normal;
+}
+</style><style type="text/css">/* Copyright 2019-present Evernote Corporation. All rights reserved. */
+
+#en-markup-disabled {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    cursor: default;
+    -webkit-user-select: none;
+}
+
+#en-markup-alert-container {
+    position: absolute;
+    z-index: 9999;
+    width: 450px;
+    left: calc(50% - 225px);
+    top: calc(50% - 85px);
+    background-color: white;
+    box-shadow: 0 2px 7px 1px rgba(0,0,0,0.35);
+    -webkit-user-select: none;
+}
+
+#en-markup-alert-container .cell-1 {
+    position: relative;
+    height: 110px;
+    width: 105px;
+    float: left;
+    text-align: center;
+    background-position: 65% 50%;
+    background-repeat: no-repeat;
+}
+
+#en-markup-alert-container .cell-2 {
+    position: relative;
+    float: left;
+    width: 345px;
+    margin-top: 29px;
+    margin-bottom: 20px;
+}
+
+#en-markup-alert-container .cell-2 .cell-2-title {
+    margin-bottom: 5px;
+    padding-right: 30px;
+    font-size: 12pt;
+    font-family: Tahoma, Arial;
+}
+
+#en-markup-alert-container .cell-2 .cell-2-message {
+    padding-right: 30px;
+    font-size: 9.5pt;
+    font-family: Tahoma, Arial;
+}
+
+#en-markup-alert-container .cell-3 {
+    position: relative;
+    width: 450px;
+    height: 60px;
+    float: left;
+    background-color: rgb(240,240,240);
+}
+
+#en-markup-alert-container .cell-3 button {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 110px;
+    height: 36px;
+}
+
+#en-markup-alert-container .cell-3 button.alt-button {
+    position: absolute;
+    top: 12px;
+    right: 140px;
+    width: 110px;
+    height: 36px;
+}
+</style></head>
+<body data-new-gr-c-s-check-loaded="14.1223.0" data-gr-ext-installed="">
+<table width="1044" align="center" style="background-color: #ffffff; box-shadow: 0px 0px 4px 4px rgba(0,0,0,0.3); margin-top: 0.6cm; ">
+  <tbody><tr>
+    <td width="1044" height="3355" align="center" valign="top"><p>&nbsp;</p>
+      <table width="900">
+      <tbody><tr>
+        <td>
+
+<p align="center"><b><font face="黑体" size="6" color="#000000">
+<p align="center"><b><font face="黑体" size="6" color="#000000">课程主页</font></b></p>
+<p align="center"><b><font face="黑体" size="6" color="#000000">《计算机图形学》</font></b></p>
+<p align="center"><b><font face="Times New Roman" size="6" color="#000000">
+Computer Graphics</font></b></p>
+<p align="center"><font face="Times New Roman" size="4">
+<a href="https://zhanghongwen.cn" target="_blank">授课教师：张鸿文</a></font></p>
+<p align="center"><font face="Times New Roman" size="4">
+<p align="center"><b><font face="黑体" size="4" color="#000000">北京师范大学人工智能学院</font></b></p>
+<p align="center"><b><font face="黑体" size="4" color="#000000">具身运动智能研究组</font></b></p>
+		</td>
+      </tr>
+      <tr>
+        <td>
+<hr>
+		</td>
+      </tr>
+      <tr>
+        <td>
+<table border="0" width="100%" style="border-collapse: collapse">
+	<tbody><tr>
+		<td>
+		<p align="center"><font size="4"><b>网站导航</b></font></p>
+		<p align="center"><b><font size="4"><a href="#Intro">课程简介</a>&nbsp;&nbsp;&nbsp; <a href="#Syllabus">课程安排</a></a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#Experiment">实验内容</a>&nbsp;&nbsp;&nbsp; 
+		<a href="#Advanced">相关资源</a></font></b></p></td>
+	</tr>
+</tbody></table>
+		</td>
+      </tr>
+      <tr>
+        <td>
+<hr>
+		</td>
+      </tr>
+      <tr>
+        <td>
+		<p align="center">
+		<img border="0" src="demo.png" height="150"></p></td>
+      </tr>
+      <tr>
+        <td>
+		<p align="left"><b><font size="5" color="#FF0000">最新消息：</font></b></p></td>
+      </tr>
+      <tr>
+        <td>
+		<ul>
+			<li>
+			<p align="left"><font size="4" face="Times New Roman">
+			2025年3月6日：【实验内容】第一次实验作业内容已发布</font></p></li>
+			<li>
+			<p align="left"><font size="4" face="Times New Roman">
+			2025年2月25日：【课程主页】本课程的主页已搭建，后续添加模块和内容</font></p></li>
+		</ul>
+		</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><font size="5" color="#000000" face="黑体">
+		<a name="Intro"></a>课程简介：</font></td>
+      </tr>
+      <tr>
+        <td>
+		<ul>
+			<li><font face="Times New Roman" size="4">
+			伴随着人工智能技术和并行计算硬件的发展，计算机图形学在过去几十年中取得了显著进展，已经深刻影响了计算机辅助设计、影视特效和虚拟仿真等多个行业。作为计算机科学中的重要领域，计算机图形学不仅涵盖了传统的几何建模、渲染与动画技术，还不断融入新的研究方向。本课程主要介绍计算机图形学的基础理论和核心方法，同时引入当代图形学的前沿研究，如数据驱动下的图像和图形处理技术、可微渲染等内容。</font></li>
+	<font face="Times New Roman" size="4">
+			<li>
+			<p align="left">授课教师：<a href="https://zhanghongwen.cn" target="_blank">张鸿文</a></p></li>
+			<li>
+			<p align="left">理论课时间：2025年春季学期，1-16周，周二下午13:00-15:10</p></li>
+			<li>
+			<p align="left">实验课时间：2025年春季学期，2-16周，周四晚上18:00-19:40</p></li></font>
+		</ul>
+		</td>
+      </tr>
+      <tr>
+        <td><p class="title1"><font size="5" face="黑体" color="#000000">
+		<a name="Syllabus"></a>课程安排：</font></p></td>
+      </tr>
+      <tr>
+        <td>
+		<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none" width="910">
+			<tbody><tr>
+				<td valign="top" style="width: 171px; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" align="center">
+				<p class="MsoNormal"><b><font face="Times New Roman" size="4">日期</font></b></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" align="center">
+				<p class="MsoNormal"><b><font face="Times New Roman" size="4">
+				课程内容</font></b></p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" align="center">
+				<p class="MsoNormal"><b><font face="Times New Roman" size="4">
+				课程资料</font></b></p></td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第一周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.2.25</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">1-绪论</span></font></p><p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal">
+				<span lang="en-us"><font face="Times New Roman" size="4">
+				<a >PPT (待上传)</a></font></span></p><p class="MsoNormal">
+				</p></td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第二周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.3.4</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">2-基础概念</span></font></p><p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal">
+				<span lang="en-us"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/t173Pg" target="_blank">PPT</a></font></span></p><p class="MsoNormal">
+				</p></td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第三周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.3.11</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">3-几何建模1</span></font></p><p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal">
+				<span lang="en-us"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/t173Pg" target="_blank">PPT</a></font></span></p><p class="MsoNormal">
+				</p>
+				<p class="MsoNormal">
+				<span lang="en-us"><font face="Times New Roman" size="4">
+				<a href="https://www.bilibili.com/video/BV1m44y1y7bC" target="_blank">Bézier Curves参考视频</a></font></span></p><p class="MsoNormal">
+				</p>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第四周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.3.18</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">4-几何建模2</span></font></p><p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal">
+				<span lang="en-us"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/t173Pg" target="_blank">PPT</a></font></span></p><p class="MsoNormal">
+				</p>
+				</td>
+			</tr>
+			</tbody></table>
+		<p class="MsoNormal">&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td><p class="title1"><font size="5" face="黑体" color="#000000">
+		<a name="Experiment"></a>实验内容：</font></p></td>
+      </tr>
+      <tr>
+        <td>
+		<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none" width="910">
+			<tbody><tr>
+				<td valign="top" style="width: 171px; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" align="center">
+				<p class="MsoNormal"><b><font face="Times New Roman" size="4">日期</font></b></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" align="center">
+				<p class="MsoNormal"><b><font face="Times New Roman" size="4">
+				课程内容</font></b></p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" align="center">
+				<p class="MsoNormal"><b><font face="Times New Roman" size="4">
+				链接</font></b></p></td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第二周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.3.6</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">OpenGL入门</span></font></p>
+				<p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/O1GrYD" target="_blank">实验一</a></font></p>
+				
+				<p class="MsoNormal">
+				</p></td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第三周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.3.13</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">实验一答疑</span></font></p><p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/l1YiWh" target="_blank">实验一-环境配置参考操作教程</a></font></p>
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/W1tSSg" target="_blank">实验一-参考操作教程</a></font></p>
+				<p class="MsoNormal">
+				</p></td>
+			</tr>
+			<tr>
+				<td valign="top" style="width: 171px; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><span lang="en-us">
+				<font face="Times New Roman" size="4">第四周</font></span></p><p class="MsoNormal">
+				<font face="Times New Roman" size="4">
+				<span lang="EN-US">2025.3.20</span></font></p></td>
+				<td valign="top" style="width: 366px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<span lang="EN-US">变换与坐标系统</span></font></p><p class="MsoNormal">
+				</p></td>
+				<td valign="top" style="width: 277px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/J1fpuB" target="_blank">实验二</a></font></p>
+				<p class="MsoNormal"><font face="Times New Roman" size="4">
+				<a href="https://pan.bnu.edu.cn/l/O1GhT2" target="_blank">实验二-参考操作教程</a></font></p>
+				<p class="MsoNormal">
+				</p></td>
+			</tr>
+			</tbody></table>
+		<p class="MsoNormal">&nbsp;</p><p class="MsoNormal"><span lang="EN-US">
+		<font size="4" face="黑体">参考教材：</font></span></p><ul>
+			<li>
+			<p class="MsoNormal"><span lang="en-us">【<b><font face="华文楷体">计算机图形学基础教程</font></b>】</span></p></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us"><a >计算机图形学基础教程第2版，孙家广、胡事民著</a></span></p></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us">【<b><font face="华文楷体">计算机图形学（OpenGL版）</font></b>】</span></p></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us"><a href="https://book.douban.com/subject/3561816" target="_blank">计算机图形学（OpenGL版）第3版，（美）希尔（美）克雷著，胡事民等译</a></span></p></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us">【<b><font face="华文楷体">计算机图形学基础（英文教材）</font></b>】</span></p></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us"><a href="https://zhuanlan.zhihu.com/p/655456610" target="_blank">Fundamentals of Computer Graphics, by Steve Marschner, Peter Shirley</a></span></p></li>
+		</ul>
+		<p class="MsoNormal">&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+      <tr>
+        <td><b><font size="5" face="黑体"><a name="Advanced"></a>相关资源：</font></b></td>
+      </tr>
+      <tr>
+        <td>
+		<ul>
+			<li>
+			<p class="MsoNormal"><span lang="en-us">【<b><font face="华文楷体">前置基础课程</font></b>】</span></p></li>
+			<li><font size="4">GAMES001：《<a href="https://games-cn.org/games001" target="_blank">图形学中的数学</a>》</font></li>
+			<li><font size="4">GAMES002：《<a href="https://games-cn.org/games002" target="_blank">图形学研发基础工具</a>》</font></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us">【<b><font face="华文楷体">图形学相关课程</font></b>】</span></p></li>
+			<li><font size="4">清华大学-胡事民：《<a href="https://cg.cs.tsinghua.edu.cn/course" target="_blank">计算机图形学</a>》</font></li>
+			<li><font size="4">中国科学技术大学-刘利刚：《<a href="http://staff.ustc.edu.cn/~lgliu/#Teaching" target="_blank">计算机图形学</a>》</font></li>
+			<li><font size="4">加州大学圣芭芭拉分校-闫令琪：《<a href="https://games-cn.org/intro-graphics" target="_blank">现代计算机图形学入门</a>》(GAMES-101课程)</font></li>
+			<li>
+			<p class="MsoNormal"><span lang="en-us">【<b><font face="华文楷体">图形学前沿进展课程</font></b>】</span></p></li>
+			<li><font size="4">中国科学技术大学暑期课程：《<a href="https://ustc-gcl-f.github.io/course/SummerSchool_2024/index.html" target="_blank">计算机图形学前沿</a>》</font></li>
+		</ul>
+		</td>
+      </tr>
+      <tr>
+      </tr>
+      <tr>
+<!--         <td>
+<hr>
+		</td> -->
+      </tr>
+      </tbody></table>
+      <p>&nbsp;</p>
+	<p>&nbsp;</p>
+      <table width="950" align="center">
+        <tbody><tr>
+          <td><hr></td>
+        </tr>
+      </tbody></table>
+    <p>&nbsp;</p></td>
+  </tr>
+</tbody></table>
+<br><br>
+
+
+</body><div><template shadowrootmode="closed"><style>
+.common li, .common span, .common a, .common input, .common img, .common h4,
+.popup, .engine-editor{
+    direction: ltr;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 10pt;
+	font-weight: normal;
+	text-decoration: none;
+	font-family: sans-serif;
+	vertical-align: baseline;
+	background: transparent;
+	color: #202020;
+	text-align: left;
+	line-height: normal;
+	white-space: normal;
+	-webkit-box-shadow: none;
+	-webkit-border-radius:0;
+	text-shadow: none;
+	float: none;
+	overflow: visible;
+}
+.common li, .common p, .common div, .common ul, .common h4{
+	display: block;
+}
+.common h4{
+	font-weight: bold;
+}
+.common ul{
+	list-style-type: none;
+}
+.common span, .common img{
+	display: inline;
+}
+.common input{
+	display: inline-block;
+	white-space: pre;
+}
+.common a:after, .common a[href^="http"]:after {
+  content: '';
+}
+.engine-editor{
+
+    z-index: 2147483647;
+	padding: 0.5em;
+	width: 35em;
+	font-size: 9pt;
+	background: #EDEDED;
+	border: 3px solid #878787;
+	-webkit-border-radius: 5px;
+	-webkit-box-shadow: 0px 0px 8px #B0B0B0;
+}
+.engine-editor input[type='text']{
+	width: 100%;
+	margin-bottom: 0.5em;
+	padding: 0.1em 0;
+	display: block;
+	border: 1px solid #A0A0A0;
+	background: #fff;
+	-webkit-border-radius: 2px;
+}
+.engine-editor input[type='button']{
+	width: auto;
+	display: inline-block;
+	margin-top: 0.5em;
+	margin-right: 0.5em;
+	padding: 0.2em 0.4em;
+	text-align: center;
+	background: -webkit-gradient(linear, left top, left bottom, from(#F5F5F5), to(#E0E0E0));
+	border: 1px solid #A0A0A0;
+	-webkit-border-radius: 2px;
+}
+.engine-editor input[type='button']:hover{
+	border: 1px solid #7C7C7C;
+}
+.engine-editor input[type='button']:active{
+	background: -webkit-gradient(linear, left top, left bottom, from(#E0E0E0), to(#F5F5F5));
+}
+.engine-editor input[type='button']:disabled{
+	color: #AAAAAA;
+	background: -webkit-gradient(linear, left top, left bottom, from(#E7E7E7), to(#D3D3D3));
+}
+.engine-editor h4{
+	margin: 0;
+	height: 1.5em;
+	font-size: 1.1em;
+	padding-bottom: 0.3em;
+	margin-bottom: 0.5em;
+	border-bottom: 1px solid #CECECE;
+}
+.engine-editor input.close{
+	float: right;
+	margin: 0;
+	height: 1.4em;
+	width: 1.4em;
+	padding-bottom: 0.3em;
+	vertical-align: middle;
+}
+.engine-editor span.title{
+	float: left;
+	font-weight: bold;
+	line-height: 1.5em;
+}
+
+
+.popup{
+ width: 12em;
+ position: absolute;
+ background: #EDECEC;
+ border: solid 1px #AEAAA7;
+ padding: 0.3em 0.3em;
+ font-size: 9pt;
+ margin: 0;
+ list-style-type: none;
+ -webkit-box-shadow: 0px 1px 10px #ccc;
+ display: block;
+ font-family: sans-serif;
+z-index: 2147483647;
+}
+.popup li{
+ margin: 1px 0;
+ padding: 0;
+ text-align: left;
+ color: #202020;
+ display: block;
+ font-family: sans-serif;
+}
+.popup input{
+	width: 10.1em;
+}
+.popup img{
+ width: 16px;
+ height: 16px;
+ vertical-align: middle;
+ border:none;
+ margin: 0;
+ margin-right: 4px;
+ display: inline;
+}
+.popup.mainmenu > li:first-child {
+ overflow: hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+ border-bottom: solid 1px #AEAAA7;
+ margin-bottom: 0.5em;
+ padding: 0.2em 0.3em;
+}
+.popup a{
+ margin: 1px;
+ text-decoration: none;
+ color: #202020;
+ display: block;
+ padding: 0.2em 0.3em;
+ -webkit-border-radius: 3px;
+ font-family: sans-serif;
+}
+.popup a:hover, .popup a.active{
+ background: #96B8E1;
+}
+.popup .engine-name{
+ display: inline-block;
+ width: 8.5em;
+ overflow: hidden;
+ text-overflow:ellipsis;
+ white-space:nowrap;
+ vertical-align: middle;
+}
+.button {
+ position:absolute;
+ background: #fafafa;
+ background-repeat: no-repeat;
+ background-position: center center;
+ -webkit-border-radius: 3px;
+ border: 1px solid #aaaaaa;
+ width: 16px;
+ height: 16px;
+ font-family: sans-serif;
+ z-index: 2147483647;
+}
+.popup .engine-separator{
+ height: 1px;
+ margin: 3px 0;
+ background: #AEAAA7;
+}
+</style><style></style><style>.popup .engine-name, .mainmenu > li:first-child{
+ display: none;
+}
+.popup a, .popup li{
+ display: inline-block; padding: 0.2em;
+}
+.popup img{
+ margin: 0; padding: 0;
+}
+.popup {
+ width: auto;
+ padding: 0.1em;
+}
+.popup .popup{
+ white-space:nowrap;
+}
+.popup .engine-separator{
+ width: 1px; height: 20px; margin: 0 3px; padding: 0; vertical-align: middle;
+}
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

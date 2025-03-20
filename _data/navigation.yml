@@ -1,0 +1,46 @@
+# main links links
+main:
+  # - title: "About Me"
+  #   url: "/#about-me"
+
+  # - title: "Educations"
+  #   url: "/#-educations"
+
+  # - title: "News"
+  #   url: "/#-news"
+
+  # - title: "Research"
+  #   url: "/#-research"
+
+  # - title: "Motion Capture"
+  #   url: "/#-motion-capture"
+
+  # - title: "Motion Understanding"
+  #   url: "/#-motion-understanding"
+
+  # - title: "Cloth Modeling"
+  #   url: "/#-cloth-modeling"
+
+  # - title: "Human Reconstruction"
+  #   url: "/#-human-reconstruction"
+
+  # - title: "Animatable Avatar"
+  #   url: "/#-animatable-avatar"
+
+
+
+  - title: "Research"
+    url: "#-research"
+
+  - title: "Honor & Award"
+    url: "#-honor-award"
+
+  - title: "Academic Services"
+    url: "#-academic-services"
+
+  - title: "Collaborators"
+    url: "#-collaborators"
+
+  # - title: "Invited Talks"
+  #   url: "/#-invited-talks"
+
