@@ -22,7 +22,8 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 <a href='https://ai.bnu.edu.cn/xygk/szdw/fgj/9b9ed1de20d3445fbdd4a57b72b2b885.htm' target="_blank">[中文简介]</a><br />
 欢迎北师大校内外学生联系实习、申请硕士/博士研究生 [<a shape="rect" href="javascript:togglebib('recruitment')" class="togglebib">招生说明</a>]<br />
 <strong style="color:red;">2025年入学本人剩余招生名额：1名学术博士，2名专业硕士(科研补助>校外住宿费)；</strong><br />
-<strong style="color:red;">课题组合作指导剩余招生名额：1名学术硕士；</strong>
+<strong style="color:red;">课题组合作指导剩余招生名额：1名学术硕士；</strong><br />
+<strong style="color:red;">【有意保研的同学请尽早联系实习，确定科研方向，实习期间可发补助】</strong>
 <!-- <br />
 <a href='https://mp.weixin.qq.com/s/6Cguf6p2ucyk-yKk5Tv1_Q' target="_blank">欢迎选择保研北京师范大学人工智能学院！</a> -->
 
