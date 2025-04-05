@@ -57,7 +57,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
    <li>
    <a href="https://arxiv.org/abs/2412.16212" target="_blank"><strong>ManiVideo: Generating Hand-Object Manipulation Video with Dexterous and Generalizable Grasping</strong> </a><br />
    Youxin Pang, Ruizhi Shao, Jiajun Zhang, Hanzhang Tu, Yun Liu, Boyao Zhou, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
-   accepted to CVPR 2025<br />
+   accepted to CVPR 2025 highlight<br />
    <a href="https://arxiv.org/abs/2412.16212" target="_blank">pdf</a> 
    </li>
 
