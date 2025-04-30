@@ -20,10 +20,9 @@ My research interests focus on human-centered computer vision and graphics, incl
 I am looking for self-motivated Ph.D./Master students with strong research interests in 3D Vision, Computer Graphics, and Embodied AI.
 
 <a href='https://ai.bnu.edu.cn/xygk/szdw/fgj/9b9ed1de20d3445fbdd4a57b72b2b885.htm' target="_blank">[中文简介]</a><br />
-欢迎北师大校内外学生联系实习、申请硕士/博士研究生 [<a shape="rect" href="javascript:togglebib('recruitment')" class="togglebib">招生说明</a>]<br />
-<strong style="color:red;">2025年入学本人剩余招生名额：1名学术博士；</strong><br />
-<strong style="color:red;">课题组合作指导剩余招生名额：1名学术硕士；</strong><br />
-<strong style="color:red;">【有意保研的同学请尽早联系实习，确定科研方向，实习期间可发补助】</strong>
+欢迎北师大校内外同学联系实习、申请硕士/博士研究生 [<a shape="rect" href="javascript:togglebib('recruitment')" class="togglebib">招生说明</a>]<br />
+<strong style="color:red;">2025年入学本人剩余名额：1名博士；课题组合作指导剩余名额：1名硕士；</strong><br />
+<strong style="color:red;">【本科同学可随时进组科研实习，全方位带领科研入门，有意保研的大二/大三同学请尽早联系】</strong>
 <!-- <br />
 <a href='https://mp.weixin.qq.com/s/6Cguf6p2ucyk-yKk5Tv1_Q' target="_blank">欢迎选择保研北京师范大学人工智能学院！</a> -->
 
@@ -31,7 +30,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 <pre xml:space="preserve">
 招收硕士/博士研究生，
 研究方向：三维视觉、图形学、具身智能、三维数字人与人形智能体；
-欢迎通过邮件/微信了解咨询，请尽可能提前线下/远程实习
+随时欢迎了解咨询，请尽可能提前线下/远程实习
 </pre>
 </div>
 
