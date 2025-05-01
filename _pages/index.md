@@ -26,6 +26,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 <!-- <br />
 <a href='https://mp.weixin.qq.com/s/6Cguf6p2ucyk-yKk5Tv1_Q' target="_blank">欢迎选择保研北京师范大学人工智能学院！</a> -->
 
+
 <div class='text-box' id="recruitment">
 <pre xml:space="preserve">
 招收硕士/博士研究生，
