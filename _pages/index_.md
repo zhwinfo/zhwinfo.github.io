@@ -44,9 +44,9 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 <h2> <a href='index.html'>  [Sort by Topic]</a> <a href='publications.html'>  [Full List]</a> <a href='https://github.com/HongwenZhang' target="_blank">  [Code List]</a><br /></h2>
 
-🎉&ensp; 1 paper accepted to <strong style="color:red;">SIGGRAPH 2024</strong> !
+🎉&ensp; 1 paper accepted to <strong style="color:red;">SIGGRAPH 2024</strong>
 
-🎉&ensp; 7 papers accepted to <strong style="color:red;">CVPR 2024</strong> !
+🎉&ensp; 7 papers accepted to <strong style="color:red;">CVPR 2024</strong>
 
 ## 🚩 Preprints
 <div style="clear: both;">
@@ -58,6 +58,14 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
    Youxin Pang, Ruizhi Shao, Jiajun Zhang, Hanzhang Tu, Yun Liu, Boyao Zhou, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
    accepted to CVPR 2025 highlight<br />
    <a href="https://arxiv.org/abs/2412.16212" target="_blank">pdf</a> 
+   </li>
+
+   <li>
+   <a href="https://chaiying1.github.io/GAF.github.io/project_page" target="_blank"><strong>GAF: Gaussian Action Field as a Dynamic World Model for Robotic Manipulation</strong> </a><br />
+   Ying Chai*, Litao Deng*, Ruizhi Shao, Jiajun Zhang, Liangjun Xing, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
+   arXiv 2025<br />
+   <a href="https://chaiying1.github.io/GAF.github.io/project_page" target="_blank">project page</a> /
+   <a href="https://arxiv.org/pdf/2506.14135" target="_blank">pdf</a> 
    </li>
 
    <li>
