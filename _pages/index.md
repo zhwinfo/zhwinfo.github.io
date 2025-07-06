@@ -46,6 +46,8 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 <span class='anchor' id='-motion-capture'></span>
 
+🎉&ensp; 2 paper accepted to <strong style="color:red;">TPAMI 2025</strong>
+
 🎉&ensp; 1 paper accepted to <strong style="color:red;">SIGGRAPH 2024</strong>
 
 🎉&ensp; 7 papers accepted to <strong style="color:red;">CVPR 2024</strong>
