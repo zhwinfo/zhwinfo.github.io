@@ -31,11 +31,25 @@ redirect_from:
    <strong> 🚩 2025</strong>
 
    <li>
+   Xiang Deng, Youxin Pang, Xiaochen Zhao, Chao Xu, Lizhen Wang, Hongjiang Xiao, Shi Yan, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
+   <a ><strong>Stereo-Talker: Audio-driven 3D Human Synthesis with Prior-Guided Mixture-of-Experts</strong> </a><br />
+   IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
+   [<a target="_blank" href='https://arxiv.org/abs/2410.23836'>Paper</a>]
+   </li>
+
+   <li>
+   Zhanfeng Liao*, Yuelang Xu*, Zhe Li, Qijing Li, Boyao Zhou, Ruifeng Bai, Di Xu, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
+   <a ><strong>HHAvatar: Gaussian Head Avatar with Dynamic Hairs</strong> </a><br />
+   IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
+   [<a target="_blank" href='https://liaozhanfeng.github.io/HHAvatar'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2312.03029'>Paper</a>]
+   </li>
+
+   <li>
    Jiajun Zhang, Yuxiang Zhang, <strong>Hongwen Zhang</strong>, Xiao Zhou, Boyao Zhou, Ruizhi Shao, Zonghai Hu, Yebin Liu<br />
    <a ><strong>Ins-HOI: Instance Aware Human-Object Interactions Recovery</strong> </a><br />
    IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
-   [<a target="_blank" href='https://jiajunzhang16.github.io/ins-hoi'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2312.09641'>Paper</a>] [<a target="_blank" href='https://github.com/jiajunzhang16/ins-hoi'>Code</a>]
-   </li> 
+   [<a target="_blank" href='https://jiajunzhang16.github.io/ins-hoi'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2312.09641'>Paper</a>] [<a target="_blank" href='https://github.com/jiajunzhang16/ins-hoi'>Dataset</a>]
+   </li>
 
    <li>
    Jiajun Zhang, Yuxiang Zhang, Liang An, Mengcheng Li, <strong>Hongwen Zhang</strong>, Zonghai Hu, Yebin Liu<br />
@@ -44,67 +58,81 @@ redirect_from:
    [<a target="_blank" href='https://jiajunzhang16.github.io/manidext'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2409.09300'>Paper</a>]
    </li>
 
+   <li>
+   Zhanfeng Liao, Hanzhang Tu, Cheng Peng, <strong>Hongwen Zhang</strong>, Boyao Zhou, Yebin Liu<br />
+   <a ><strong>HADES: Human Avatar with Dynamic Explicit Hair Strands</strong> </a><br />
+   IEEE International Conference on Computer Vision (ICCV), 2025<br />
+   [<a >Paper</a>]
+   </li>
+
+   <li>
+   Youxin Pang, Ruizhi Shao, Jiajun Zhang, Hanzhang Tu, Yun Liu, Boyao Zhou, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
+   <a ><strong>ManiVideo: Generating Hand-Object Manipulation Video with Dexterous and Generalizable Grasping</strong> </a><br />
+   IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2025<strong style="color:red;">☆ Highlight Paper</strong><br />
+   [<a target="_blank" href='https://carlyx.github.io/manivideo'>Project Page</a>] [<a target="_blank" href='https://openaccess.thecvf.com/content/CVPR2025/papers/Pang_ManiVideo_Generating_Hand-Object_Manipulation_Video_with_Dexterous_and_Generalizable_Grasping_CVPR_2025_paper.pdf'>Paper</a>]
+   </li>
+
    <strong> 🚩 2024</strong>
 
    <li>
+      Siyou Lin, Zhe Li, Zhaoqi Su, Zerong Zheng, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
    <a ><strong>LayGA: Layered Gaussian Avatars for Animatable Clothing Transfer</strong> </a><br />
-   Siyou Lin, Zhe Li, Zhaoqi Su, Zerong Zheng, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
    SIGGRAPH Conference Proceedings, 2024<br />
       [<a target="_blank" href='https://jsnln.github.io/layga'>Project Page</a>]
    </li>
 
    <li>
+      Yuxiang Zhang, <strong>Hongwen Zhang</strong>, Liangxiao Hu, Jiajun Zhang, Hongwei Yi, Shengping Zhang, Yebin Liu<br />
    <a ><strong>ProxyCap: Real-time Monocular Full-body Capture in World Space via Human-Centric Proxy-to-Motion Learning</strong> </a><br />
-   Yuxiang Zhang, <strong>Hongwen Zhang</strong>, Liangxiao Hu, Jiajun Zhang, Hongwei Yi, Shengping Zhang, Yebin Liu<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
       [<a target="_blank" href='https://zhangyux15.github.io/ProxyCapV2'>Project Page</a>]
    </li>
 
    <li>
+      Mengcheng Li, <strong>Hongwen Zhang</strong>, Yuxiang Zhang, Ruizhi Shao, Tao Yu, Yebin Liu<br />
    <a ><strong>HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models</strong> </a><br />
-   Mengcheng Li, <strong>Hongwen Zhang</strong>, Yuxiang Zhang, Ruizhi Shao, Tao Yu, Yebin Liu<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
    [<a target="_blank" href='https://www.liuyebin.com/HHMR/HHMR.html'>Project Page</a>]
    </li>
 
    <li>
+      Liangxiao Hu, <strong>Hongwen Zhang</strong>, Yuxiang Zhang, Boyao Zhou, Boning Liu, Shengping Zhang, Liqiang Nie<br />
    <a ><strong>GaussianAvatar: Towards Realistic Human Avatar Modeling from a Single Video via Animatable 3D Gaussians</strong> </a><br />
-   Liangxiao Hu, <strong>Hongwen Zhang</strong>, Yuxiang Zhang, Boyao Zhou, Boning Liu, Shengping Zhang, Liqiang Nie<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
       [<a target="_blank" href='https://huliangxiao.github.io/GaussianAvatar'>Project Page</a>] [<a target="_blank" href='https://github.com/huliangxiao/GaussianAvatar'>Code</a>]
    </li>
 
    <li>
+      Yuelang Xu, Benwang Chen, Zhe Li, <strong>Hongwen Zhang</strong>, Lizhen Wang, Zerong Zheng, Yebin Liu<br />
    <a ><strong>Gaussian Head Avatar: Ultra High-fidelity Head Avatar via Dynamic Gaussians</strong> </a><br />
-   Yuelang Xu, Benwang Chen, Zhe Li, <strong>Hongwen Zhang</strong>, Lizhen Wang, Zerong Zheng, Yebin Liu<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
       [<a target="_blank" href='https://yuelangx.github.io/gaussianheadavatar'>Project Page</a>] [<a target="_blank" href='https://github.com/YuelangX/Gaussian-Head-Avatar'>Code</a>]
    </li>
 
    <li>
+      Ruizhi Shao, Jingxiang Sun, Cheng Peng, Zerong Zheng, Boyao Zhou, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
    <a ><strong>Control4D: Efficient 4D Portrait Editing with Text</strong> </a><br />
-   Ruizhi Shao, Jingxiang Sun, Cheng Peng, Zerong Zheng, Boyao Zhou, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
       [<a target="_blank" href='https://control4darxiv.github.io'>Project Page</a>]
    </li>
 
    <li>
+      Xin Huang, Ruizhi Shao, Qi Zhang, <strong>Hongwen Zhang</strong>, Ying Feng, Yebin Liu, Qing Wang<br />
    <a ><strong>HumanNorm: Learning Normal Diffusion Model for High-quality and Realistic 3D Human Generation</strong> </a><br />
-   Xin Huang, Ruizhi Shao, Qi Zhang, <strong>Hongwen Zhang</strong>, Ying Feng, Yebin Liu, Qing Wang<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
    [<a target="_blank" href='https://humannorm.github.io'>Project Page</a>] [<a target="_blank" href='https://github.com/xhuangcv/humannorm'>Code</a>]
    </li>
 
    <li>
+      Ronghui Li, Yuxiang Zhang, Yachao Zhang, <strong>Hongwen Zhang</strong>, Jie Guo, Yan Zhang, Yebin Liu, Xiu Li<br />
    <a ><strong>Lodge: A Coarse to Fine Diffusion Network for Long Dance Generation guided by the Characteristic Dance Primitives</strong> </a><br />
-   Ronghui Li, Yuxiang Zhang, Yachao Zhang, <strong>Hongwen Zhang</strong>, Jie Guo, Yan Zhang, Yebin Liu, Xiu Li<br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024<br />
     [<a target="_blank" href='https://li-ronghui.github.io/lodge'>Project Page</a>] [<a target="_blank" href='https://github.com/li-ronghui/LODGE'>Code</a>]
    </li>
 
    <li>
+      Junxing Hu, <strong>Hongwen Zhang</strong>, Zerui Chen, Mengcheng Li, Yunlong Wang, Yebin Liu, Zhenan Sun<br />
    <a ><strong>Learning Explicit Contact for Implicit Reconstruction of Hand-held Objects from Monocular Images</strong> </a><br />
-    Junxing Hu, <strong>Hongwen Zhang</strong>, Zerui Chen, Mengcheng Li, Yunlong Wang, Yebin Liu, Zhenan Sun<br />
     AAAI Conference on Artificial Intelligence (AAAI), 2024<br />
     [<a target="_blank" href='https://junxinghu.github.io/projects/hoi.html'>Project Page</a>] [<a target="_blank" href='https://github.com/JunxingHu/CHOI'>Code</a>]
    </li>
