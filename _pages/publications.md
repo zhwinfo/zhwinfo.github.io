@@ -28,6 +28,22 @@ redirect_from:
 <!-- <h2>Publications</h2> -->
   <!-- <div class="paper"> -->
 
+   <strong> 🚩 2025</strong>
+
+   <li>
+   Jiajun Zhang, Yuxiang Zhang, <strong>Hongwen Zhang</strong>, Xiao Zhou, Boyao Zhou, Ruizhi Shao, Zonghai Hu, Yebin Liu<br />
+   <a ><strong>Ins-HOI: Instance Aware Human-Object Interactions Recovery</strong> </a><br />
+   IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
+   [<a target="_blank" href='https://jiajunzhang16.github.io/ins-hoi'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2312.09641'>Paper</a>] [<a target="_blank" href='https://github.com/jiajunzhang16/ins-hoi'>Code</a>]
+   </li> 
+
+   <li>
+   Jiajun Zhang, Yuxiang Zhang, Liang An, Mengcheng Li, <strong>Hongwen Zhang</strong>, Zonghai Hu, Yebin Liu<br />
+   <a ><strong>ManiDext: Hand-Object Manipulation Synthesis via Continuous Correspondence Embeddings and Residual-Guided Diffusion</strong> </a><br />
+   IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
+   [<a target="_blank" href='https://jiajunzhang16.github.io/manidext'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2409.09300'>Paper</a>]
+   </li>
+
    <strong> 🚩 2024</strong>
 
    <li>
