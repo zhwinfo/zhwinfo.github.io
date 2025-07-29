@@ -36,9 +36,9 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 由于申请邮件较多，抱歉无法逐一回复，符合条件的候选同学会在三天内收到回复邮件以进一步联系；
 按近两年情况参考申请条件：
-保研：有CCF-A类论文已录用/发表或在投（需附上论文PDF）
-考研：暂无参考条件（一般为专业硕士）
-博士：有CCF-A类论文已录用/发表
+保研：有CCF-A类论文已发表/录用或在投（需附上论文PDF）
+考研：暂无参考条件（名额一般为专业硕士）
+博士：有CCF-A类论文已发表/录用
 </pre>
 </div>
 
