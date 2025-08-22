@@ -35,7 +35,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 由于名额有限，有意通过夏令营/保研/考研等方式进组的同学【均需要提前联系】；
 
 由于申请邮件较多，抱歉无法逐一回复，符合条件的候选同学会在三天内收到回复邮件以进一步联系；
-按近两年情况参考申请条件：
+近两年情况的参考申请条件：
 保研：有CCF-A类论文已发表/录用或在投（需附上论文PDF）
 考研：暂无参考条件（名额主要为专业硕士）
 博士：有CCF-A类论文已发表/录用
@@ -890,7 +890,7 @@ year={2023}
 
 # 🎖️ Honor & Award
 
-<div class='paper-box' id="CAST-YESS"><div class='paper-box-image'><div><img src='images/yess.png' alt='青托工程' width="100%" loading="eager"></div></div>
+<div class='paper-box' id="CAST-YESS"><div class='paper-box-image'><div><img src='images/cast_yess.jpeg' alt='青托工程' width="100%" loading="eager"></div></div>
 <div class='paper-box-text' markdown="1">
 <a ><strong>中国科协青年人才托举工程, Young Elite Scientist Sponsorship Program by CAST</strong></a><br />
      China Association for Science and Technology (CAST)<br />
