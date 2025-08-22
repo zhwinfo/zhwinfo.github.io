@@ -956,7 +956,7 @@ coming
 
 # 🎖️ Honor & Award
 
-<div class='paper-box' id="CAST-YESS"><div class='paper-box-image'><div><img src='images/cast_yess.jpeg' alt='青托工程' width="100%" loading="eager"></div></div>
+<div class='paper-box' id="CAST-YESS"><div class='paper-box-image'><div><img src='images/cast_yess.jpg' alt='青托工程' width="100%" loading="eager"></div></div>
 <div class='paper-box-text' markdown="1">
 <a ><strong>中国科协青年人才托举工程, Young Elite Scientist Sponsorship Program by CAST</strong></a><br />
      China Association for Science and Technology (CAST)<br />
