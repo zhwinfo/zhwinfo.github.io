@@ -52,7 +52,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 <span class='anchor' id='-motion-capture'></span>
 
-🎉&ensp; 6 paper accepted to <strong style="color:red;">TPAMI/CVPR/ICCV 2025</strong>
+🎉&ensp; 7 paper accepted to <strong style="color:red;">TPAMI/CVPR/ICCV 2025</strong>
 
 🎉&ensp; 1 paper accepted to <strong style="color:red;">SIGGRAPH 2024</strong>
 
@@ -90,7 +90,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
    <li>
    <a href="https://li-ronghui.github.io/lodgepp" target="_blank"><strong>Lodge++: High-quality and Long Dance Generation with Vivid Choreography Patterns</strong> </a><br />
    Ronghui Li, <strong>Hongwen Zhang</strong>, Yachao Zhang, Yuxiang Zhang, Youliang Zhang, Jie Guo, Yan Zhang, Xiu Li, Yebin Liu<br />
-   arXiv 2024<br />
+   accepted to TPAMI 2025<br />
    <a href="https://li-ronghui.github.io/lodgepp" target="_blank">project page</a> /
    <a href="https://arxiv.org/abs/2410.20389" target="_blank">pdf</a>
    </li>

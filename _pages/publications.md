@@ -31,6 +31,13 @@ redirect_from:
    <strong> 🚩 2025</strong>
 
    <li>
+   Ronghui Li, <strong>Hongwen Zhang</strong>, Yachao Zhang, Yuxiang Zhang, Youliang Zhang, Jie Guo, Yan Zhang, Xiu Li, Yebin Liu<br />
+   <a target="_blank"><strong>Lodge++: High-quality and Long Dance Generation with Vivid Choreography Patterns</strong> </a><br />
+   IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
+   [<a target="_blank" href='https://li-ronghui.github.io/lodgepp'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2410.20389'>Paper</a>]
+   </li>
+
+   <li>
    Xiang Deng, Youxin Pang, Xiaochen Zhao, Chao Xu, Lizhen Wang, Hongjiang Xiao, Shi Yan, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
    <a ><strong>Stereo-Talker: Audio-driven 3D Human Synthesis with Prior-Guided Mixture-of-Experts</strong> </a><br />
    IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
