@@ -52,7 +52,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 <h2> <a href='index.html'>  [Sort by Topic]</a> <a href='publications.html'>  [Full List]</a> <a href='https://github.com/HongwenZhang' target="_blank">  [Code List]</a><br /></h2>
 
-🎉&ensp; 7 paper accepted to <strong style="color:red;">TPAMI/CVPR/ICCV 2025</strong>
+🎉&ensp; 10 paper accepted to <strong style="color:red;">TPAMI/TVCG/CVPR/ICCV/NeurIPS/AAAI 2025</strong>
 
 🎉&ensp; 1 paper accepted to <strong style="color:red;">SIGGRAPH 2024</strong>
 

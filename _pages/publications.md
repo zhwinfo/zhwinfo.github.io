@@ -31,6 +31,27 @@ redirect_from:
    <strong> 🚩 2025</strong>
 
    <li>
+   Lingwei Dang, Ruizhi Shao, <strong>Hongwen Zhang</strong>, Wei MIN, Yebin Liu, Qingyao Wu<br />
+   <a target="_blank"><strong>SViMo: Synchronized Diffusion for Video and Motion Generation in Hand-object Interaction Scenarios</strong> </a><br />
+   Neural Information Processing Systems (NeurIPS), 2025<br />
+   [<a target="_blank" href='https://arxiv.org/abs/2506.02444'>Paper</a>]
+   </li>
+
+   <li>
+   Wei Yao, Yunlian Sun, <strong>Hongwen Zhang</strong>, Yebin Liu, Jinhui Tang<br />
+   <a target="_blank"><strong>HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception</strong> </a><br />
+   AAAI Conference on Artificial Intelligence (AAAI), 2025<br />
+   [<a target="_blank" href='https://arxiv.org/abs/2506.01579'>Paper</a>]
+   </li>
+
+   <li>
+   Kangyu Wang, Jian Wu, Runze Fan, <strong>Hongwen Zhang</strong>, Sio Kei Im, Lili Wang<br />
+   <a target="_blank"><strong>HFM-GS: Half-Face Mapping 3DGS Avatar Based Real-Time HMD Removal</strong> </a><br />
+   IEEE Transactions on Visualization and Computer Graphics (TVCG), 2025<br />
+   [<a target="_blank" href='https://liliwang.net/publications/PDF/2025/HFM_GS__half_face_mapping_3DGS_avatar_based_real_time_HMD_removal.pdf'>Paper</a>]
+   </li>
+
+   <li>
    Ronghui Li, <strong>Hongwen Zhang</strong>, Yachao Zhang, Yuxiang Zhang, Youliang Zhang, Jie Guo, Yan Zhang, Xiu Li, Yebin Liu<br />
    <a target="_blank"><strong>Lodge++: High-quality and Long Dance Generation with Vivid Choreography Patterns</strong> </a><br />
    IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025<br />
@@ -69,7 +90,7 @@ redirect_from:
    Zhanfeng Liao, Hanzhang Tu, Cheng Peng, <strong>Hongwen Zhang</strong>, Boyao Zhou, Yebin Liu<br />
    <a ><strong>HADES: Human Avatar with Dynamic Explicit Hair Strands</strong> </a><br />
    IEEE International Conference on Computer Vision (ICCV), 2025<br />
-   [<a >Paper</a>]
+   [<a target="_blank" href='https://openaccess.thecvf.com/content/ICCV2025/papers/Liao_HADES_Human_Avatar_with_Dynamic_Explicit_Hair_Strands_ICCV_2025_paper.pdf'>Paper</a>]
    </li>
 
    <li>
