@@ -94,17 +94,17 @@ redirect_from:
    </li>
 
    <li>
-   Wei Yao, Yunlian Sun, <strong>Hongwen Zhang</strong>, Yebin Liu, Jinhui Tang<br />
-   <a target="_blank"><strong>HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception</strong> </a><br />
-   AAAI Conference on Artificial Intelligence (AAAI), 2025 [CCF-A]<br />
-   [<a target="_blank" href='https://arxiv.org/abs/2506.01579'>Paper</a>]
-   </li>
-
-   <li>
    Jinming Zhang, Yunlian Sun, <strong>Hongwen Zhang</strong>, Jinhui Tang<br />
    <a target="_blank"><strong>EDMG: Towards Efficient Long Dance Motion Generation with Fundamental Movements from Dance Genres</strong> </a><br />
    ACM International Conference on Multimedia (MM), 2025 [CCF-A]<br />
    [<a target="_blank" href='https://yunliansun.github.io/papers/EDMG.pdf'>Paper</a>]
+   </li>
+
+   <li>
+   Wei Yao, Yunlian Sun, <strong>Hongwen Zhang</strong>, Yebin Liu, Jinhui Tang<br />
+   <a target="_blank"><strong>HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception</strong> </a><br />
+   AAAI Conference on Artificial Intelligence (AAAI), 2025 [CCF-A]<br />
+   [<a target="_blank" href='https://arxiv.org/abs/2506.01579'>Paper</a>]
    </li>
 
    <strong> 🚩 2024</strong>
