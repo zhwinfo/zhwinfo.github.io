@@ -73,7 +73,7 @@ redirect_from:
    </li>
 
    <li>
-   Lingwei Dang, Ruizhi Shao, <strong>Hongwen Zhang</strong>, Wei MIN, Yebin Liu, Qingyao Wu<br />
+   Lingwei Dang, Ruizhi Shao, <strong>Hongwen Zhang</strong>, Wei Min, Yebin Liu, Qingyao Wu<br />
    <a target="_blank"><strong>SViMo: Synchronized Diffusion for Video and Motion Generation in Hand-object Interaction Scenarios</strong> </a><br />
    Neural Information Processing Systems (NeurIPS), 2025 [CCF-A]<br />
    [<a target="_blank" href='https://arxiv.org/abs/2506.02444'>Paper</a>]
