@@ -160,13 +160,13 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2023<br 
 </div>
 
 
-<div class='paper-box' id="pymafx2022"><div class='paper-box-image'><div><img src='https://liuyebin.com/pymaf-x/files/mini-demo.gif' alt='image' width="100%" loading="lazy"></div></div>
+<div class='paper-box' id="pymafx2022"><div class='paper-box-image'><div><img src='pymaf-x/files/mini-demo.gif' alt='image' width="100%" loading="lazy"></div></div>
 <div class='paper-box-text' markdown="1">
-<a class="paper" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'pymafx2022']);" href="https://www.liuyebin.com/pymaf-x" target="_blank"><strong>PyMAF-X: Towards Well-aligned Full-body Model Regression from Monocular Images</strong></a><br />
+<a class="paper" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'pymafx2022']);" href="https://zhanghongwen.cn/pymaf-x" target="_blank"><strong>PyMAF-X: Towards Well-aligned Full-body Model Regression from Monocular Images</strong></a><br />
 <strong>Hongwen Zhang</strong>, Yating Tian, Yuxiang Zhang, Mengcheng Li, Liang An, Zhenan Sun, Yebin Liu<br />
     IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2023<br />
     <em style="color:red;">a framework for human/hand/face/full-body model reconstruction</em><br />
-    <a href="https://www.liuyebin.com/pymaf-x" target="_blank" onclick="_gaq.push(['_trackEvent', 'pymafx2022']);">project page</a> /
+    <a href="https://zhanghongwen.cn/pymaf-x" target="_blank" onclick="_gaq.push(['_trackEvent', 'pymafx2022']);">project page</a> /
     <a href="https://arxiv.org/pdf/2207.06400.pdf" target="_blank" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'pymafx2022']);">pdf</a> /
     <a href="https://www.bilibili.com/video/BV1pN4y1T7dY" target="_blank" onclick="_gaq.push(['_trackEvent', 'pymafx2022']);">video</a> /
     <a href="https://github.com/HongwenZhang/PyMAF-X" target="_blank" onclick="_gaq.push(['_trackEvent', 'Code', 'Download', 'pymafx2022']);">code</a> /
@@ -213,7 +213,7 @@ IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2023<br 
 <div class="content" onclick="expandContent()" id='content_mask'>
 
 
-<div class='paper-box' id="pymaf2021"><div class='paper-box-image'><div><img src='https://liuyebin.com/pymaf-x/files/flashmob.gif' alt='image' width="100%" loading="lazy"></div></div>
+<div class='paper-box' id="pymaf2021"><div class='paper-box-image'><div><img src='pymaf-x/files/flashmob.gif' alt='image' width="100%" loading="lazy"></div></div>
 <div class='paper-box-text' markdown="1">
 <a class="paper" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'pymaf2021']);" href="pymaf" target="_blank"><strong>PyMAF: 3D Human Pose and Shape Regression with Pyramidal Mesh Alignment Feedback Loop</strong></a><br />
     <strong>Hongwen Zhang</strong>\*, Yating Tian\*, Xinchi Zhou, Wanli Ouyang, Yebin Liu, Limin Wang, Zhenan Sun<br />
@@ -579,12 +579,12 @@ year={2023}
 <h2 id="-cloth-modeling">🚩 Animatable Clothed Human Modeling</h2>
 
 
-<div class='paper-box' id="closet2023"><div class='paper-box-image'><div><img src='https://liuyebin.com/cvpr23/closet.jpg' alt='image' width="100%" loading="lazy"></div></div>
+<div class='paper-box' id="closet2023"><div class='paper-box-image'><div><img src='images/closet.jpg' alt='image' width="100%" loading="lazy"></div></div>
 <div class='paper-box-text' markdown="1">
-<a class="paper" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'closet2023']);" href="https://www.liuyebin.com/closet" target="_blank"><strong>CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition</strong></a><br />
+<a class="paper" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'closet2023']);" href="https://zhanghongwen.cn/closet" target="_blank"><strong>CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition</strong></a><br />
     <strong>Hongwen Zhang</strong>, Siyou Lin, Ruizhi Shao, Yuxiang Zhang, Zerong Zheng, Han Huang, Yandong Guo, Yebin Liu<br />
     IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2023<br />
-    <a href="https://www.liuyebin.com/closet" target="_blank" onclick="_gaq.push(['_trackEvent', 'closet2023']);">project page</a> /
+    <a href="https://zhanghongwen.cn/closet" target="_blank" onclick="_gaq.push(['_trackEvent', 'closet2023']);">project page</a> /
     <a href="https://arxiv.org/abs/2304.03167" target="_blank" onclick="_gaq.push(['_trackEvent', 'Pub', 'Download', 'closet2023']);">pdf</a> /
     <a href="https://github.com/HongwenZhang/CloSET" target="_blank" onclick="_gaq.push(['_trackEvent', 'Code', 'Download', 'closet2023']);">code (coming)</a> /
     <a href="https://github.com/HongwenZhang/THuman-CloSET" target="_blank" onclick="_gaq.push(['_trackEvent', 'Data', 'Download', 'closet2023']);">dataset (available)</a> /

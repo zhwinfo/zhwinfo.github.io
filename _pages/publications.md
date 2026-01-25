@@ -215,7 +215,7 @@ redirect_from:
    <a ><strong>PyMAF-X: Towards Well-aligned Full-body Model Regression from Monocular Images</strong> </a><br />
    IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2023 [CCF-A]<br />
    <em style="color:red;">**a framework for human/hand/face/full-body model reconstruction**</em><br />
-      [<a target="_blank" href='https://www.liuyebin.com/pymaf-x'>Project Page</a>]  [<a target="_blank" href='https://www.bilibili.com/video/BV1pN4y1T7dY'>Video</a>] [<a target="_blank" href='https://arxiv.org/abs/2207.06400'>Paper</a>] [<a target="_blank" href='https://github.com/HongwenZhang/PyMAF-X'>Code</a>]
+      [<a target="_blank" href='https://zhanghongwen.cn/pymaf-x'>Project Page</a>]  [<a target="_blank" href='https://www.bilibili.com/video/BV1pN4y1T7dY'>Video</a>] [<a target="_blank" href='https://arxiv.org/abs/2207.06400'>Paper</a>] [<a target="_blank" href='https://github.com/HongwenZhang/PyMAF-X'>Code</a>]
   </li> 
 
    <li>
@@ -251,7 +251,7 @@ redirect_from:
    <strong>Hongwen Zhang</strong>, Siyou Lin, Ruizhi Shao, Yuxiang Zhang, Zerong Zheng, Han Huang, Yandong Guo, Yebin Liu<br />
    <a ><strong>CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition</strong> </a><br />
    IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2023 [CCF-A]<br />
-      [<a target="_blank" href='https://www.liuyebin.com/closet'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2304.03167'>Paper</a>] [<a target="_blank" href='https://github.com/HongwenZhang/THuman-CloSET'>Dataset</a>] [<a >Code (coming)</a>]
+      [<a target="_blank" href='https://zhanghongwen.cn/closet'>Project Page</a>] [<a target="_blank" href='https://arxiv.org/abs/2304.03167'>Paper</a>] [<a target="_blank" href='https://github.com/HongwenZhang/THuman-CloSET'>Dataset</a>] [<a >Code (coming)</a>]
    </li>
 
    <li>
