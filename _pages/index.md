@@ -39,7 +39,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 近两年情况的参考申请条件：
 保研：有CCF-A类论文已发表/录用/在投（需附上论文PDF）或完整的Demo作品（需演示效果）
 考研：暂无参考条件（侧重数学/408/机试成绩）
-博士：有CCF-A类论文已发表/或录用
+博士：有CCF-A类论文已发表/录用
 </pre>
 </div>
 
