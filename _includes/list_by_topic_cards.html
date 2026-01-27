@@ -1,0 +1,15 @@
+{% assign items = site.data.publications.items %}
+
+{% for p in items %}
+  {% if p.topics and p.topics contains include.topic %}
+    {% if include.featured_only %}
+      {% if p.featured %}
+        {% include card_item.html p=p show_ccf=include.show_ccf %}
+      {% endif %}
+    {% else %}
+      {% unless p.featured %}
+        {% include card_item.html p=p show_ccf=include.show_ccf %}
+      {% endunless %}
+    {% endif %}
+  {% endif %}
+{% endfor %}

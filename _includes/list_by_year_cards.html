@@ -1,0 +1,25 @@
+<div class="year-card-list" style="clear: both;">
+  {% assign idx = site.data.publications.items | size %}
+  {% for y in site.data.publications.years_order %}
+    {% unless y == "Before 2020" %}
+      {% assign year_items = site.data.publications.items | where: "year", y %}
+      {% if year_items and year_items.size > 0 %}
+        <h2><strong> 🚩 {{ y }}</strong></h2>
+        {% for p in year_items %}
+          {% include card_item.html p=p dom_suffix="-year" simple=include.simple index=idx show_ccf=include.show_ccf %}
+          {% assign idx = idx | minus: 1 %}
+        {% endfor %}
+      {% endif %}
+    {% endunless %}
+  {% endfor %}
+  {% assign before_num_items = site.data.publications.items | where_exp: "p", "p.year < 2020" %}
+  {% assign before_str_items = site.data.publications.items | where: "year", "Before 2020" %}
+  {% assign before_items = before_num_items | concat: before_str_items %}
+  {% if before_items and before_items.size > 0 %}
+    <h2><strong> 🚩 Before 2020</strong></h2>
+    {% for p in before_items %}
+      {% include card_item.html p=p dom_suffix="-year" simple=include.simple index=idx show_ccf=include.show_ccf %}
+      {% assign idx = idx | minus: 1 %}
+    {% endfor %}
+  {% endif %}
+</div>

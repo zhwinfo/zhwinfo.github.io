@@ -30,17 +30,16 @@ main:
 
 
   - title: "Research"
-    url: "#-research"
+    url: "/#-research"
 
   - title: "Honor & Award"
-    url: "#-honor-award"
+    url: "/#-honor-award"
 
   - title: "Academic Services"
-    url: "#-academic-services"
+    url: "/#-academic-services"
 
   - title: "Collaborators"
-    url: "#-collaborators"
+    url: "/#-collaborators"
 
   # - title: "Invited Talks"
   #   url: "/#-invited-talks"
-

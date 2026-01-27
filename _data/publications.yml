@@ -1,0 +1,972 @@
+# Structured publication data for year- and topic-based cards
+
+years_order:
+  - 2025
+  - 2024
+  - 2023
+  - 2022
+  - 2021
+  - 2020
+
+items:
+  # 2025
+  - id: lodgepp-2025
+    title: "Lodge++: High-quality and Long Dance Generation with Vivid Choreography Patterns"
+    authors: "Ronghui Li, Hongwen Zhang, Yachao Zhang, Yuxiang Zhang, Youliang Zhang, Jie Guo, Yan Zhang, Xiu Li, Yebin Liu"
+    venue_name: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2025
+    project_page: "https://li-ronghui.github.io/lodgepp"
+    paper: "https://arxiv.org/abs/2410.20389"
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/lodgepp.jpg"
+
+  - id: stereo-talker-2025
+    title: "Stereo-Talker: Audio-driven 3D Human Synthesis with Prior-Guided Mixture-of-Experts"
+    authors: "Xiang Deng, Youxin Pang, Xiaochen Zhao, Chao Xu, Lizhen Wang, Hongjiang Xiao, Shi Yan, Hongwen Zhang, Yebin Liu"
+    venue_name: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2025
+    paper: "https://arxiv.org/abs/2410.23836"
+    image: "images/placeholder.jpg"
+
+  - id: hhavatar-2025
+    title: "HHAvatar: Gaussian Head Avatar with Dynamic Hairs"
+    authors: "Zhanfeng Liao*, Yuelang Xu*, Zhe Li, Qijing Li, Boyao Zhou, Ruifeng Bai, Di Xu, Hongwen Zhang, Yebin Liu"
+    venue_name: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2025
+    project_page: "https://liaozhanfeng.github.io/HHAvatar"
+    paper: "https://arxiv.org/abs/2312.03029"
+    topics:
+      - Animatable Avatar
+    image: "images/placeholder.jpg"
+
+  - id: inshoi-2025
+    title: "Ins-HOI: Instance Aware Human-Object Interactions Recovery"
+    authors: "Jiajun Zhang, Yuxiang Zhang, Hongwen Zhang, Xiao Zhou, Boyao Zhou, Ruizhi Shao, Zonghai Hu, Yebin Liu"
+    venue_name: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2025
+    project_page: "https://jiajunzhang16.github.io/ins-hoi"
+    paper: "https://arxiv.org/abs/2312.09641"
+    code: "https://github.com/jiajunzhang16/ins-hoi"
+    topics:
+      - Motion Understanding
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/inshoi.jpg"
+
+  - id: manidext-2025
+    title: "ManiDext: Hand-Object Manipulation Synthesis via Continuous Correspondence Embeddings and Residual-Guided Diffusion"
+    authors: "Jiajun Zhang, Yuxiang Zhang, Liang An, Mengcheng Li, Hongwen Zhang, Zonghai Hu, Yebin Liu"
+    venue_name: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2025
+    project_page: "https://jiajunzhang16.github.io/manidext"
+    paper: "https://arxiv.org/abs/2409.09300"
+    topics:
+      - Motion Understanding
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/manidext.jpg"
+
+  - id: hfm-gs-2025
+    title: "HFM-GS: Half-Face Mapping 3DGS Avatar Based Real-Time HMD Removal"
+    authors: "Kangyu Wang, Jian Wu, Runze Fan, Hongwen Zhang, Sio Kei Im, Lili Wang"
+    venue_name: "IEEE Transactions on Visualization and Computer Graphics"
+    venue_abbr: "TVCG"
+    ccf_rank: "A"
+    year: 2025
+    paper: "https://liliwang.net/publications/PDF/2025/HFM_GS__half_face_mapping_3DGS_avatar_based_real_time_HMD_removal.pdf"
+    topics:
+      - Animatable Avatar
+    image: "images/placeholder.jpg"
+
+  - id: svimo-2025
+    title: "SViMo: Synchronized Diffusion for Video and Motion Generation in Hand-object Interaction Scenarios"
+    authors: "Lingwei Dang, Ruizhi Shao, Hongwen Zhang, Wei Min, Yebin Liu, Qingyao Wu"
+    venue_name: "Neural Information Processing Systems"
+    venue_abbr: "NeurIPS"
+    ccf_rank: "A"
+    year: 2025
+    paper: "https://arxiv.org/abs/2506.02444"
+    topics:
+      - Motion Understanding
+    image: "images/placeholder.jpg"
+
+  - id: hades-2025
+    title: "HADES: Human Avatar with Dynamic Explicit Hair Strands"
+    authors: "Zhanfeng Liao, Hanzhang Tu, Cheng Peng, Hongwen Zhang, Boyao Zhou, Yebin Liu"
+    venue_name: "IEEE International Conference on Computer Vision"
+    venue_abbr: "ICCV"
+    ccf_rank: "A"
+    year: 2025
+    paper: "https://openaccess.thecvf.com/content/ICCV2025/papers/Liao_HADES_Human_Avatar_with_Dynamic_Explicit_Hair_Strands_ICCV_2025_paper.pdf"
+    topics:
+      - Animatable Avatar
+    image: "images/placeholder.jpg"
+
+  - id: manivideo-2025
+    title: "ManiVideo: Generating Hand-Object Manipulation Video with Dexterous and Generalizable Grasping"
+    authors: "Youxin Pang, Ruizhi Shao, Jiajun Zhang, Hanzhang Tu, Yun Liu, Boyao Zhou, Hongwen Zhang, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2025
+    feature: "Highlight Paper"
+    project_page: "https://carlyx.github.io/manivideo"
+    paper: "https://openaccess.thecvf.com/content/CVPR2025/papers/Pang_ManiVideo_Generating_Hand-Object_Manipulation_Video_with_Dexterous_and_Generalizable_Grasping_CVPR_2025_paper.pdf"
+    topics:
+      - Motion Understanding
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/manivideo.png"
+
+  - id: edmg-2025
+    title: "EDMG: Towards Efficient Long Dance Motion Generation with Fundamental Movements from Dance Genres"
+    authors: "Jinming Zhang, Yunlian Sun, Hongwen Zhang, Jinhui Tang"
+    venue_name: "ACM International Conference on Multimedia"
+    venue_abbr: "MM"
+    ccf_rank: "A"
+    year: 2025
+    paper: "https://yunliansun.github.io/papers/EDMG.pdf"
+    topics:
+      - Motion Understanding
+    image: "https://yunliansun.github.io/images/edmg.png"
+
+  - id: hosig-2025
+    title: "HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception"
+    authors: "Wei Yao, Yunlian Sun, Hongwen Zhang, Yebin Liu, Jinhui Tang"
+    venue_name: "AAAI Conference on Artificial Intelligence"
+    venue_abbr: "AAAI"
+    ccf_rank: "A"
+    year: 2025
+    paper: "https://arxiv.org/abs/2506.01579"
+    topics:
+      - Motion Understanding
+    image: "https://yw0208.github.io/images/hosig.jpg"
+
+  # 2024
+  - id: layga-2024
+    title: "LayGA: Layered Gaussian Avatars for Animatable Clothing Transfer"
+    authors: "Siyou Lin, Zhe Li, Zhaoqi Su, Zerong Zheng, Hongwen Zhang, Yebin Liu"
+    venue: "SIGGRAPH Conference Proceedings"
+    venue_abbr: "SIGGRAPH"
+    ccf_rank: "A"
+    year: 2024
+    project_page: "https://jsnln.github.io/layga"
+    topics:
+      - Animatable Avatar
+      - Clothed Human
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/arXiv23/layga.jpg"
+
+  - id: proxycap-2024
+    title: "ProxyCap: Real-time Monocular Full-body Capture in World Space via Human-Centric Proxy-to-Motion Learning"
+    authors: "Yuxiang Zhang, Hongwen Zhang, Liangxiao Hu, Jiajun Zhang, Hongwei Yi, Shengping Zhang, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Motion Capture
+    featured: true
+    project_page: "https://zhangyux15.github.io/ProxyCapV2"
+    paper: "https://zhangyux15.github.io/ProxyCapV2"
+    bibtex: |
+      @inproceedings{zhang2024proxycap,
+        title={ProxyCap: Real-time Monocular Full-body Capture in World Space via Human-Centric Proxy-to-Motion Learning},
+        author={Zhang, Yuxiang and Zhang, Hongwen and Hu, Liangxiao and Zhang, Jiajun and Yi, Hongwei and Zhang, Shengping and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2024}
+      }
+    image: "images/proxycap.gif"
+
+  - id: hhmr-2024
+    title: "HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models"
+    authors: "Mengcheng Li, Hongwen Zhang, Yuxiang Zhang, Ruizhi Shao, Tao Yu, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Motion Understanding
+      - Motion Capture
+    project_page: "https://www.liuyebin.com/HHMR/HHMR.html"
+    paper: "https://www.liuyebin.com/HHMR/HHMR.html"
+    feature: "Highlight Paper"
+    bibtex: |
+      @inproceedings{li2024hhmr,
+        title={HHMR: Holistic Hand Mesh Recovery by Enhancing the Multimodal Controllability of Graph Diffusion Models},
+        author={Li, Mengcheng and Zhang, Hongwen and Zhang, Yuxiang and Shao, Ruizhi and Yu, Tao and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2024}
+      }
+    image: "images/HHMR.jpg"
+
+  - id: gaussianavatar-2024
+    title: "GaussianAvatar: Towards Realistic Human Avatar Modeling from a Single Video via Animatable 3D Gaussians"
+    authors: "Liangxiao Hu, Hongwen Zhang, Yuxiang Zhang, Boyao Zhou, Boning Liu, Shengping Zhang, Liqiang Nie"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Animatable Avatar
+    project_page: "https://huliangxiao.github.io/GaussianAvatar"
+    paper: "https://huliangxiao.github.io/GaussianAvatar"
+    code: "https://github.com/huliangxiao/GaussianAvatar"
+    bibtex: |
+      @inproceedings{hu2024gaussianavatar,
+        title={GaussianAvatar: Towards Realistic Human Avatar Modeling from a Single Video via Animatable 3D Gaussians},
+        author={Hu, Liangxiao and Zhang, Hongwen and Zhang, Yuxiang and Zhou, Boyao and Liu, Boning and Zhang, Shengping and Nie, Liqiang},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2024}
+      }
+    image: "images/GaussianAvatar.jpg"
+
+  - id: gaussian-head-avatar-2024
+    title: "Gaussian Head Avatar: Ultra High-fidelity Head Avatar via Dynamic Gaussians"
+    authors: "Yuelang Xu, Benwang Chen, Zhe Li, Hongwen Zhang, Lizhen Wang, Zerong Zheng, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Animatable Avatar
+    project_page: "https://yuelangx.github.io/gaussianheadavatar"
+    code: "https://github.com/YuelangX/Gaussian-Head-Avatar"
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/arXiv23/guassianhead.jpg"
+
+  - id: control4d-2024
+    title: "Control4D: Efficient 4D Portrait Editing with Text"
+    authors: "Ruizhi Shao, Jingxiang Sun, Cheng Peng, Zerong Zheng, Boyao Zhou, Hongwen Zhang, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    project_page: "https://control4darxiv.github.io"
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/arXiv23/control4d.jpg"
+
+  - id: humannorm-2024
+    title: "HumanNorm: Learning Normal Diffusion Model for High-quality and Realistic 3D Human Generation"
+    authors: "Xin Huang, Ruizhi Shao, Qi Zhang, Hongwen Zhang, Ying Feng, Yebin Liu, Qing Wang"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Animatable Avatar
+    project_page: "https://humannorm.github.io"
+    code: "https://github.com/xhuangcv/humannorm"
+    image: "https://xhuangcv.github.io/about/humannorm.gif"
+
+  - id: lodge-2024
+    title: "Lodge: A Coarse to Fine Diffusion Network for Long Dance Generation guided by the Characteristic Dance Primitives"
+    authors: "Ronghui Li, Yuxiang Zhang, Yachao Zhang, Hongwen Zhang, Jie Guo, Yan Zhang, Yebin Liu, Xiu Li"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Motion Understanding
+    project_page: "https://li-ronghui.github.io/lodge"
+    code: "https://github.com/li-ronghui/LODGE"
+    bibtex: |
+      @inproceedings{li2024lodge,
+        title={Lodge: A coarse to fine diffusion network for long dance generation guided by the characteristic dance primitives},
+        author={Li, Ronghui and Zhang, YuXiang and Zhang, Yachao and Zhang, Hongwen and Guo, Jie and Zhang, Yan and Liu, Yebin and Li, Xiu},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2024}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/arXiv23/lodge.jpg"
+
+  - id: choi-2024
+    title: "Learning Explicit Contact for Implicit Reconstruction of Hand-held Objects from Monocular Images"
+    authors: "Junxing Hu, Hongwen Zhang, Zerui Chen, Mengcheng Li, Yunlong Wang, Yebin Liu, Zhenan Sun"
+    venue: "AAAI Conference on Artificial Intelligence"
+    venue_abbr: "AAAI"
+    ccf_rank: "A"
+    year: 2024
+    topics:
+      - Motion Capture
+    project_page: "https://junxinghu.github.io/projects/hoi.html"
+    code: "https://github.com/JunxingHu/CHOI"
+    bibtex: |
+      @inproceedings{hu2024choi,
+        title={Learning Explicit Contact for Implicit Reconstruction of Hand-held Objects from Monocular Images},
+        author={Hu, Junxing and Zhang, Hongwen and Chen, Zerui and Li, Mengcheng and Wang, Yunlong and Liu, Yebin and Sun, Zhenan},
+        booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+        year={2024},
+      }
+    image: "images/CHOI.jpg"
+
+  # 2023
+  - id: havatar-2023
+    title: "HAvatar: High-fidelity Head Avatar via Facial Model Conditioned Neural Radiance Field"
+    authors: "Xiaochen Zhao, Lizhen Wang, Jingxiang Sun, Hongwen Zhang, Jinli Suo, Yebin Liu"
+    venue: "ACM Transactions on Graphics"
+    venue_abbr: "TOG"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "http://www.liuyebin.com/havatar"
+    paper: "https://arxiv.org/pdf/2309.17128.pdf"
+    bibtex: |
+      @article{zhao2023havatar,
+        title={HAvatar: High-fidelity Head Avatar via Facial Model Conditioned Neural Radiance Field},
+        author={Zhao, Xiaochen and Wang, Lizhen and Sun, Jingxiang and Zhang, Hongwen and Suo, Jinli and Liu, Yebin},
+        journal={ACM Transactions on Graphics (TOG)},
+        year={2023},
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/havatar.jpg"
+
+  - id: intrinsic-2023
+    title: "Leveraging Intrinsic Properties for Non-Rigid Garment Alignment"
+    authors: "Siyou Lin, Boyao Zhou, Zerong Zheng, Hongwen Zhang, Yebin Liu"
+    venue: "IEEE International Conference on Computer Vision"
+    venue_abbr: "ICCV"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Clothed Human
+    project_page: "https://jsnln.github.io/iccv2023_intrinsic/index.html"
+    paper: "https://arxiv.org/pdf/2308.09519.pdf"
+    code: "https://github.com/jsnln/IntrinsicGarmAlign"
+    bibtex: |
+      @InProceedings{lin2023leveraging,
+        title={Leveraging Intrinsic Properties for Non-Rigid Garment Alignment},
+        author={Lin, Siyou and Zhou, Boyao and Zheng, Zerong and Zhang, Hongwen and Liu, Yebin},
+        booktitle={IEEE International Conference on Computer Vision},
+        year={2023}
+      }
+    image: "images/IntrinsicCloth.jpg"
+
+  - id: caphy-2023
+    title: "CaPhy: Capturing Physical Properties for Animatable Human Avatars"
+    authors: "Zhaoqi Su, Liangxiao Hu, Siyou Lin, Hongwen Zhang, Shengping Zhang, Justus Thies, Yebin Liu"
+    venue: "IEEE International Conference on Computer Vision"
+    venue_abbr: "ICCV"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Clothed Human
+      - Animatable Avatar
+    project_page: "https://suzhaoqi.github.io/projects/CaPhy"
+    paper: "https://arxiv.org/pdf/2308.05925.pdf"
+    bibtex: |
+      @InProceedings{su2023caphy,
+        title={CaPhy: Capturing Physical Properties for Animatable Human Avatars},
+        author={Su, Zhaoqi and Hu, Liangxiao and Lin, Siyou and Zhang, Hongwen and Zhang, Shengping and Thies, Justus and Liu, Yebin},
+        booktitle={IEEE International Conference on Computer Vision},
+        year={2023}
+      }
+    image: "images/CaPhy.jpg"
+
+  - id: narrator-2023
+    title: "Narrator: Towards Natural Control of Human-Scene Interaction Generation via Relationship Reasoning"
+    authors: "Haibiao Xuan, Xiongzheng Li, Jinsong Zhang, Hongwen Zhang, Yebin Liu, Kun Li"
+    venue: "IEEE International Conference on Computer Vision"
+    venue_abbr: "ICCV"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Motion Understanding
+    project_page: "http://cic.tju.edu.cn/faculty/likun/projects/Narrator/index.html"
+    paper: "https://arxiv.org/pdf/2303.09410.pdf"
+    code: "https://github.com/HaibiaoXuan/Narrator"
+    bibtex: |
+      @InProceedings{xuan2023narrator,
+        title={Narrator: Towards Natural Control of Human-Scene Interaction Generation via Relationship Reasoning},
+        author={Xuan, Haibiao and Li, Xiongzheng and Zhang, Jinsong and Zhang, Hongwen and Liu, Yebin and Li, Kun},
+        booktitle={IEEE International Conference on Computer Vision},
+        year={2023}
+      }
+    image: "images/narrator.jpg"
+
+  - id: hmrsurvey-2023
+    title: "Recovering 3D Human Mesh from Monocular Images: A Survey"
+    authors: "Yating Tian*, Hongwen Zhang*, Yebin Liu, Limin Wang"
+    venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Motion Capture
+    featured: true
+    project_page: "https://github.com/tinatiansjz/hmr-survey"
+    paper: "https://arxiv.org/pdf/2203.01923.pdf"
+    citations_data: "6z0m_ZMAAAAJ:hMod-77fHWUC"
+    bibtex: |
+      @article{tian2023hmrsurvey,
+        title={Recovering 3D Human Mesh from Monocular Images: A Survey},
+        author={Tian, Yating and Zhang, Hongwen and Liu, Yebin and Wang, Limin},
+        journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+        year={2023}
+      }
+    image: "images/hmrsurvey.jpg"
+
+  - id: pymafx-2023
+    title: "PyMAF-X: Towards Well-aligned Full-body Model Regression from Monocular Images"
+    authors: "Hongwen Zhang, Yating Tian, Yuxiang Zhang, Mengcheng Li, Liang An, Zhenan Sun, Yebin Liu"
+    venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Motion Capture
+    featured: true
+    project_page: "https://zhanghongwen.cn/pymaf-x"
+    paper: "https://arxiv.org/abs/2207.06400"
+    code: "https://github.com/HongwenZhang/PyMAF-X"
+    video: "https://www.bilibili.com/video/BV1pN4y1T7dY"
+    citations_data: "6z0m_ZMAAAAJ:7PzlFSSx8tAC"
+    note_html: '<em style="color:red;">a framework for human/hand/face/full-body model reconstruction</em>'
+    bibtex: |
+      @article{pymafx2023,
+        title={PyMAF-X: Towards Well-aligned Full-body Model Regression from Monocular Images},
+        author={Zhang, Hongwen and Tian, Yating and Zhang, Yuxiang and Li, Mengcheng and An, Liang and Sun, Zhenan and Liu, Yebin},
+        journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+        year={2023}
+      }
+    image: "pymaf-x/files/mini-demo.gif"
+
+  - id: avatarrex-2023
+    title: "AvatarReX: Real-time Expressive Full-body Avatars"
+    authors: "Zerong Zheng, Xiaochen Zhao, Hongwen Zhang, Boning Liu, Yebin Liu"
+    venue: "ACM Transactions on Graphics, SIGGRAPH Journal Track"
+    venue_abbr: "TOG"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/AvatarRex"
+    paper: "https://arxiv.org/abs/2305.04789"
+    bibtex: |
+      @article{zheng2023avatarrex,
+        title={AvatarReX: Real-time Expressive Full-body Avatars},
+        author={Zheng, Zerong and Zhao, Xiaochen and Zhang, Hongwen and Liu, Boning and Liu, Yebin},
+        journal={ACM Transactions on Graphics (TOG)},
+        volume={42},
+        number={4},
+        year={2023},
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/siggraph23/AvatarRex.jpg"
+
+  - id: latentavatar-2023
+    title: "LatentAvatar: Learning Latent Expression Code for Expressive Neural Head Avatar"
+    authors: "Yuelang Xu, Hongwen Zhang, Lizhen Wang, Xiaochen Zhao, Han Huang, Guojun Qi, Yebin Liu"
+    venue: "SIGGRAPH Conference Proceedings"
+    venue_abbr: "SIGGRAPH"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/latentavatar"
+    paper: "https://arxiv.org/abs/2305.01190"
+    code: "https://github.com/YuelangX/LatentAvatar"
+    bibtex: |
+      @InProceedings{xu2023latentavatar,
+        title={LatentAvatar: Learning Latent Expression Code for Expressive Neural Head Avatar},
+        author={Xu, Yuelang and Zhang, Hongwen and Wang, Lizhen and Zhao, Xiaochen and Han, Huang and Guojun, Qi and Liu, Yebin},
+        booktitle={ACM SIGGRAPH 2023 Conference Proceedings},
+        year={2023}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/siggraph23/latentAvatar.jpg"
+
+  - id: avatarmav-2023
+    title: "AvatarMAV: Fast 3D Head Avatar Reconstruction Using Motion-Aware Neural Voxels"
+    authors: "Yuelang Xu, Lizhen Wang, Xiaochen Zhao, Hongwen Zhang, Yebin Liu"
+    venue: "SIGGRAPH Conference Proceedings"
+    venue_abbr: "SIGGRAPH"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/avatarmav"
+    paper: "https://arxiv.org/abs/2211.13206"
+    code: "https://github.com/YuelangX/AvatarMAV"
+    bibtex: |
+      @InProceedings{xu2023avatarmav,
+        title={AvatarMAV: Fast 3D Head Avatar Reconstruction Using Motion-Aware Neural Voxels},
+        author={Xu, Yuelang and Wang, Lizhen and Zhao, Xiaochen and Zhang, Hongwen and Liu, Yebin},
+        booktitle={ACM SIGGRAPH 2023 Conference Proceedings},
+        year={2023}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/siggraph23/AvatarMAV.jpg"
+
+  - id: styleavatar-2023
+    title: "StyleAvatar: Real-time Photo-realistic Portrait Avatar from a Single Video"
+    authors: "Lizhen Wang, Xiaochen Zhao, Jingxiang Sun, Yuxiang Zhang, Hongwen Zhang, Tao Yu, Yebin Liu"
+    venue: "SIGGRAPH Conference Proceedings"
+    venue_abbr: "SIGGRAPH"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/styleavatar/styleavatar.html"
+    paper: "https://arxiv.org/abs/2305.00942"
+    code: "https://github.com/LizhenWangT/StyleAvatar"
+    bibtex: |
+      @inproceedings{wang2023styleavatar,
+        title={StyleAvatar: Real-time Photo-realistic Portrait Avatar from a Single Video},
+        author={Wang, Lizhen and Zhao, Xiaochen and Sun, Jingxiang and Zhang, Yuxiang and Zhang, Hongwen and Yu, Tao and Liu, Yebin},
+        booktitle={ACM SIGGRAPH 2023 Conference Proceedings},
+        year={2023}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/siggraph23/styleAvatar.jpg"
+
+  - id: closet-2023
+    title: "CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition"
+    authors: "Hongwen Zhang, Siyou Lin, Ruizhi Shao, Yuxiang Zhang, Zerong Zheng, Han Huang, Yandong Guo, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "https://zhanghongwen.cn/closet"
+    paper: "https://arxiv.org/abs/2304.03167"
+    code: "https://github.com/HongwenZhang/THuman-CloSET"
+    bibtex: |
+      @inproceedings{zhang2023closet,
+        title={CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition},
+        author={Zhang, Hongwen and Lin, Siyou and Shao, Ruizhi and Zhang, Yuxiang and Zheng, Zerong and Huang, Han and Guo, Yandong and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2023}
+      }
+    image: "images/closet.jpg"
+
+  - id: tensor4d-2023
+    title: "Tensor4D: Efficient Neural 4D Decomposition for High-fidelity Dynamic Reconstruction and Rendering"
+    authors: "Ruizhi Shao, Zerong Zheng, Hanzhang Tu, Boning Liu, Hongwen Zhang, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Clothed Human
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/tensor4d/tensor4d.html"
+    paper: "https://arxiv.org/pdf/2211.11610.pdf"
+    code: "https://github.com/DSaurus/Tensor4D"
+    bibtex: |
+      @inproceedings{shao2023tensor4d,
+        title={Tensor4D: Efficient Neural 4D Decomposition for High-fidelity Dynamic Reconstruction and Rendering},
+        author={Shao, Ruizhi and Zheng, Zerong and Tu, Hanzhang and Liu, Boning and Zhang, Hongwen and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2023}
+      }
+    image: "images/tensor4d.jpg"
+
+  - id: next3d-2023
+    title: "Next3D: Generative Neural Texture Rasterization for 3D-Aware Head Avatars"
+    authors: "Jingxiang Sun, Xuan Wang, Lizhen Wang, Xiaoyu Li, Yong Zhang, Hongwen Zhang, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Animatable Avatar
+    project_page: "https://mrtornado24.github.io/Next3D"
+    paper: "https://arxiv.org/pdf/2211.11208.pdf"
+    code: "https://github.com/MrTornado24/Next3D"
+    bibtex: |
+      @inproceedings{sun2023next3d,
+        title={Next3D: Generative Neural Texture Rasterization for 3D-Aware Head Avatars},
+        author={Sun, Jingxiang and Wang, Xuan and Wang, Lizhen and Li, Xiaoyu and Zhang, Yong and Zhang, Hongwen and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2023}
+      }
+    image: "images/next3d.gif"
+
+  - id: pg-graph-2023
+    title: "Personalized Graph Generation for Monocular 3D Human Pose and Shape Estimation"
+    authors: "Junxing Hu, Hongwen Zhang, Yunlong Wang, Min Ren, Zhenan Sun"
+    venue: "IEEE Transactions on Circuits and Systems for Video Technology"
+    venue_abbr: "TCSVT"
+    year: 2023
+    paper: "https://ieeexplore.ieee.org/abstract/document/10236465"
+    image: "images/placeholder.jpg"
+
+  - id: paff-2023
+    title: "Delving Deep into Pixel Alignment Feature for Accurate Multi-view Human Mesh Recovery"
+    authors: "Kai Jia, Hongwen Zhang, Liang An, Yebin Liu"
+    venue: "AAAI Conference on Artificial Intelligence"
+    venue_abbr: "AAAI"
+    ccf_rank: "A"
+    year: 2023
+    topics:
+      - Motion Capture
+    project_page: "https://kairobo.github.io/PaFF"
+    paper: "https://arxiv.org/pdf/2301.06020.pdf"
+    code: "https://github.com/Kairobo/PaFF"
+    bibtex: |
+      @inproceedings{jia2023delving,
+        title={Delving Deep into Pixel Alignment Feature for Accurate Multi-view Human Mesh Recovery},
+        author={Jia, Kai and Zhang, Hongwen and An, Liang and Liu, Yebin},
+        booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+        year={2023},
+      }
+    image: "images/paff.jpg"
+
+  # 2022
+  - id: floren-2022
+    title: "FloRen: Real-time High-quality Human Performance Rendering via Appearance Flow Using Sparse RGB Cameras"
+    authors: "Ruizhi Shao, Liliang Chen, Zerong Zheng, Hongwen Zhang, Yuxiang Zhang, Han Huang, Yandong Guo, Yebin Liu"
+    venue: "SIGGRAPH Asia Conference Papers"
+    year: 2022
+    topics:
+      - Clothed Human
+    project_page: "http://www.liuyebin.com"
+    paper: "https://dl.acm.org/doi/abs/10.1145/3550469.3555409"
+    bibtex: |
+      @inproceedings{shao2022floren,
+        title={FloRen: Real-time High-quality Human Performance Rendering via Appearance Flow Using Sparse RGB Cameras},
+        author={Shao, Ruizhi and Chen, Liliang and Zheng, Zerong and Zhang, Hongwen and Zhang, Yuxiang and Huang, Han and Guo, Yandong and Liu, Yebin},
+        booktitle={SIGGRAPH Asia Conference Papers},
+        year={2022}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/siggraph22/floren.jpg"
+
+  - id: diffustereo-2022
+    title: "DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras"
+    authors: "Ruizhi Shao, Zerong Zheng, Hongwen Zhang, Jingxiang Sun, Yebin Liu"
+    venue: "European Conference on Computer Vision"
+    venue_abbr: "ECCV"
+    year: 2022
+    topics:
+      - Clothed Human
+    project_page: "http://www.liuyebin.com"
+    paper: "https://arxiv.org/pdf/2207.08000.pdf"
+    code: "https://github.com/DSaurus/DiffuStereo"
+    feature: "Oral Paper"
+    bibtex: |
+      @inproceedings{shao2022diffusionstereo,
+        title={DiffuStereo: High Quality Human Reconstruction via Diffusion-based Stereo Using Sparse Cameras},
+        author={Shao, Ruizhi and Zheng, Zerong and Zhang, Hongwen and Sun, Jingxiang and Liu, Yebin},
+        booktitle={European Conference on Computer Vision},
+        year={2022}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/eccv22teaser/diffustereo.jpg"
+
+  - id: fite-2022
+    title: "Learning Implicit Templates for Point-Based Clothed Human Modeling"
+    authors: "Siyou Lin, Hongwen Zhang, Zerong Zheng, Ruizhi Shao, Yebin Liu"
+    venue: "European Conference on Computer Vision"
+    venue_abbr: "ECCV"
+    year: 2022
+    topics:
+      - Animatable Avatar
+    project_page: "https://jsnln.github.io/fite"
+    paper: "https://arxiv.org/pdf/2207.06955.pdf"
+    code: "https://github.com/jsnln/fite"
+    bibtex: |
+      @inproceedings{lin2022fite,
+        title={Learning Implicit Templates for Point-Based Clothed Human Modeling},
+        author={Lin, Siyou and Zhang, Hongwen and Zheng, Zerong and Shao, Ruizhi and Liu, Yebin},
+        booktitle={European Conference on Computer Vision},
+        year={2022}
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/eccv22teaser/fite.jpg"
+
+  - id: avatarcap-2022
+    title: "AvatarCap: Animatable Avatar Conditioned Monocular Human Volumetric Capture"
+    authors: "Zhe Li, Zerong Zheng, Hongwen Zhang, Chaonan Ji, Yebin Liu"
+    venue: "European Conference on Computer Vision"
+    venue_abbr: "ECCV"
+    year: 2022
+    topics:
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/avatarcap/avatarcap.html"
+    paper: "https://arxiv.org/pdf/2207.02031.pdf"
+    code: "https://github.com/lizhe00/AvatarCap"
+    bibtex: |
+      @inproceedings{li2022avatarcap,
+        title={AvatarCap: Animatable Avatar Conditioned Monocular Human Volumetric Capture},
+        author={Li, Zhe and Zheng, Zerong and Zhang, Hongwen and Ji, Chaonan and Liu, Yebin},
+        booktitle={European Conference on Computer Vision},
+        year={2022},
+      }
+    image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/eccv22teaser/avatarcap.jpg"
+
+  - id: intaghand-2022
+    title: "Interacting Attention Graph for Single Image Two-Hand Reconstruction"
+    authors: "Mengcheng Li, Liang An, Hongwen Zhang, Lianpeng Wu, Feng Chen, Tao Yu, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2022
+    topics:
+      - Motion Capture
+    project_page: "http://www.liuyebin.com/IntagHand/Intaghand.html"
+    paper: "https://arxiv.org/pdf/2203.09364.pdf"
+    code: "https://github.com/Dw1010/IntagHand"
+    citations_data: "6z0m_ZMAAAAJ:qxL8FJ1GzNcC"
+    feature: "Oral Paper"
+    bibtex: |
+      @inproceedings{li2022interacting,
+        title={Interacting Attention Graph for Single Image Two-Hand Reconstruction},
+        author={Li, Mengcheng and An, Liang and Zhang, Hongwen and Wu, Lianpeng and Chen, Feng and Yu, Tao and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2022}
+      }
+    image: "images/intaghand_demo.jpg"
+
+  - id: doublefield-2022
+    title: "DoubleField: Bridging the Neural Surface and Radiance Fields for High-fidelity Human Reconstruction and Rendering"
+    authors: "Ruizhi Shao, Hongwen Zhang, He Zhang, Mingjia Chen, Yanpei Cao, Tao Yu, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2022
+    topics:
+      - Clothed Human
+    project_page: "http://www.liuyebin.com/dbfield/dbfield.html"
+    paper: "https://arxiv.org/pdf/2106.03798.pdf"
+    code: "https://github.com/DSaurus/DoubleField"
+    bibtex: |
+      @inproceedings{shao2022doublefield,
+        title={DoubleField: Bridging the Neural Surface and Radiance Fields for High-fidelity Human Reconstruction and Rendering},
+        author={Shao, Ruizhi and Zhang, Hongwen and Zhang, He and Chen, Mingjia and Cao, Yanpei and Yu, Tao and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2022}
+      }
+    image: "images/dbfield.jpg"
+
+  - id: slrf-2022
+    title: "Structured Local Radiance Fields for Human Avatar Modeling"
+    authors: "Zerong Zheng, Han Huang, Tao Yu, Hongwen Zhang, Yandong Guo, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2022
+    topics:
+      - Animatable Avatar
+    project_page: "https://liuyebin.com/slrf/slrf.html"
+    paper: "https://arxiv.org/pdf/2203.14478.pdf"
+    code: "https://zhengzerong.github.io"
+    bibtex: |
+      @inproceedings{zheng2022structured,
+        title={Structured Local Radiance Fields for Human Avatar Modeling},
+        author={Zheng, Zerong and Huang, Han and Yu, Tao and Zhang, Hongwen and Guo, Yandong and Liu, Yebin},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2022}
+      }
+    image: "images/slrf.jpg"
+
+  # - id: lightcap-2022
+  #   title: "Real-time Sparse-view Multi-person Total Motion Capture"
+  #   authors: "Yuxiang Zhang, Zeping Ren, Liang An, Hongwen Zhang, Tao Yu, Yebin Liu"
+  #   venue: ""
+  #   year: 2022
+  #   topics:
+  #     - Motion Capture
+  #   project_page: "http://www.liuyebin.com/realtime_cap_project/realtotalcap/realtotalcap.html"
+  #   bibtex: |
+  #     coming
+  #   image: "images/placeholder.jpg"
+
+  # 2021
+  - id: pymaf-2021
+    title: "PyMAF: 3D Human Pose and Shape Regression with Pyramidal Mesh Alignment Feedback Loop"
+    authors: "Hongwen Zhang*, Yating Tian*, Xinchi Zhou, Wanli Ouyang, Yebin Liu, Limin Wang, Zhenan Sun"
+    venue: "IEEE International Conference on Computer Vision"
+    venue_abbr: "ICCV"
+    ccf_rank: "A"
+    year: 2021
+    topics:
+      - Motion Capture
+    project_page: "https://hongwenzhang.github.io/pymaf"
+    paper: "https://arxiv.org/pdf/2103.16507.pdf"
+    code: "https://github.com/HongwenZhang/PyMAF"
+    video: "https://www.youtube.com/watch?v=yqEmznSKjYI"
+    citations_data: "6z0m_ZMAAAAJ:Zph67rFs4hoC"
+    feature: "Oral Paper"
+    bibtex: |
+      @inproceedings{pymaf2021,
+        title={PyMAF: 3D Human Pose and Shape Regression with Pyramidal Mesh Alignment Feedback Loop},
+        author={Zhang, Hongwen and Tian, Yating and Zhou, Xinchi and Ouyang, Wanli and Liu, Yebin and Wang, Limin and Sun, Zhenan},
+        booktitle={Proceedings of the IEEE International Conference on Computer Vision},
+        year={2021}
+      }
+    image: "images/pymaf.jpg"
+
+  - id: ess-nas-2021
+    title: "Evolving Search Space for Neural Architecture Search"
+    authors: "Yuanzheng Ci, Chen Lin, Ming Sun, Boyu Chen, Hongwen Zhang, Wanli Ouyang"
+    venue: "IEEE International Conference on Computer Vision"
+    venue_abbr: "ICCV"
+    ccf_rank: "A"
+    year: 2021
+    paper: "https://arxiv.org/pdf/2011.10904.pdf"
+    code: "https://github.com/orashi/NSE_NAS"
+    image: "images/ess_nas.jpg"
+
+  # 2020
+  - id: densepose2smpl-2020
+    title: "Learning 3D Human Shape and Pose from Dense Body Parts"
+    authors: "Hongwen Zhang, Jie Cao, Guo Lu, Wanli Ouyang, Zhenan Sun"
+    venue: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    venue_abbr: "TPAMI"
+    ccf_rank: "A"
+    year: 2020
+    topics:
+      - Motion Capture
+    featured: true
+    project_page: "https://hongwenzhang.github.io/DensePose2SMPL"
+    paper: "https://arxiv.org/pdf/1912.13344.pdf"
+    code: "https://github.com/HongwenZhang/DaNet-DensePose2SMPL"
+    citations_data: "6z0m_ZMAAAAJ:mB3voiENLucC"
+    note_html: '<em style="color:red;">DensePose to SMPL; part-based regressor; more robust to occlusion</em>'
+    bibtex: |
+      @article{zhang2020densepose2smpl,
+        title={Learning 3D Human Shape and Pose from Dense Body Parts},
+        author={Zhang, Hongwen and Cao, Jie and Lu, Guo and Ouyang, Wanli and Sun, Zhenan},
+        journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+        volume={44},
+        number={5},
+        pages={2610--2627},
+        year={2022},
+      }
+    image: "images/densepose2smpl.jpg"
+
+  - id: cheaper-pretraining-2020
+    title: "Cheaper Pre-training Lunch: An Efficient Paradigm for Object Detection"
+    authors: "Dongzhan Zhou*, Xinchi Zhou*, Hongwen Zhang, Shuai Yi, Wanli Ouyang"
+    venue: "European Conference on Computer Vision"
+    venue_abbr: "ECCV"
+    year: 2020
+    paper: "https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123530256.pdf"
+    image: "images/placeholder.jpg"
+
+  - id: rethinking-pseudolidar-2020
+    title: "Rethinking Pseudo-LiDAR Representation"
+    authors: "Xinzhu Ma, Shinan Liu, Zhiyi Xia, Hongwen Zhang, Xingyu Zeng, Wanli Ouyang"
+    venue: "European Conference on Computer Vision"
+    venue_abbr: "ECCV"
+    year: 2020
+    paper: "http://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123580307.pdf"
+    image: "images/RethinkingPseudoLiDAR.jpg"
+
+  - id: msg3d-2020
+    title: "Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition"
+    authors: "Ziyu Liu, Hongwen Zhang, Zhenghao Chen, Zhiyong Wang, Wanli Ouyang"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2020
+    topics:
+      - Motion Understanding
+    paper: "http://openaccess.thecvf.com/content_CVPR_2020/papers/Liu_Disentangling_and_Unifying_Graph_Convolutions_for_Skeleton-Based_Action_Recognition_CVPR_2020_paper.pdf"
+    code: "https://github.com/kenziyuliu/MS-G3D"
+    video: "https://www.youtube.com/watch?v=Vm024c-tYIE"
+    feature: "Oral Paper"
+    bibtex: |
+      @inproceedings{liu2020disentangling,
+        title={Disentangling and Unifying Graph Convolutions for Skeleton-Based Action Recognition},
+        author={Liu, Ziyu and Zhang, Hongwen and Chen, Zhenghao and Wang, Zhiyong and Ouyang, Wanli},
+        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+        year={2020}
+      }
+    image: "images/ms-g3d.jpg"
+
+  - id: face-frontalization-wild-2020
+    title: "Towards High Fidelity Face Frontalization in the Wild"
+    authors: "Jie Cao, Yibo Hu, Hongwen Zhang, Ran He, Zhenan Sun"
+    venue: "International Journal of Computer Vision"
+    venue_abbr: "IJCV"
+    ccf_rank: "A"
+    year: 2020
+    paper: "https://link.springer.com/article/10.1007/s11263-019-01229-6"
+    image: "images/faceFront.jpg"
+
+  # Before 2020 (grouped)
+  - id: danet-2019
+    title: "DaNet: Decompose-and-aggregate Network for 3D Human Shape and Pose Estimation"
+    authors: "Hongwen Zhang et al."
+    venue: "ACM International Conference on Multimedia"
+    venue_abbr: "MM"
+    ccf_rank: "A"
+    year: 2019
+    topics:
+      - Motion Capture
+    paper: "https://hongwenzhang.github.io/pdf/acmmm19DaNet.pdf"
+    code: "https://github.com/HongwenZhang/DaNet-DensePose2SMPL"
+    note_html: '<em style="color:red;">part-based method for human mesh recovery</em>'
+    bibtex: |
+      @inproceedings{zhang2019danet,
+        title={DaNet: Decompose-and-aggregate Network for 3D Human Shape and Pose Estimation},
+        author={Zhang, Hongwen and Cao, Jie and Lu, Guo and Ouyang, Wanli and Sun, Zhenan},
+        booktitle={Proceedings of the 27th ACM International Conference on Multimedia},
+        pages={935--944},
+        year={2019},
+        organization={ACM}
+      }
+    image: "images/DaNet.jpg"
+
+  - id: semantic-volume-2019
+    title: "Adversarial Learning Semantic Volume for 2D/3D Face Shape Regression in the Wild"
+    authors: "Hongwen Zhang et al."
+    venue: "IEEE Transactions on Image Processing"
+    venue_abbr: "TIP"
+    ccf_rank: "A"
+    year: 2019
+    topics:
+      - Motion Capture
+    paper: "https://openreview.net/pdf?id=gafjGfv8uR"
+    code: "https://github.com/HongwenZhang/JVCR-3Dlandmark"
+    bibtex: |
+      @article{zhang2019adversarial,
+        title={Adversarial Learning Semantic Volume for 2D/3D Face Shape Regression in the Wild},
+        author={Zhang, Hongwen and Li, Qi and Sun, Zhenan},
+        journal={IEEE Transactions on Image Processing},
+        volume={28},
+        number={9},
+        pages={4526--4540},
+        year={2019},
+        publisher={IEEE}
+      }
+    image: "images/semVol.jpg"
+
+  - id: high-fidelity-frontalization-2018
+    title: "Learning a High Fidelity Pose Invariant Model for High-resolution Face Frontalization"
+    authors: "Jie Cao et al."
+    venue: "Advances in Neural Information Processing Systems"
+    venue_abbr: "NeurIPS"
+    ccf_rank: "A"
+    year: 2018
+    paper: "http://papers.nips.cc/paper/7551-learning-a-high-fidelity-pose-invariant-model-for-high-resolution-face-frontalization.pdf"
+    image: "images/faceFront++.jpg"
+
+  - id: jvcr-icpr-2018
+    title: "Joint Voxel and Coordinate Regression for Accurate 3D Facial Landmark Localization"
+    authors: "Hongwen Zhang et al."
+    venue: "International Conference on Pattern Recognition"
+    year: 2018
+    paper: "https://arxiv.org/pdf/1801.09242.pdf"
+    code: "https://github.com/HongwenZhang/JVCR-3Dlandmark"
+    image: "images/3dlandmark.jpg"
+
+  - id: ect-facealignment-2018
+    title: "Combining Data-driven and Model-driven Methods for Robust Facial Landmark Detection"
+    authors: "Hongwen Zhang et al."
+    venue: "IEEE Transactions on Information Forensics and Security"
+    venue_abbr: "TIFS"
+    ccf_rank: "A"
+    year: 2018
+    topics:
+      - Motion Capture
+    paper: "https://arxiv.org/pdf/1611.10152.pdf"
+    code: "https://github.com/HongwenZhang/ECT-FaceAlignment"
+    bibtex: |
+      @article{zhang2018combining,
+        title={Combining data-driven and model-driven methods for robust facial landmark detection},
+        author={Zhang, Hongwen and Li, Qi and Sun, Zhenan and Liu, Yunfan},
+        journal={IEEE Transactions on Information Forensics and Security},
+        volume={13},
+        number={10},
+        pages={2409--2422},
+        year={2018},
+        publisher={IEEE}
+      }
+    image: "images/ECT.jpg"

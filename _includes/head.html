@@ -11,13 +11,13 @@
 </script>
 
 <style>
-    .content {
+    #view-topic .content {
         max-height: 400px;
         overflow: hidden;
         position: relative;
     }
 
-    .content:before {
+    #view-topic .content:before {
         content: '';
         position: absolute;
         bottom: 0;
@@ -29,13 +29,13 @@
         cursor: pointer;
     }
 
-    .content.expand:before {
+    #view-topic .content.expand:before {
         opacity: 0;
         cursor: default;
         z-index: -1;
     }
 
-    .content.expand {
+    #view-topic .content.expand {
         max-height: 99999px;
     }
 
@@ -61,11 +61,11 @@
         pointer-events: none;
     }
 
-    .content:hover .tooltip {
+    #view-topic .content:hover .tooltip {
         opacity: 1;
     }
 
-    .content.expand .tooltip {
+    #view-topic .content.expand .tooltip {
         display: none;
     }
 
@@ -163,28 +163,109 @@
 
     .sticky {
         position: fixed;
-        top: 0;
-        display: flex;
-        flex: 1;
-        justify-content: space-between;
-        transition: top 0.3s;
-        align-items: center;
-        z-index: 1000;
-    }
-
-    .sticky_mobile {
-        position: fixed;
-        top: calc(var(--vh, 1vh) * 10); /* 示例：设置 top 为 10% 视口高度 */
+        top: var(--sticky-top, 80px);
+        left: 0;
+        right: 0;
+        width: 100%;
         display: flex;
         flex: 1;
         justify-content: space-between;
         transition: top 0.3s;
         align-items: center;
         z-index: 10000;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .sticky_mobile {
+        position: fixed;
+        top: var(--sticky-top, 80px);
+        left: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        transition: top 0.3s;
+        align-items: center;
+        z-index: 10000;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .view-toggle-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin: 12px 0 18px 0;
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #D0D7DE; /* light gray */
+      background: linear-gradient(180deg, #FFFFFF 0%, #F7F9FC 100%);
+      color: #24292F; /* GitHub dark gray */
+      text-decoration: none;
+      box-shadow: 0 1px 2px rgba(31, 35, 40, 0.06);
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.05s ease;
+    }
+
+    .view-toggle i {
+      font-size: 14px;
+      color: #57606A;
+    }
+
+    .view-toggle:hover {
+      background: #F0F4F8;
+      box-shadow: 0 2px 6px rgba(31, 35, 40, 0.12);
+    }
+
+    .view-toggle:active {
+      transform: translateY(1px);
+    }
+
+    .view-toggle.active-view {
+      border-color: #6871ad; /* theme accent */
+      background: linear-gradient(180deg, #EFF2FF 0%, #E5E9FF 100%);
+      color: #1F2328;
+    }
+
+    .view-toggle.active-view i {
+      color: #6871ad;
+    }
+
+    @media (max-width: 480px) {
+      .view-toggle span {
+        font-size: 14px;
+      }
+
+      .view-toggle {
+        padding: 7px 12px;
+      }
+    }
+
+
+    /* Fast system fallback while webfonts load */
+    html, body, .masthead__menu-item {
+      font-family: "Lora", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+    h1, h2, h3, .view-toggle span {
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
     }
 
 </style>
 
+<link rel="preconnect" href="https://fonts.loli.net">
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.loli.net">
+<link rel="dns-prefetch" href="https://gstatic.loli.net">
+<link rel="preload" as="style" href="https://fonts.loli.net/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;700&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@400;700&display=swap"></noscript>
 <!-- For all browsers -->
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="preload" href="images/award-CAS.jpg" as="image">

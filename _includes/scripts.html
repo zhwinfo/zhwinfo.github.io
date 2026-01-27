@@ -25,7 +25,7 @@ hideallabs();
     }
 
     function toggleContent() {
-    	if (!showcontent){
+		if (!showcontent){
         var content = document.querySelector('.content');
         content.classList.toggle('expand');
         var btn = document.querySelector('.more-btn');
@@ -37,6 +37,10 @@ hideallabs();
             btn.style.display = 'none';
         }
         }
+    }
+
+    function handleLinkClick(e) {
+        e.stopPropagation();
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -84,18 +88,89 @@ hideallabs();
         }
     }
 
+    function suppressAutoHighlight(ms) {
+        window.__tab_user_select_until = Date.now() + ms;
+    }
+
+    function setActiveResearchTab(tabElement) {
+        var tabs = document.querySelectorAll('#research-tab-container .highlight_research_tab, #research-tab-container .research_tab');
+        tabs.forEach(function(el) { el.className = 'research_tab'; });
+        if (tabElement) {
+            tabElement.className = 'highlight_research_tab';
+        }
+    }
+
+    function getStickyTopPx() {
+        try {
+            var v = getComputedStyle(document.documentElement).getPropertyValue('--sticky-top');
+            var n = parseInt(v, 10);
+            return isNaN(n) ? 80 : Math.max(0, n);
+        } catch (e) {
+            return 80;
+        }
+    }
+
+    function scrollToTargetProperly(selector) {
+        var target = null;
+        try {
+            target = document.querySelector(selector);
+        } catch (e) {
+            target = null;
+        }
+        // If we matched a non-heading anchor (e.g., span.anchor), try the corresponding H2 explicitly.
+        if (target && target.tagName !== 'H2') {
+            var headingTarget = null;
+            try {
+                headingTarget = document.querySelector('h2' + selector);
+            } catch (e2) {
+                headingTarget = null;
+            }
+            if (headingTarget) {
+                target = headingTarget;
+            }
+        }
+        if (!target) return false;
+        var sticky = getStickyTopPx();
+        var rect = target.getBoundingClientRect();
+        var y = window.pageYOffset + rect.top - sticky;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        return true;
+    }
+
     function toggle_research_vis(target, tabElement) {
         var is_current_summary = 0;
 
-        if (!target == ""){
-        	window.location.href = target
+        function updateCurrentActiveIndex() {
+            if (!tabElement) return;
+            var idx = -1;
+            if (tabElement === tab_a) {
+                idx = 0;
+            } else if (tabElement === tab_b) {
+                idx = 1;
+            } else if (tabElement === tab_c) {
+                idx = 2;
+            } else if (tabElement === tab_d) {
+                idx = 3;
+            }
+            if (idx >= 0) {
+                window.__current_active_idx = idx;
+            }
         }
 
-        var e = document.getElementsByClassName("highlight_research_tab");
-        for (var i = 0; i < e.length; i++) {
-            e[i].className = "research_tab";
+        if (target && target !== "") {
+            setActiveResearchTab(tabElement);
+            suppressAutoHighlight(1200);
+            updateCurrentActiveIndex();
+            if (!scrollToTargetProperly(target)) {
+                try {
+                    window.location.hash = target.replace('#', '');
+                } catch (e) {}
+            }
+        } else {
+            setActiveResearchTab(tabElement);
+            suppressAutoHighlight(1200);
+            updateCurrentActiveIndex();
         }
-        tabElement.className = "highlight_research_tab"
     }
 
 </script>
@@ -143,85 +218,103 @@ if (window.screen.width < 500) {
 
     const buttonContainer = document.getElementById('research-tab-container');
     const placeholder = document.getElementById('all_tab_place');
-    var content = document.querySelector('.content');
+    var content = document.querySelector('#view-topic .content');
 
-    const buttonOffsetTop = buttonContainer.offsetTop;
-
-    // const placeholder = document.getElementById('tab_a_place');
     const tab_b_placeholder = document.getElementById('tab_b_place');
     const tab_c_placeholder = document.getElementById('tab_c_place');
     const tab_d_placeholder = document.getElementById('tab_d_place');
     const end_placeholder = document.getElementById('end_place');
 
-    const mask_placeholder = document.getElementById('content_mask');
+    if (buttonContainer && placeholder && content && tab_a && tab_b && tab_c && tab_d && tab_b_placeholder && tab_c_placeholder && tab_d_placeholder && end_placeholder) {
+        const buttonOffsetTop = buttonContainer.offsetTop;
 
-    // const tab_b_placeholder = document.getElementById('zhang2019adversarial');
-    // const tab_c_placeholder = document.getElementById('Lodge');
-    // const tab_d_placeholder = document.getElementById('floren2022');
-    // const end_placeholder = document.getElementById('next3d');
-
-    window.addEventListener('scroll', function() {
-
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const end_OffsetTop = end_placeholder.getBoundingClientRect().top;
-        const mask_OffsetTop = mask_placeholder.getBoundingClientRect().top;
-
-        if (scrollTop >= buttonOffsetTop && end_OffsetTop > 0) {
-
-	        if (content.classList.contains('expand')) {
+        function updateSticky(scrollTop) {
+            if (scrollTop >= buttonOffsetTop) {
+                var height = buttonContainer.offsetHeight;
+                placeholder.style.height = height + 'px';
 
                 if (window.screen.width < 1024) {
                     buttonContainer.classList.add('sticky_mobile');
+                    buttonContainer.classList.remove('sticky');
                 } else {
                     buttonContainer.classList.add('sticky');
+                    buttonContainer.classList.remove('sticky_mobile');
                 }
-
-                const tab_b_OffsetTop = tab_b_placeholder.getBoundingClientRect().top;
-                const tab_c_OffsetTop = tab_c_placeholder.getBoundingClientRect().top;
-                const tab_d_OffsetTop = tab_d_placeholder.getBoundingClientRect().top;
-
-                if (tab_b_OffsetTop > 0) {
-                    toggle_research_vis("", tab_a);
-                } else {
-
-                    if (tab_c_OffsetTop > 0) {
-                        toggle_research_vis("", tab_b);
-                    } else {
-                            if (tab_d_OffsetTop > 0) {
-                            toggle_research_vis("", tab_c);
-                        } else {        
-                            toggle_research_vis("", tab_d);
-                        }
-                    }
-                }
-	        } else {
-                if (mask_OffsetTop < 0) {
-                    if (window.screen.width < 1024) {
-                        buttonContainer.classList.remove('sticky_mobile');
-                    } else {
-                        buttonContainer.classList.remove('sticky');
-                    }
-                } else {
-                    if (window.screen.width < 1024) {
-                        buttonContainer.classList.add('sticky_mobile');
-                    } else {
-                        buttonContainer.classList.add('sticky');
-                    }
-                }
-            }
-        } else {
-        	if (window.screen.width < 1024) {
-		    	buttonContainer.classList.remove('sticky_mobile');
-		    } else {
-		    	buttonContainer.classList.remove('sticky');
-		    }
-
-            if (end_OffsetTop > 0) {
-                toggle_research_vis("", tab_a);
             } else {
-                toggle_research_vis("", tab_d);
+                placeholder.style.height = '0px';
+                buttonContainer.classList.remove('sticky');
+                buttonContainer.classList.remove('sticky_mobile');
             }
-            
         }
-    });
+
+        function updateActiveTab() {
+            if (window.__tab_user_select_until && Date.now() < window.__tab_user_select_until) {
+                return;
+            }
+            var sticky = getStickyTopPx();
+            var headings = [
+                document.querySelector('h2#-motion-capture'),
+                document.querySelector('h2#-motion-understanding'),
+                document.querySelector('h2#-human-reconstruction'),
+                document.querySelector('h2#-animatable-avatar')
+            ];
+            var tabs = [tab_a, tab_b, tab_c, tab_d];
+            var candidateIdx = 0;
+            for (var i = 0; i < headings.length; i++) {
+                var h = headings[i];
+                if (!h) {
+                    continue;
+                }
+                var top = h.getBoundingClientRect().top;
+                if (top - sticky <= 8) {
+                    candidateIdx = i;
+                } else {
+                    break;
+                }
+            }
+            if (typeof window.__current_active_idx !== 'number') {
+                window.__current_active_idx = candidateIdx;
+                setActiveResearchTab(tabs[candidateIdx]);
+                return;
+            }
+            if (candidateIdx !== window.__current_active_idx) {
+                var delta = headings[candidateIdx] ? headings[candidateIdx].getBoundingClientRect().top - sticky : 0;
+                if (Math.abs(delta) > 24) {
+                    window.__current_active_idx = candidateIdx;
+                    setActiveResearchTab(tabs[candidateIdx]);
+                }
+            }
+        }
+
+        function onScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            updateSticky(scrollTop);
+            updateActiveTab();
+        }
+
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('resize', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            updateSticky(scrollTop);
+        });
+    }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function updateStickyTopOffset() {
+        var root = document.documentElement;
+        if (!root) return;
+        var defaultOffset = 80;
+        var masthead = document.querySelector('.masthead');
+        var offset = defaultOffset;
+        if (masthead && masthead.offsetHeight) {
+            offset = masthead.offsetHeight + 8;
+        }
+        root.style.setProperty('--sticky-top', offset + 'px');
+    }
+
+    updateStickyTopOffset();
+    window.addEventListener('resize', updateStickyTopOffset);
+});
 </script>
