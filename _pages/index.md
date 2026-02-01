@@ -39,7 +39,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 近两年情况的参考申请条件：
 保研：有CCF-A类论文已发表/录用/在投（需附上论文PDF）或完整的Demo作品（需演示效果）
 考研：暂无参考条件（侧重数学/408/机试成绩）
-博士：有CCF-A类论文已发表/录用
+博士：有CCF-A类论文已发表/录用且有完整的Demo作品
 </pre>
 </div>
 
@@ -56,63 +56,28 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 🎉&ensp; 10 paper accepted to <strong style="color:red;">TPAMI/TVCG/CVPR/ICCV/NeurIPS/AAAI 2025</strong>
 
-🎉&ensp; 1 paper accepted to <strong style="color:red;">SIGGRAPH 2024</strong>
-
-🎉&ensp; 7 papers accepted to <strong style="color:red;">CVPR 2024</strong>
+🎉&ensp; 8 paper accepted to <strong style="color:red;">CVPR/SIGGRAPH 2024</strong>
 
 ## 🚩 Preprints
 <div style="clear: both;">
 
-   <ul>
-
-   <li>
-   <a href="https://arxiv.org/abs/2412.16212" target="_blank"><strong>ManiVideo: Generating Hand-Object Manipulation Video with Dexterous and Generalizable Grasping</strong> </a><br />
-   Youxin Pang, Ruizhi Shao, Jiajun Zhang, Hanzhang Tu, Yun Liu, Boyao Zhou, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
-   accepted to CVPR 2025 highlight<br />
-   <a href="https://arxiv.org/abs/2412.16212" target="_blank">pdf</a> 
-   </li>
-
-   <li>
-   <a href="https://chaiying1.github.io/GAF.github.io/project_page" target="_blank"><strong>GAF: Gaussian Action Field as a Dynamic World Model for Robotic Manipulation</strong> </a><br />
-   Ying Chai*, Litao Deng*, Ruizhi Shao, Jiajun Zhang, Liangjun Xing, <strong>Hongwen Zhang</strong>, Yebin Liu<br />
-   arXiv 2025<br />
-   <a href="https://chaiying1.github.io/GAF.github.io/project_page" target="_blank">project page</a> /
-   <a href="https://arxiv.org/pdf/2506.14135" target="_blank">pdf</a> 
-   </li>
-
-   <li>
-   <a href="https://arxiv.org/pdf/2405.20330v2" target="_blank"><strong>4DHands: Reconstructing Interactive Hands in 4D with Transformers</strong> </a><br />
-   Dixuan Lin, Yuxiang Zhang, Mengcheng Li, Yebin Liu, Wei Jing, Qi Yan, Qianying Wang, <strong>Hongwen Zhang</strong><br />
-   arXiv 2024<br />
-   <a href="https://4dhands.github.io" target="_blank">project page</a> /
-   <a href="https://arxiv.org/pdf/2405.20330v2" target="_blank">pdf</a> /
-   <a href="https://github.com/LinDixuan/OmniHands" target="_blank">code</a>
-   </li>
-
-   <li>
-   <a href="https://li-ronghui.github.io/lodgepp" target="_blank"><strong>Lodge++: High-quality and Long Dance Generation with Vivid Choreography Patterns</strong> </a><br />
-   Ronghui Li, <strong>Hongwen Zhang</strong>, Yachao Zhang, Yuxiang Zhang, Youliang Zhang, Jie Guo, Yan Zhang, Xiu Li, Yebin Liu<br />
-   accepted to TPAMI 2025<br />
-   <a href="https://li-ronghui.github.io/lodgepp" target="_blank">project page</a> /
-   <a href="https://arxiv.org/abs/2410.20389" target="_blank">pdf</a>
-   </li>
-
-   </ul>
+   {% for p in site.data.preprint.items %}
+   {% include card_item.html p=p show_ccf=false %}
+   {% endfor %}
 
 </div>
 
 <div class="view-toggle-bar">
-  <a href='/?view=topic#-research' class='view-toggle active-view' data-view='topic'><i class="fas fa-layer-group"></i><span>Sort by Topic</span></a>
-  <a href='/?view=year#-research' class='view-toggle' data-view='year'><i class="fas fa-calendar-alt"></i><span>Sort by Year</span></a>
-  <a href='publications.html' class='view-toggle'><i class="fas fa-list"></i><span>Full List</span></a>
-  <a href='https://github.com/HongwenZhang' target="_blank" class='view-toggle'><i class="fab fa-github"></i><span>Code List</span></a>
+  <a href='/?view=topic#-research' class='view-toggle active-view' data-view='topic'><i class="fas fa-layer-group"></i><span>View by Topic</span></a>
+  <a href='/?view=year#-research' class='view-toggle' data-view='year'><i class="fas fa-calendar-alt"></i><span>View by Year</span></a>
+  <a href='publications.html' class='view-toggle'><i class="fas fa-list"></i><span>All Publications</span></a>
 </div>
 
 <div id="view-topic">
   <div style="display: flex;" class="tab-container" id="research-tab-container">
     <button class="highlight_research_tab" onclick="toggle_research_vis('#-motion-capture', this)"  id="tab_a">Motion Capture</button>
     <button class="research_tab" onclick="toggle_research_vis('#-motion-understanding', this); toggleContent()"  id="tab_b">Motion Generation</button>
-    <button class="research_tab" onclick="toggle_research_vis('#-human-reconstruction', this); toggleContent()"  id="tab_c">Human Reconcstruction</button>
+    <button class="research_tab" onclick="toggle_research_vis('#-human-reconstruction', this); toggleContent()"  id="tab_c">Human Reconstruction</button>
     <button class="research_tab" onclick="toggle_research_vis('#-animatable-avatar', this); toggleContent()"  id="tab_d">Animatable Avatar</button>
   </div>
   <div class="placeholder" id="all_tab_place"></div>
