@@ -1,0 +1,21 @@
+items:
+  - id: gaf-2025
+    title: "GAF: Gaussian Action Field as a Dynamic World Model for Robotic Manipulation"
+    authors: "Ying Chai*, Litao Deng*, Ruizhi Shao, Jiajun Zhang, Liangjun Xing, Hongwen Zhang, Yebin Liu"
+    venue_name: "arXiv 2506.14135, accepted to ICRA"
+    venue_abbr: ""
+    year: 2026
+    project_page: "https://chaiying1.github.io/GAF.github.io/project_page"
+    paper: "https://arxiv.org/pdf/2506.14135"
+    image: "https://raw.githubusercontent.com/ChaiYing1/GAF.github.io/refs/heads/main/project_page/files/start.png"
+
+  - id: 4dhands-2024
+    title: "4DHands: Reconstructing Interactive Hands in 4D with Transformers"
+    authors: "Dixuan Lin, Yuxiang Zhang, Mengcheng Li, Wei Jing, Qi Yan, Qianying Wang, Yebin Liu, Hongwen Zhang"
+    venue_name: "arXiv 2405.20330"
+    venue_abbr: ""
+    year: 2024
+    project_page: "https://4dhands.github.io"
+    paper: "https://arxiv.org/pdf/2405.20330v2"
+    code: "https://github.com/LinDixuan/OmniHands"
+    image: "https://raw.githubusercontent.com/LinDixuan/OmniHands/refs/heads/main/assets/demo.png"
