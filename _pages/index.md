@@ -199,7 +199,14 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 <span class='anchor' id='-honor-award'></span>
 
-# 🎖️ Honor & Award
+# 🎖️ Honor & Awards
+
+<div class='paper-box' id="CAST-YESS"><div class='paper-box-image'><div><img src='https://topscinet.com/static/images/logo2.jpg' alt='WorldTopScientists' width="100%" loading="eager"></div></div>
+<div class='paper-box-text' markdown="1">
+<a ><strong>Stanford University’s List of "World's Top 2% Scientists"</strong></a><br />
+斯坦福全球前2%顶尖科学家榜单, by Stanford & Elsevier<br />
+</div>
+</div>
 
 <div class='paper-box' id="CAST-YESS"><div class='paper-box-image'><div><img src='images/cast_yess.jpg' alt='青托工程' width="100%" loading="eager"></div></div>
 <div class='paper-box-text' markdown="1">
@@ -219,8 +226,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 # 📑 Academic Services
 
-Reviewer for Journals: TPAMI, IJCV, TIP, TVCG, TNNLS, TMM, TCSVT, CVIU, etc. <br />
-Reviewer for Conferences: CVPR, ICCV, ECCV, SIGGRAPH, NeurIPS, ICLR, ICML, 3DV, etc.
+Technical Papers Committee for SIGGRAPH (Asia)
 
 <span class='anchor' id='-collaborators'></span>
 
