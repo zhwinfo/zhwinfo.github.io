@@ -95,7 +95,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
     <span class='anchor' id='-motion-understanding'></span>
     <h2 id="-motion-understanding">🚩 Motion Understanding and Generation</h2>
 
-    {% include list_by_topic_cards.html topic="Motion Understanding" featured_only=false show_ccf=false %}
+    {% include list_by_topic_cards.html topic="Motion Generation" featured_only=false show_ccf=false %}
 
     <div class="placeholder" id="tab_c_place"></div>
 

@@ -19,6 +19,8 @@ items:
     year: 2025
     project_page: "https://li-ronghui.github.io/lodgepp"
     paper: "https://arxiv.org/abs/2410.20389"
+    topics:
+      - Motion Generation
     image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/lodgepp.jpg"
 
   - id: stereo-talker-2025
@@ -29,6 +31,8 @@ items:
     ccf_rank: "A"
     year: 2025
     paper: "https://arxiv.org/abs/2410.23836"
+    topics:
+      - Animatable Avatar
     image: "images/placeholder.jpg"
 
   - id: hhavatar-2025
@@ -68,7 +72,7 @@ items:
     project_page: "https://jiajunzhang16.github.io/manidext"
     paper: "https://arxiv.org/abs/2409.09300"
     topics:
-      - Motion Understanding
+      - Motion Generation
     image: "https://web.archive.org/web/20250911070241im_/http://www.liuyebin.com/thumbnail/manidext.jpg"
 
   - id: hfm-gs-2025
@@ -92,7 +96,7 @@ items:
     year: 2025
     paper: "https://arxiv.org/abs/2506.02444"
     topics:
-      - Motion Understanding
+      - Motion Generation
     image: "images/placeholder.jpg"
 
   - id: hades-2025
@@ -130,7 +134,7 @@ items:
     year: 2025
     paper: "https://yunliansun.github.io/papers/EDMG.pdf"
     topics:
-      - Motion Understanding
+      - Motion Generation
     image: "https://yunliansun.github.io/images/edmg.png"
 
   - id: hosig-2025
@@ -142,7 +146,7 @@ items:
     year: 2025
     paper: "https://arxiv.org/abs/2506.01579"
     topics:
-      - Motion Understanding
+      - Motion Generation
     image: "https://yw0208.github.io/images/hosig.jpg"
 
   # 2024
@@ -188,7 +192,6 @@ items:
     ccf_rank: "A"
     year: 2024
     topics:
-      - Motion Understanding
       - Motion Capture
     project_page: "https://www.liuyebin.com/HHMR/HHMR.html"
     paper: "https://www.liuyebin.com/HHMR/HHMR.html"
@@ -267,7 +270,7 @@ items:
     ccf_rank: "A"
     year: 2024
     topics:
-      - Motion Understanding
+      - Motion Generation
     project_page: "https://li-ronghui.github.io/lodge"
     code: "https://github.com/li-ronghui/LODGE"
     bibtex: |
@@ -370,7 +373,7 @@ items:
     ccf_rank: "A"
     year: 2023
     topics:
-      - Motion Understanding
+      - Motion Generation
     project_page: "http://cic.tju.edu.cn/faculty/likun/projects/Narrator/index.html"
     paper: "https://arxiv.org/pdf/2303.09410.pdf"
     code: "https://github.com/HaibiaoXuan/Narrator"
@@ -942,6 +945,7 @@ items:
     title: "Joint Voxel and Coordinate Regression for Accurate 3D Facial Landmark Localization"
     authors: "Hongwen Zhang et al."
     venue: "International Conference on Pattern Recognition"
+    venue_abbr: "ICPR"
     year: 2018
     paper: "https://arxiv.org/pdf/1801.09242.pdf"
     code: "https://github.com/HongwenZhang/JVCR-3Dlandmark"
