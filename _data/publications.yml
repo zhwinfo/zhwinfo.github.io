@@ -11,7 +11,7 @@ years_order:
 items:
   # 2025
   - id: lodgepp-2025
-    title: "Lodge++: High-quality and Long Dance Generation with Vivid Choreography Patterns"
+    title: "Lodge++: High-Quality and Long Dance Generation with Robust Choreography Patterns"
     authors: "Ronghui Li, Hongwen Zhang, Yachao Zhang, Yuxiang Zhang, Youliang Zhang, Jie Guo, Yan Zhang, Xiu Li, Yebin Liu"
     venue_name: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
     venue_abbr: "TPAMI"
