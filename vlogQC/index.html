@@ -20,6 +20,9 @@
         .login-footer { position: absolute; bottom: 10px; width: 100%; text-align: center; color: #adb5bd; font-size: 0.8rem; background: transparent; }
         .login-icon-box { width: 80px; height: 80px; background: #e7f1ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; }
         
+        .btn-light-primary { background-color: #e7f1ff; color: #0d6efd; border: 1px solid transparent; transition: all 0.3s ease; }
+        .btn-light-primary:hover { background-color: #0d6efd; color: white; border-color: #0d6efd; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(13, 110, 253, 0.25); }
+
         .error-detail-box { background: #fff3cd; border: 1px solid #ffecb5; border-radius: 6px; padding: 15px; margin-top: 15px; text-align: left; font-size: 0.9rem; }
         .error-path-item { font-family: Consolas, Monaco, 'Courier New', monospace; background: rgba(0,0,0,0.08); padding: 4px 8px; border-radius: 4px; font-weight: bold; color: #d63384; display: inline-block; margin: 2px 0; }
         .error-arrow { color: #6c757d; margin: 0 5px; font-weight: bold; }
@@ -32,19 +35,22 @@
         <div class="card card-custom p-5 shadow-lg" style="width: 500px; position: relative;">
             <div class="text-center mb-5">
                 <div class="login-icon-box"><i class="bi bi-camera-reels-fill" style="font-size: 2.5rem; color: #0d6efd;"></i></div>
-                <h3 class="text-primary fw-bold">系统登录</h3>
-                <p class="text-muted small">视频质量检测平台</p>
+                <h3 class="text-primary fw-bold"> </h3>
+                <p class="text-muted small"> </p>
             </div>
             
             <div class="d-grid gap-3 mb-4">
-                <button @click="login('single')" class="btn btn-outline-primary btn-lg py-3 fw-bold border-2">
+                <button @click="login('single')" class="btn btn-light-primary btn-lg py-3 fw-bold shadow-sm">
                     <i class="bi bi-person-fill me-2"></i> 单用户检测模式
                 </button>
-                <button @click="login('multi')" class="btn btn-primary btn-lg py-3 fw-bold shadow-sm">
+                <button @click="login('multi')" class="btn btn-light-primary btn-lg py-3 fw-bold shadow-sm">
                     <i class="bi bi-people-fill me-2"></i> 多用户批量检测
                 </button>
+                <a href="https://zhanghongwen.cn" target="_blank" class="btn btn-light-primary btn-lg py-3 fw-bold shadow-sm d-flex align-items-center justify-content-center text-decoration-none">
+                    <i class="bi bi-globe me-2"></i> 了解课题组研究
+                </a>
             </div>
-            <div class="text-center text-muted small mt-2">系统将自动为您分配会话 ID</div>
+            <div class="text-center text-muted small mt-2"> </div>
         </div>
         <div class="login-footer">
             <p class="mb-0">网页开发：吕佳忆</p>
@@ -59,7 +65,6 @@
                     <h5 class="text-center mb-4"><i class="bi bi-film"></i> 视频检测系统</h5>
                     <div class="text-center mb-4 text-white-50 small">
                         <i class="bi bi-person-circle fs-4 mb-1 d-block text-white"></i>
-                        当前ID: <span class="text-white fw-bold">{{ user }}</span>
                         <div class="badge bg-secondary mt-1">{{ mode === 'single' ? '单用户模式' : '多用户模式' }}</div>
                     </div>
                     <a @click="view='scan'" :class="{active: view==='scan'}"><i class="bi bi-speedometer2"></i> 检测中心</a>
@@ -281,8 +286,8 @@ createApp({
         const DURATION_Threshold_Folder = 6 * 3600; 
         const DURATION_Threshold_Avg = 7 * 3600;
 
-        const user = ref(localStorage.getItem('qc_current_user') || '');
-        const mode = ref(localStorage.getItem('qc_mode') || 'single'); // 'single' or 'multi'
+        const user = ref('');
+        const mode = ref('single'); // 'single' or 'multi'
         const view = ref('scan');
         const browsing = ref(false);
         const scanning = ref(false);
@@ -318,9 +323,9 @@ createApp({
             user.value = newId;
             mode.value = selectedMode;
             
-            // Persist session
-            localStorage.setItem('qc_current_user', newId);
-            localStorage.setItem('qc_mode', selectedMode);
+            // Persist session (disabled for always-ask behavior)
+            // localStorage.setItem('qc_current_user', newId);
+            // localStorage.setItem('qc_mode', selectedMode);
         };
 
         const logout = () => { 
