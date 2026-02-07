@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Broadcast Timer</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #121212;
@@ -33,6 +35,17 @@
             display: inline-block;
             white-space: nowrap;
             font-size: 18vw;
+        }
+        #timer-text .digit {
+            font-family: 'Courier New', Courier, monospace;
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum" 1, "zero" 0;
+        }
+        #timer-text .colon {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            font-variant-numeric: normal;
+            font-feature-settings: "tnum" 0;
+            letter-spacing: -0.02em;
         }
 
         #bottom-container {
@@ -178,7 +191,7 @@
             btnFullscreen.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
             
             // Initial render
-            timerText.textContent = formatSeconds(remainingSeconds);
+            renderTimeText(formatSeconds(remainingSeconds));
             fitTimerToWidth();
         }
 
@@ -263,7 +276,7 @@
             remainingSeconds = currentRemaining;
             remainingSecondsLastTick = currentRemaining;
             
-            timerText.textContent = formatSeconds(remainingSeconds);
+            renderTimeText(formatSeconds(remainingSeconds));
             if (Math.floor(prev) !== Math.floor(currentRemaining)) {
                 fitTimerToWidth();
             }
@@ -305,7 +318,7 @@
         function startFlash() {
             if (flashInterval) return;
             
-            timerLabel.textContent = "时 间 到";
+            timerText.textContent = "时 间 到";
             flashState = false;
             playAudio(3); // Play 3 times
             
@@ -356,7 +369,7 @@
             targetTime = null;
             
             stopFlash();
-            timerText.textContent = formatSeconds(remainingSeconds);
+            renderTimeText(formatSeconds(remainingSeconds));
             timeInput.value = formatSeconds(remainingSeconds); // Normalize input
             statusLabel.textContent = "Timer reset.";
         }
@@ -378,7 +391,7 @@
             stopFlash();
             remainingSeconds = secs;
             remainingSecondsLastTick = secs;
-            timerText.textContent = formatSeconds(remainingSeconds);
+            renderTimeText(formatSeconds(remainingSeconds));
             targetTime = null;
             statusLabel.textContent = `Timer set to ${formatSeconds(remainingSeconds)}.`;
             fitTimerToWidth();
@@ -445,6 +458,11 @@
                 size = Math.floor(size * target / measured);
                 timerText.style.fontSize = size + 'px';
             }
+        }
+        function renderTimeText(hms) {
+            timerText.innerHTML = hms
+              .replace(/:/g, "<span class='colon'>:</span>")
+              .replace(/\d/g, d => "<span class='digit'>" + d + "</span>");
         }
 
         // Initialize
