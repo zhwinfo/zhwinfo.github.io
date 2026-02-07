@@ -364,6 +364,7 @@ createApp({
 
                 const scan = async (dirHandle, pathStack = []) => {
                     for await (const entry of dirHandle.values()) {
+                        if (/^\./.test(entry.name)) continue;
                         if (entry.kind === 'directory') {
                             await scan(entry, [...pathStack, dirHandle]);
                         } else if (entry.kind === 'file' && /\.(mp4|mov|avi|mkv)$/i.test(entry.name)) {
