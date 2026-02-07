@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broadcast Timer</title>
+    <style>
+        body {
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            overflow: hidden;
+            user-select: none; /* Prevent selection like a native app */
+        }
+
+        #timer-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            font-weight: bold;
+            font-family: "黑体", SimHei, sans-serif;
+            color: #00FF88;
+            padding-top: 0;
+            line-height: 1;
+        }
+        #timer-text {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 18vw;
+        }
+
+        #bottom-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #local-time {
+            font-size: 10vh;
+            color: #FFFFFF;
+            margin-bottom: 2vh;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        #controls-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        #controls {
+            background-color: #121212;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            font-size: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .control-label {
+            font-size: 1.2rem;
+        }
+
+        input {
+            background-color: #FFFFFF;
+            border: none;
+            font-size: 1.2rem;
+            padding: 5px;
+            width: 120px;
+            text-align: center;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        button {
+            background-color: #1F1F1F;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            min-width: 80px;
+        }
+
+        button:hover {
+            background-color: #2E2E2E;
+        }
+
+        button:active {
+            background-color: #3E3E3E;
+        }
+
+        #status {
+            color: #FF6666;
+            height: 1.5rem;
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        /* Helper classes */
+        .text-green { color: #00FF88 !important; }
+        .text-red { color: #FF4444 !important; }
+        .text-hidden { color: #121212 !important; } /* Match bg to hide */
+
+    </style>
+</head>
+<body>
+
+    <div id="timer-container"><span id="timer-text">00:10:00</span></div>
+
+    <div id="bottom-container">
+        <div id="local-time">00:00:00</div>
+        
+        <div id="controls-wrapper">
+            <div id="controls">
+                <span class="control-label">Set timer<br>(HH:MM:SS):</span>
+                <input type="text" id="time-input" value="00:10:00">
+                <button id="btn-start">Start</button>
+                <button id="btn-reset">Reset</button>
+                <button id="btn-set">Set</button>
+                <button id="btn-fullscreen">Fullscreen</button>
+            </div>
+            <div id="status"></div>
+        </div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="notify-sound" src="notify.wav" preload="auto"></audio>
+
+    <script>
+        // --- State ---
+        let timerRunning = false;
+        let remainingSeconds = 600; // Default 10 mins
+        let remainingSecondsLastTick = 600;
+        let targetTime = null;
+        let timerInterval = null;
+        let flashInterval = null;
+        let flashState = false;
+        
+        // --- DOM Elements ---
+        const timerLabel = document.getElementById('timer-container');
+        const timerText = document.getElementById('timer-text');
+        const localTimeLabel = document.getElementById('local-time');
+        const timeInput = document.getElementById('time-input');
+        const btnStart = document.getElementById('btn-start');
+        const btnFullscreen = document.getElementById('btn-fullscreen');
+        const statusLabel = document.getElementById('status');
+        const notifySound = document.getElementById('notify-sound');
+
+        // --- Initialization ---
+        function init() {
+            updateLocalTime();
+            setInterval(updateLocalTime, 1000);
+            fitTimerToWidth();
+            window.addEventListener('resize', fitTimerToWidth);
+            
+            // Event Listeners
+            document.getElementById('btn-start').addEventListener('click', toggleTimer);
+            document.getElementById('btn-reset').addEventListener('click', resetTimer);
+            document.getElementById('btn-set').addEventListener('click', setTimer);
+            btnFullscreen.addEventListener('click', toggleFullscreen);
+            document.addEventListener('fullscreenchange', () => {
+                btnFullscreen.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
+            });
+            btnFullscreen.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
+            
+            // Initial render
+            timerText.textContent = formatSeconds(remainingSeconds);
+            fitTimerToWidth();
+        }
+
+        // --- Logic ---
+
+        function updateLocalTime() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            localTimeLabel.textContent = `${h}:${m}:${s}`;
+        }
+
+        function formatSeconds(totalSeconds) {
+            const safeSeconds = Math.max(totalSeconds, 0);
+            const hours = Math.floor(safeSeconds / 3600);
+            const minutes = Math.floor((safeSeconds % 3600) / 60);
+            const seconds = safeSeconds % 60;
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function parseInputTime(text) {
+            const parts = text.trim().split(':');
+            if (parts.length !== 3) return null;
+            const h = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10);
+            const s = parseInt(parts[2], 10);
+
+            if (isNaN(h) || isNaN(m) || isNaN(s)) return null;
+            if (m < 0 || m >= 60 || s < 0 || s >= 60 || h < 0 || h > 99) return null;
+            
+            return h * 3600 + m * 60 + s;
+        }
+
+        function toggleTimer() {
+            // User interaction unlocks audio
+            unlockAudio();
+
+            if (!timerRunning) {
+                if (remainingSeconds <= 0) {
+                    if (!setTimer()) return;
+                }
+                beginCountdown();
+            } else {
+                pauseTimer();
+            }
+        }
+
+        function beginCountdown() {
+            stopFlash();
+            const now = new Date();
+            targetTime = new Date(now.getTime() + remainingSeconds * 1000);
+            timerRunning = true;
+            btnStart.textContent = "Pause";
+            statusLabel.textContent = "";
+            
+            // Use requestAnimationFrame or setInterval for loop
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(tickTimer, 50); // 20ms in python, 50ms is enough here
+        }
+
+        function pauseTimer() {
+            remainingSeconds = calculateRemainingSeconds();
+            remainingSecondsLastTick = remainingSeconds;
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            timerRunning = false;
+            btnStart.textContent = "Start";
+        }
+
+        function tickTimer() {
+            const prev = remainingSeconds;
+            const currentRemaining = calculateRemainingSeconds();
+            
+            // Check for 1 minute crossing
+            // Python logic: if last > 60 and current <= 60
+            const crossOneMinute = (remainingSecondsLastTick > 60 && currentRemaining <= 60);
+            
+            remainingSeconds = currentRemaining;
+            remainingSecondsLastTick = currentRemaining;
+            
+            timerText.textContent = formatSeconds(remainingSeconds);
+            if (Math.floor(prev) !== Math.floor(currentRemaining)) {
+                fitTimerToWidth();
+            }
+
+            if (remainingSeconds <= 0) {
+                handleTimeExpired();
+                return;
+            }
+
+            if (crossOneMinute) {
+                timerText.classList.remove('text-green');
+                timerText.classList.add('text-red');
+                playAudio(2); // Play 2 times
+            }
+        }
+
+        function calculateRemainingSeconds() {
+            if (!targetTime) return Math.max(remainingSeconds, 0);
+            const now = new Date();
+            const diff = targetTime - now; // milliseconds
+            if (diff <= 0) return 0;
+            return Math.ceil(diff / 1000);
+        }
+
+        function handleTimeExpired() {
+            remainingSeconds = 0;
+            remainingSecondsLastTick = 0;
+            timerRunning = false;
+            targetTime = null;
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            btnStart.textContent = "Start";
+            startFlash();
+            fitTimerToWidth();
+        }
+
+        function startFlash() {
+            if (flashInterval) return;
+            
+            timerLabel.textContent = "时 间 到";
+            flashState = false;
+            playAudio(3); // Play 3 times
+            
+            flashTimerLabel(); // Run once immediately? No, python uses .after(500)
+            flashInterval = setInterval(flashTimerLabel, 500);
+        }
+
+        function flashTimerLabel() {
+            flashState = !flashState;
+            // Toggle between red and hidden (background color)
+            // Python: fg_color = "#FF4444" if self.flash_state else "#121212"
+            if (flashState) {
+                timerText.classList.remove('text-hidden');
+                timerText.classList.add('text-red');
+            } else {
+                timerText.classList.remove('text-red');
+                timerText.classList.add('text-hidden');
+            }
+        }
+
+        function stopFlash() {
+            if (flashInterval) {
+                clearInterval(flashInterval);
+                flashInterval = null;
+            }
+            stopAudio();
+            // Reset color
+            timerText.classList.remove('text-red', 'text-hidden');
+            timerText.classList.add('text-green');
+            
+            // If text was "Time's Up", reset it to time
+            if (timerText.textContent === "时 间 到") {
+                timerText.textContent = formatSeconds(remainingSeconds);
+            }
+        }
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = null;
+            timerRunning = false;
+            btnStart.textContent = "Start";
+            
+            let secs = parseInputTime(timeInput.value);
+            if (secs === null) secs = 600; // Default 10 mins
+
+            remainingSeconds = secs;
+            remainingSecondsLastTick = secs;
+            targetTime = null;
+            
+            stopFlash();
+            timerText.textContent = formatSeconds(remainingSeconds);
+            timeInput.value = formatSeconds(remainingSeconds); // Normalize input
+            statusLabel.textContent = "Timer reset.";
+        }
+
+        function setTimer() {
+            const secs = parseInputTime(timeInput.value);
+            if (secs === null) {
+                statusLabel.textContent = "Invalid time. Use HH:MM:SS.";
+                return false;
+            }
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = null;
+            if (timerRunning) {
+                timerRunning = false;
+                btnStart.textContent = "Start";
+            }
+
+            stopFlash();
+            remainingSeconds = secs;
+            remainingSecondsLastTick = secs;
+            timerText.textContent = formatSeconds(remainingSeconds);
+            targetTime = null;
+            statusLabel.textContent = `Timer set to ${formatSeconds(remainingSeconds)}.`;
+            fitTimerToWidth();
+            return true;
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => {});
+                }
+            }
+        }
+
+        // --- Audio Handling ---
+        
+        let audioPlayCount = 0;
+        let audioTargetCount = 0;
+
+        function unlockAudio() {
+            // Try to play and pause immediately to unlock AudioContext on mobile/strict browsers
+            // Just accessing the element in a click handler is usually enough for subsequent plays
+            // We verify if we can play
+            if (notifySound.paused) {
+                 // notifySound.play().then(() => notifySound.pause()).catch(() => {});
+            }
+        }
+
+        function playAudio(times) {
+            audioTargetCount = times;
+            audioPlayCount = 0;
+            notifySound.currentTime = 0;
+            
+            // Remove previous listeners to avoid stacking
+            notifySound.onended = null; 
+            
+            notifySound.onended = function() {
+                audioPlayCount++;
+                if (audioPlayCount < audioTargetCount) {
+                    notifySound.currentTime = 0;
+                    notifySound.play().catch(e => console.error(e));
+                }
+            };
+            
+            notifySound.play().catch(e => console.error("Audio play failed", e));
+        }
+
+        function stopAudio() {
+            notifySound.pause();
+            notifySound.currentTime = 0;
+            notifySound.onended = null;
+        }
+
+        function fitTimerToWidth() {
+            const target = Math.max(document.documentElement.clientWidth - 4, 320);
+            timerText.style.fontSize = '100px';
+            let measured = timerText.scrollWidth;
+            let size = Math.max(Math.floor(100 * target / measured), 10);
+            timerText.style.fontSize = size + 'px';
+            measured = timerText.scrollWidth;
+            if (measured < target) {
+                size = Math.floor(size * target / measured);
+                timerText.style.fontSize = size + 'px';
+            }
+        }
+
+        // Initialize
+        init();
+
+    </script>
+</body>
+</html>
