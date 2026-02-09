@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>招生报名 | Admission</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    body{background:#f7f9fc}
+    .container-narrow{max-width:960px}
+    .card-custom{border:none;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+    .tab-btn{min-width:160px}
+    .section-title{font-weight:700}
+    .required::after{content:" *";color:#dc3545}
+    .form-help{font-size:.9rem;color:#6c757d}
+    .btn-primary-soft{background:#eef6ff;color:#0d6efd;border:1px solid transparent}
+    .btn-primary-soft:hover,.btn-primary-soft:focus,.btn-primary-soft.active{background:#0d6efd;color:#fff}
+    .badge-soft{background:#eef2f7;color:#6c757d}
+    .preview-area{white-space:pre-wrap}
+    .landing-card{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .option-list{width:100%;max-width:640px;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;justify-items:center}
+    .option-btn{padding:1rem 1.25rem;font-size:1.125rem;width:100%;max-width:420px}
+    .landing-title{font-weight:700;color:#0d6efd}
+  </style>
+</head>
+<body>
+  <div class="container container-narrow py-4">
+    <div class="d-flex align-items-center mb-3">
+      <i class="bi bi-people-fill text-primary me-2" style="font-size:1.5rem"></i>
+      <h3 class="mb-0">申请加入</h3>
+      <span class="badge badge-soft ms-3">科研实习生 / 硕博学生</span>
+      <a href="/" class="ms-auto btn btn-outline-secondary btn-sm"><i class="bi bi-house-door"></i> 返回主页</a>
+    </div>
+
+    <div class="card card-custom p-3 mb-3" id="top-tabs">
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary-soft tab-btn" id="btn-intern"><i class="bi bi-person-workspace me-1"></i> 科研实习生报名</button>
+        <button class="btn btn-primary-soft tab-btn" id="btn-grad"><i class="bi bi-mortarboard-fill me-1"></i> 硕/博学生报名</button>
+      </div>
+    </div>
+    <div id="section-landing" class="card card-custom p-5 mb-3 landing-card">
+      <h4 class="landing-title mb-4">申请加入具身运动智能研究组</h4>
+      <div class="option-list d-grid gap-3">
+        <button class="btn btn-primary-soft option-btn" id="btn-go-intern"><i class="bi bi-person-workspace me-1"></i> 科研实习生报名</button>
+        <button class="btn btn-primary-soft option-btn" id="btn-go-grad"><i class="bi bi-mortarboard-fill me-1"></i> 硕/博研究生报名</button>
+        <button class="btn btn-primary-soft option-btn" id="btn-go-info"><i class="bi bi-info-circle me-1"></i> 了解课题组信息</button>
+      </div>
+    </div>
+
+    <div id="section-intern" class="card card-custom p-4">
+      <h5 class="section-title mb-3"><i class="bi bi-person-workspace text-primary me-1"></i> 科研实习生报名</h5>
+      <div class="mb-3" style="height:75vh">
+        <iframe src="https://f.wps.cn/g/wJcXYNaH/" title="科研实习生报名表" style="width:100%;height:100%;border:0" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+
+    <div id="section-grad" class="card card-custom p-4 mt-4">
+      <h5 class="section-title mb-3"><i class="bi bi-mortarboard-fill text-primary me-1"></i> 硕/博学生报名</h5>
+      <div class="mb-3" style="height:75vh">
+        <iframe src="https://f.wps.cn/g/wJcXYNaH/" title="硕/博学生报名表" style="width:100%;height:100%;border:0" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-eye"></i> 预览</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="previewContent" class="preview-area"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" id="btn-copy"><i class="bi bi-clipboard"></i> 复制到剪贴板</button>
+          <button class="btn btn-primary" id="btn-mail"><i class="bi bi-envelope"></i> 发送邮件</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const qs=(s)=>document.querySelector(s)
+    const showIntern=()=>{qs('#section-landing').style.display='none';qs('#top-tabs').style.display='block';qs('#section-intern').style.display='block';qs('#section-grad').style.display='none'}
+    const showGrad=()=>{qs('#section-landing').style.display='none';qs('#top-tabs').style.display='block';qs('#section-intern').style.display='none';qs('#section-grad').style.display='block'}
+    const showLanding=()=>{qs('#section-landing').style.display='block';qs('#top-tabs').style.display='none';qs('#section-intern').style.display='none';qs('#section-grad').style.display='none'}
+    const navigateTo=(mode)=>{const url=new URL(window.location.href);url.searchParams.set('mode',mode);window.location.href=url.toString()}
+    qs('#btn-intern').addEventListener('click',showIntern)
+    qs('#btn-grad').addEventListener('click',showGrad)
+    qs('#btn-go-intern').addEventListener('click',()=>navigateTo('intern'))
+    qs('#btn-go-grad').addEventListener('click',()=>navigateTo('grad'))
+    qs('#btn-go-info').addEventListener('click',()=>{const b=qs('#btn-go-info');b.classList.add('active');window.open('https://zhanghongwen.cn','_blank','noopener')})
+    document.querySelectorAll('#section-landing .option-btn').forEach(btn=>{
+      btn.addEventListener('mousedown',()=>btn.classList.add('active'))
+      btn.addEventListener('mouseup',()=>btn.classList.remove('active'))
+      btn.addEventListener('mouseleave',()=>btn.classList.remove('active'))
+    })
+    const params=new URLSearchParams(window.location.search)
+    const mode=params.get('mode')
+    if(mode==='intern') showIntern()
+    else if(mode==='grad') showGrad()
+    else showLanding()
+  </script>
+</body>
+</html>

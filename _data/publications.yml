@@ -1,6 +1,7 @@
 # Structured publication data for year- and topic-based cards
 
 years_order:
+  - 2026
   - 2025
   - 2024
   - 2023
@@ -9,6 +10,17 @@ years_order:
   - 2020
 
 items:
+  # 2026
+  - id: gaf-2026
+    title: "GAF: Gaussian Action Field as a Dynamic World Model for Robotic Manipulation"
+    authors: "Ying Chai*, Litao Deng*, Ruizhi Shao, Jiajun Zhang, Liangjun Xing, Hongwen Zhang, Yebin Liu"
+    venue_name: "IEEE International Conference on Robotics & Automation"
+    venue_abbr: "ICRA"
+    year: 2026
+    project_page: "https://chaiying1.github.io/GAF.github.io/project_page"
+    paper: "https://arxiv.org/pdf/2506.14135"
+    image: "https://raw.githubusercontent.com/ChaiYing1/GAF.github.io/refs/heads/main/project_page/files/start.png"
+
   # 2025
   - id: lodgepp-2025
     title: "Lodge++: High-Quality and Long Dance Generation with Robust Choreography Patterns"
