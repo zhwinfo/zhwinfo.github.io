@@ -81,6 +81,21 @@
             font-size: 1.5rem;
             flex-wrap: wrap;
         }
+        #connect {
+            background-color: #121212;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: white;
+            width: 100%;
+            max-width: 1000px;
+        }
+        #connect textarea {
+            width: 100%;
+            min-height: 120px;
+            font-family: "Segoe UI", sans-serif;
+        }
 
         .control-label {
             font-size: 1.2rem;
@@ -162,6 +177,7 @@
         let timerInterval = null;
         let flashInterval = null;
         let flashState = false;
+        let bcSync = null;
         
         // --- DOM Elements ---
         const timerLabel = document.getElementById('timer-container');
@@ -172,9 +188,20 @@
         const btnFullscreen = document.getElementById('btn-fullscreen');
         const statusLabel = document.getElementById('status');
         const notifySound = document.getElementById('notify-sound');
+        const btnGenAnswer = null;
+        let pc = null;
+        let dc = null;
+        let pcIceDone = false;
+        let pendingCandidates = [];
 
         // --- Initialization ---
         function init() {
+            try {
+                bcSync = new BroadcastChannel('timer-sync');
+                bcSync.onmessage = onSyncMessage;
+            } catch (e) {
+                bcSync = null;
+            }
             updateLocalTime();
             setInterval(updateLocalTime, 1000);
             fitTimerToWidth();
@@ -193,6 +220,8 @@
             // Initial render
             renderTimeText(formatSeconds(remainingSeconds));
             fitTimerToWidth();
+            broadcastStatus();
+            initWebRTCUI();
         }
 
         // --- Logic ---
@@ -279,6 +308,7 @@
             renderTimeText(formatSeconds(remainingSeconds));
             if (Math.floor(prev) !== Math.floor(currentRemaining)) {
                 fitTimerToWidth();
+                broadcastStatus();
             }
 
             if (remainingSeconds <= 0) {
@@ -313,6 +343,7 @@
             btnStart.textContent = "Start";
             startFlash();
             fitTimerToWidth();
+            broadcastStatus();
         }
 
         function startFlash() {
@@ -372,6 +403,7 @@
             renderTimeText(formatSeconds(remainingSeconds));
             timeInput.value = formatSeconds(remainingSeconds); // Normalize input
             statusLabel.textContent = "Timer reset.";
+            broadcastStatus();
         }
 
         function setTimer() {
@@ -395,6 +427,7 @@
             targetTime = null;
             statusLabel.textContent = `Timer set to ${formatSeconds(remainingSeconds)}.`;
             fitTimerToWidth();
+            broadcastStatus();
             return true;
         }
 
@@ -463,6 +496,98 @@
             timerText.innerHTML = hms
               .replace(/:/g, "<span class='colon'>:</span>")
               .replace(/\d/g, d => "<span class='digit'>" + d + "</span>");
+        }
+        function broadcastStatus() {
+            if (!bcSync) return;
+            bcSync.postMessage({
+                type: 'status',
+                running: timerRunning,
+                remaining: Math.max(remainingSeconds, 0),
+                timestamp: Date.now()
+            });
+            if (dc && dc.readyState === 'open') {
+                try {
+                    dc.send(JSON.stringify({type:'status',running:timerRunning,remaining:Math.max(remainingSeconds,0)}));
+                } catch(e){}
+            }
+        }
+        function onSyncMessage(ev) {
+            const msg = ev.data;
+            if (!msg || typeof msg !== 'object') return;
+            if (msg.type === 'command') {
+                if (msg.cmd === 'set' && typeof msg.value === 'number') {
+                    timeInput.value = formatSeconds(msg.value);
+                    setTimer();
+                } else if (msg.cmd === 'start') {
+                    if (!timerRunning) toggleTimer();
+                } else if (msg.cmd === 'pause') {
+                    if (timerRunning) toggleTimer();
+                } else if (msg.cmd === 'reset') {
+                    resetTimer();
+                }
+            }
+        }
+        function initWebRTCUI() {
+            const connectDiv = document.createElement('div');
+            connectDiv.id = 'connect';
+            connectDiv.innerHTML = [
+                "<div style='font-size:1.2rem'>跨设备连接</div>",
+                "<div style='display:flex;flex-wrap:wrap;gap:10px'>",
+                "<div style='flex:1 1 450px'>",
+                "<div style='margin-bottom:6px'>粘贴控制页提供的 Offer</div>",
+                "<textarea id='offer-input' placeholder='在此粘贴控制页 Offer'></textarea>",
+                "<button id='btn-accept-offer'>接受并生成 Answer</button>",
+                "<div style='margin-top:6px'>复制以下 Answer 返回控制页</div>",
+                "<textarea id='answer-output' placeholder='生成后显示 Answer'></textarea>",
+                "</div>",
+                "</div>"
+            ].join("");
+            document.getElementById('controls-wrapper').appendChild(connectDiv);
+            document.getElementById('btn-accept-offer').addEventListener('click', async function() {
+                const text = document.getElementById('offer-input').value.trim();
+                if (!text) return;
+                try {
+                    await setupPeerAsAnswerer(text);
+                } catch(e) {
+                    statusLabel.textContent = "连接失败";
+                }
+            });
+        }
+        async function setupPeerAsAnswerer(offerText) {
+            pc = new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+            pc.ondatachannel = function(ev) {
+                dc = ev.channel;
+                dc.onmessage = function(ev) {
+                    try {
+                        const msg = JSON.parse(ev.data);
+                        if (msg.type === 'command') {
+                            if (msg.cmd === 'set' && typeof msg.value === 'number') {
+                                timeInput.value = formatSeconds(msg.value);
+                                setTimer();
+                            } else if (msg.cmd === 'start') {
+                                if (!timerRunning) toggleTimer();
+                            } else if (msg.cmd === 'pause') {
+                                if (timerRunning) toggleTimer();
+                            } else if (msg.cmd === 'reset') {
+                                resetTimer();
+                            }
+                        }
+                    } catch(e){}
+                };
+            };
+            pc.onicecandidate = function(ev) {
+                if (ev.candidate) {
+                    pendingCandidates.push(ev.candidate);
+                } else {
+                    pcIceDone = true;
+                }
+            };
+            const offer = JSON.parse(offerText);
+            await pc.setRemoteDescription(offer);
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
+            const answerText = JSON.stringify(pc.localDescription);
+            document.getElementById('answer-output').value = answerText;
         }
 
         // Initialize
