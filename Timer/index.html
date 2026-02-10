@@ -91,9 +91,9 @@
             width: 100%;
             max-width: 1000px;
         }
-        #connect textarea {
+        #connect input[type="text"] {
             width: 100%;
-            min-height: 120px;
+            box-sizing: border-box;
             font-family: "Segoe UI", sans-serif;
         }
 
@@ -531,30 +531,50 @@
             const connectDiv = document.createElement('div');
             connectDiv.id = 'connect';
             connectDiv.innerHTML = [
-                "<div style='font-size:1.2rem'>跨设备连接</div>",
+                `<div style='font-size:1.2rem'>跨设备连接 <span id="connection-status" style="font-weight:normal;padding-left:10px;"></span></div>`,
                 "<div style='display:flex;flex-wrap:wrap;gap:10px'>",
                 "<div style='flex:1 1 450px'>",
                 "<div style='margin-bottom:6px'>粘贴控制页提供的 Offer</div>",
-                "<textarea id='offer-input' placeholder='在此粘贴控制页 Offer'></textarea>",
+                `<input type="text" id='offer-input' placeholder='在此粘贴控制页 Offer'>`,
                 "<button id='btn-accept-offer'>接受并生成 Answer</button>",
                 "<div style='margin-top:6px'>复制以下 Answer 返回控制页</div>",
-                "<textarea id='answer-output' placeholder='生成后显示 Answer'></textarea>",
+                `<input type="text" id='answer-output' placeholder='生成后显示 Answer' readonly>`,
                 "</div>",
                 "</div>"
             ].join("");
             document.getElementById('controls-wrapper').appendChild(connectDiv);
+            
+            const connectionStatus = document.getElementById('connection-status');
+            function setConnectionStatus(text, color) {
+                connectionStatus.textContent = text;
+                connectionStatus.style.color = color;
+            }
+
             document.getElementById('btn-accept-offer').addEventListener('click', async function() {
                 const text = document.getElementById('offer-input').value.trim();
                 if (!text) return;
                 try {
-                    await setupPeerAsAnswerer(text);
+                    setConnectionStatus('正在连接...', '#888');
+                    await setupPeerAsAnswerer(text, setConnectionStatus);
                 } catch(e) {
-                    statusLabel.textContent = "连接失败";
+                    setConnectionStatus("连接失败", "#FF6666");
                 }
             });
         }
-        async function setupPeerAsAnswerer(offerText) {
+        async function setupPeerAsAnswerer(offerText, setConnectionStatus) {
             pc = new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+            
+            pc.oniceconnectionstatechange = e => {
+                switch(pc.iceConnectionState) {
+                    case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
+                    case "connected": setConnectionStatus("已连接", "#00FF88"); break;
+                    case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
+                    case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
+                    case "closed": setConnectionStatus("连接关闭", "#888"); break;
+                    default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
+                }
+            };
+
             pc.ondatachannel = function(ev) {
                 dc = ev.channel;
                 dc.onmessage = function(ev) {
@@ -572,22 +592,22 @@
                                 resetTimer();
                             }
                         }
-                    } catch(e){}
+                    } catch(e) {}
+                };
+                dc.onopen = () => {
+                    // Connection confirmed
                 };
             };
             pc.onicecandidate = function(ev) {
-                if (ev.candidate) {
-                    pendingCandidates.push(ev.candidate);
-                } else {
-                    pcIceDone = true;
+                if (!ev.candidate) {
+                    document.getElementById('answer-output').value = JSON.stringify(pc.localDescription);
+                    setConnectionStatus('Answer 已生成，请复制', '#888');
                 }
             };
             const offer = JSON.parse(offerText);
             await pc.setRemoteDescription(offer);
             const answer = await pc.createAnswer();
             await pc.setLocalDescription(answer);
-            const answerText = JSON.stringify(pc.localDescription);
-            document.getElementById('answer-output').value = answerText;
         }
 
         // Initialize
