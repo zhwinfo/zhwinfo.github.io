@@ -31,10 +31,16 @@
       <button id="btn-start">开始</button>
       <button id="btn-pause">暂停</button>
       <button id="btn-reset">重置</button>
+      <button id="btn-toggle-connect">跨设备</button>
+      <input id="room-id" type="text" placeholder="房间号" style="width:120px">
+      <button id="btn-auto-connect">自动连接</button>
+      <button id="btn-qr-share">分享二维码</button>
       <span id="status" style="color:#FF6666;margin-left:8px"></span>
     </div>
-    <div id="connect">
+    <div id="connect" style="display: none;">
       <div style="font-size:1.1rem">跨设备连接 <span id="connection-status" style="font-weight:normal;padding-left:10px;"></span></div>
+      <div id="auto-link" style="font-size:0.95rem;color:#ccc"></div>
+      <canvas id="qr-canvas" style="display:none;margin-top:6px;width:160px;height:160px"></canvas>
       <button id="btn-gen-offer">生成 Offer</button>
       <input type="text" id="offer-output" placeholder="复制此 Offer 到被控页" readonly>
       <div>粘贴被控页生成的 Answer</div>
@@ -60,6 +66,11 @@
     const answerInput=document.getElementById('answer-input');
     const btnAcceptAnswer=document.getElementById('btn-accept-answer');
     const connectionStatus=document.getElementById('connection-status');
+    const roomInput=document.getElementById('room-id');
+    const btnAutoConnect=document.getElementById('btn-auto-connect');
+    const autoLink=document.getElementById('auto-link');
+    const btnQRShare=document.getElementById('btn-qr-share');
+    const qrCanvas=document.getElementById('qr-canvas');
 
     function setConnectionStatus(text, color) {
         connectionStatus.textContent = text;
@@ -125,6 +136,201 @@
       btnReset.addEventListener('click',()=>send('reset'));
       btnGenOffer.addEventListener('click',genOffer);
       btnAcceptAnswer.addEventListener('click',acceptAnswer);
+      document.getElementById('btn-toggle-connect').addEventListener('click', () => {
+        const connectDiv = document.getElementById('connect');
+        connectDiv.style.display = connectDiv.style.display === 'none' ? 'flex' : 'none';
+      });
+      // 默认房间号
+      if(!roomInput.value){
+        roomInput.value = Math.random().toString().slice(2,8);
+      }
+      updateAutoLink();
+      btnAutoConnect.addEventListener('click', autoConnectControl);
+      btnQRShare.addEventListener('click', showQR);
+    }
+    function signalBase(){
+      const host = window.location.hostname;
+      return `http://${host}:5001`;
+    }
+    function updateAutoLink(){
+      const rid = roomInput.value.trim();
+      if(!rid){ autoLink.textContent=''; qrCanvas.style.display='none'; return; }
+      const url = `${window.location.origin}/Timer/index.html?room=${encodeURIComponent(rid)}`;
+      autoLink.innerHTML = `被控页快捷链接：<a href="${url}" target="_blank" style="color:#66ccff">${url}</a>`;
+      // 绘制二维码
+      drawQR(url);
+    }
+    function drawQR(text){
+      const ctx = qrCanvas.getContext('2d');
+      const size = 160;
+      qrCanvas.width = size;
+      qrCanvas.height = size;
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0,0,size,size);
+      ctx.fillStyle = '#000';
+      const qr = genQR(text);
+      const cell = size / qr.length;
+      for(let y=0;y<qr.length;y++){
+        for(let x=0;x<qr[y].length;x++){
+          if(qr[y][x]) ctx.fillRect(x*cell, y*cell, cell, cell);
+        }
+      }
+      qrCanvas.style.display='block';
+    }
+    function genQR(text){
+      // 简易二维码生成（21x21 模式1）
+      const size = 21;
+      const qr = Array.from({length:size},()=>Array(size).fill(0));
+      // 定位点
+      function placeFinder(x,y){
+        for(let dy=0;dy<7;dy++){
+          for(let dx=0;dx<7;dx++){
+            qr[y+dy][x+dx] = (dx===0||dy===0||dx===6||dy===6||(dx>=2&&dx<=4&&dy>=2&&dy<=4))?1:0;
+          }
+        }
+      }
+      placeFinder(0,0); placeFinder(14,0); placeFinder(0,14);
+      // 简单数据填充（仅支持数字+字母，示例）
+      const data = text.split('').map(c=>c.charCodeAt(0));
+      let idx = 0;
+      for(let y=0;y<size&&idx<data.length*8;y+=2){
+        for(let x=size-1;x>=0&&idx<data.length*8;x--){
+          if(qr[y][x]===0 && (x>8||y>8)){
+            qr[y][x] = (data[Math.floor(idx/8)] >> (7-idx%8)) & 1;
+            idx++;
+          }
+        }
+      }
+      return qr;
+    }
+    function showQR(){
+      if(qrCanvas.style.display==='none'){
+        updateAutoLink();
+      } else {
+        qrCanvas.style.display='none';
+      }
+    }
+    roomInput && roomInput.addEventListener('input', updateAutoLink);
+    async function postJSON(path, body){
+      const res = await fetch(`${signalBase()}${path}?room=${encodeURIComponent(roomInput.value.trim())}`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(body||{})
+      });
+      if(!res.ok) throw new Error('network');
+      return res.json().catch(()=>({}));
+    }
+    function subscribeEvents(handler){
+      const rid = roomInput.value.trim();
+      let stopped = false;
+      const poll = async () => {
+        if (stopped) return;
+        try{
+          const res = await fetch(`${signalBase()}/poll?room=${encodeURIComponent(rid)}&type=answer`, {cache:'no-store'});
+          if(res.ok){
+            const json = await res.json().catch(()=>({}));
+            if(json && !json.empty){
+              handler('answer', json);
+              stopped = true;
+              return;
+            }
+          }
+        }catch(_){}
+        setTimeout(poll, 1500);
+      };
+      poll();
+      return { stop(){ stopped = true; } };
+    }
+    async function autoConnectControl(){
+      const rid = roomInput.value.trim();
+      if(!rid) { status.textContent='请填写房间号'; return; }
+      setConnectionStatus('正在生成 Offer...', '#888');
+      pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+      pc.oniceconnectionstatechange = e => {
+          switch(pc.iceConnectionState) {
+              case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
+              case "connected": setConnectionStatus("已连接", "#00FF88"); break;
+              case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
+              case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
+              case "closed": setConnectionStatus("连接关闭", "#888"); break;
+              default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
+          }
+      };
+      dc=pc.createDataChannel('timer');
+      dc.onopen=function(){};
+      dc.onmessage=function(ev){
+        try{
+          const msg=JSON.parse(ev.data);
+          if(msg.type==='status'){
+            running=!!msg.running;
+            remaining=msg.remaining||0;
+            render(formatSeconds(remaining));
+            status.textContent=running?'计时中':'已暂停';
+          }
+        }catch(e){}
+      };
+      subscribeEvents(async (type, payload)=>{
+        if(type==='answer' && pc && !pc.currentRemoteDescription){
+          try{
+            await pc.setRemoteDescription(payload);
+          }catch(e){}
+        }
+      });
+      pc.onicecandidate = async function(ev){
+        if(!ev.candidate){
+          try{
+            await postJSON('/offer', pc.localDescription);
+            setConnectionStatus('Offer 已发布，等待 Answer', '#888');
+          }catch(e){
+            setConnectionStatus('信令服务器不可用', '#FF6666');
+          }
+        }
+      };
+      const offer=await pc.createOffer();
+      await pc.setLocalDescription(offer);
+    }
+    // 纯前端连接：将 Offer 编码到 URL 并通过二维码分享，被控端扫码后回传 Answer（手动粘贴一次 Answer 即可）
+    async function genOffer(){
+      setConnectionStatus('正在生成 Offer...', '#888');
+      pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+      
+      pc.oniceconnectionstatechange = e => {
+          switch(pc.iceConnectionState) {
+              case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
+              case "connected": setConnectionStatus("已连接", "#00FF88"); break;
+              case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
+              case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
+              case "closed": setConnectionStatus("连接关闭", "#888"); break;
+              default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
+          }
+      };
+
+      dc=pc.createDataChannel('timer');
+      dc.onopen=function(){};
+      dc.onmessage=function(ev){
+        try{
+          const msg=JSON.parse(ev.data);
+          if(msg.type==='status'){
+            running=!!msg.running;
+            remaining=msg.remaining||0;
+            render(formatSeconds(remaining));
+            status.textContent=running?'计时中':'已暂停';
+          }
+        }catch(e){}
+      };
+      pc.onicecandidate=function(ev){
+        if(!ev.candidate){
+            offerOutput.value=JSON.stringify(pc.localDescription);
+            setConnectionStatus('Offer 已生成，请复制或扫码分享', '#888');
+            // 将 Offer 编码到 URL 方便扫码
+            const encoded = encodeURIComponent(btoa(JSON.stringify(pc.localDescription)));
+            const shareUrl = `${window.location.origin}/Timer/index.html?offer=${encoded}`;
+            updateAutoLink();
+            drawQR(shareUrl);
+        }
+      };
+      const offer=await pc.createOffer();
+      await pc.setLocalDescription(offer);
     }
     async function genOffer(){
       setConnectionStatus('正在生成 Offer...', '#888');
@@ -177,6 +383,20 @@
       }
     }
     init();
+    // 若 URL 携带 Answer，自动填充并连接
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedAnswer = urlParams.get('answer') || '';
+    if (encodedAnswer) {
+        try {
+            const answer = JSON.parse(atob(decodeURIComponent(encodedAnswer)));
+            answerInput.value = JSON.stringify(answer);
+            setTimeout(() => {
+                acceptAnswer();
+            }, 0);
+        } catch(e){
+            status.textContent = 'URL Answer 解析失败';
+        }
+    }
   </script>
 </body>
 </html>
