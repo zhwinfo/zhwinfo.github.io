@@ -171,6 +171,7 @@
     <!-- Audio element -->
     <audio id="notify-sound" src="notify.wav" preload="auto"></audio>
 
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script>
         // --- State ---
         let timerRunning = false;
@@ -181,6 +182,8 @@
         let flashInterval = null;
         let flashState = false;
         let bcSync = null;
+        let peer = null;
+        let conn = null;
         
         // --- DOM Elements ---
         const timerLabel = document.getElementById('timer-container');
@@ -525,16 +528,15 @@
         }
         function broadcastStatus() {
             if (!bcSync) return;
-            bcSync.postMessage({
+            const data = {
                 type: 'status',
                 running: timerRunning,
                 remaining: Math.max(remainingSeconds, 0),
                 timestamp: Date.now()
-            });
-            if (dc && dc.readyState === 'open') {
-                try {
-                    dc.send(JSON.stringify({type:'status',running:timerRunning,remaining:Math.max(remainingSeconds,0)}));
-                } catch(e){}
+            };
+            bcSync.postMessage(data);
+            if (conn && conn.open) {
+                conn.send(data);
             }
         }
         function onSyncMessage(ev) {
@@ -559,6 +561,14 @@
             connectDiv.style.display = 'none'; // Default to hidden
             connectDiv.innerHTML = [
                 `<div style='font-size:1.2rem'>跨设备连接 <span id="connection-status" style="font-weight:normal;padding-left:10px;"></span></div>`,
+                "<div style='margin: 10px 0; padding: 10px; border: 1px solid #444; background: #1a1a1a;'>",
+                "<div style='margin-bottom: 8px; color: #00FF88; font-size: 0.95rem;'>信令服务器设置 (GitHub Pages 部署必填)</div>",
+                "<div style='display: flex; gap: 8px;'>",
+                "<input type=\"text\" id='signal-url' placeholder='例如 http://your-ip:5001' style='flex: 1; min-width: 0;'>",
+                "<button id='btn-save-signal' style='padding: 6px 12px; font-size: 0.9rem;'>保存</button>",
+                "</div>",
+                "<div style='font-size: 0.8rem; color: #888; margin-top: 5px;'>若部署在 GitHub Pages，需填写你自己的云服务器地址。</div>",
+                "</div>",
                 "<div style='display:flex;flex-wrap:wrap;gap:10px'>",
                 "<div style='flex:1 1 450px'>",
                 "<div style='margin-bottom:6px'>粘贴控制页提供的 Offer</div>",
@@ -570,6 +580,16 @@
                 "</div>"
             ].join("");
             document.getElementById('controls-wrapper').appendChild(connectDiv);
+
+            const signalInput = document.getElementById('signal-url');
+            const btnSaveSignal = document.getElementById('btn-save-signal');
+            if (signalInput) {
+                signalInput.value = localStorage.getItem('timer_signal_url') || '';
+                btnSaveSignal.addEventListener('click', () => {
+                    localStorage.setItem('timer_signal_url', signalInput.value.trim());
+                    alert('信令服务器地址已保存');
+                });
+            }
             
             const connectionStatus = document.getElementById('connection-status');
             function setConnectionStatus(text, color) {
@@ -593,8 +613,14 @@
             });
         }
         function signalBase(){
+            const saved = localStorage.getItem('timer_signal_url');
+            if (saved && saved.trim()) return saved.trim().replace(/\/$/, '');
+            
             const host = window.location.hostname;
-            return `http://${host}:5001`;
+            const protocol = window.location.protocol;
+            // 如果页面是 https，信令服务器也尝试 https（除非是 localhost）
+            const sigProtocol = (protocol === 'https:' && host !== 'localhost') ? 'https:' : 'http:';
+            return `${sigProtocol}//${host}:5001`;
         }
         async function postJSON(path, body){
             const rid = roomInput.value.trim();
@@ -627,111 +653,69 @@
             poll();
             return { stop(){ stopped = true; } };
         }
+        // --- 自动连接逻辑 (使用 PeerJS) ---
         async function autoConnectAnswerer(){
             const rid = roomInput.value.trim();
             if(!rid){ statusLabel.textContent = '请填写房间号'; return; }
+            
             const connectionStatus = document.getElementById('connection-status');
             function setConnectionStatus(text, color) {
                 if (!connectionStatus) return;
                 connectionStatus.textContent = text;
                 connectionStatus.style.color = color;
             }
-            subscribeEvents(async (type, payload)=>{
-                if(type==='offer'){
-                    try{
-                        pc = new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
-                        pc.oniceconnectionstatechange = e => {
-                            switch(pc.iceConnectionState) {
-                                case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
-                                case "connected": setConnectionStatus("已连接", "#00FF88"); break;
-                                case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
-                                case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
-                                case "closed": setConnectionStatus("连接关闭", "#888"); break;
-                                default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
-                            }
-                        };
-                        pc.ondatachannel = function(ev) {
-                            dc = ev.channel;
-                            dc.onmessage = function(ev) {
-                                try {
-                                    const msg = JSON.parse(ev.data);
-                                    if (msg.type === 'command') {
-                                        if (msg.cmd === 'set' && typeof msg.value === 'number') {
-                                            timeInput.value = formatSeconds(msg.value);
-                                            setTimer();
-                                        } else if (msg.cmd === 'start') {
-                                            if (!timerRunning) toggleTimer();
-                                        } else if (msg.cmd === 'pause') {
-                                            if (timerRunning) toggleTimer();
-                                        } else if (msg.cmd === 'reset') {
-                                            resetTimer();
-                                        }
-                                    }
-                                } catch(e) {}
-                            };
-                        };
-                        await pc.setRemoteDescription(payload);
-                        const answer = await pc.createAnswer();
-                        await pc.setLocalDescription(answer);
-                        await postJSON('/answer', pc.localDescription);
-                        setConnectionStatus('Answer 已发布，等待连接', '#888');
-                    }catch(e){
-                        setConnectionStatus('自动连接失败', '#FF6666');
-                    }
-                }
+
+            if(peer) peer.destroy();
+            setConnectionStatus('正在初始化云连接...', '#888');
+
+            peer = new Peer(); // 随机 ID
+
+            peer.on('open', () => {
+                setConnectionStatus('正在呼叫控制端...', '#66ccff');
+                conn = peer.connect('timer-room-' + rid);
+                setupConnection(setConnectionStatus);
+            });
+
+            peer.on('error', (err) => {
+                setConnectionStatus('连接出错: ' + err.type, '#FF6666');
             });
         }
-        async function setupPeerAsAnswerer(offerText, setConnectionStatus) {
-            pc = new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
-            
-            pc.oniceconnectionstatechange = e => {
-                switch(pc.iceConnectionState) {
-                    case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
-                    case "connected": setConnectionStatus("已连接", "#00FF88"); break;
-                    case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
-                    case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
-                    case "closed": setConnectionStatus("连接关闭", "#888"); break;
-                    default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
-                }
-            };
 
-            pc.ondatachannel = function(ev) {
-                dc = ev.channel;
-                dc.onmessage = function(ev) {
-                    try {
-                        const msg = JSON.parse(ev.data);
-                        if (msg.type === 'command') {
-                            if (msg.cmd === 'set' && typeof msg.value === 'number') {
-                                timeInput.value = formatSeconds(msg.value);
-                                setTimer();
-                            } else if (msg.cmd === 'start') {
-                                if (!timerRunning) toggleTimer();
-                            } else if (msg.cmd === 'pause') {
-                                if (timerRunning) toggleTimer();
-                            } else if (msg.cmd === 'reset') {
-                                resetTimer();
-                            }
+        function setupConnection(setConnectionStatus) {
+            conn.on('open', () => {
+                setConnectionStatus('已连接', '#00FF88');
+                broadcastStatus();
+            });
+
+            conn.on('data', (data) => {
+                try {
+                    if (data.type === 'command') {
+                        if (data.cmd === 'set' && typeof data.value === 'number') {
+                            timeInput.value = formatSeconds(data.value);
+                            setTimer();
+                        } else if (data.cmd === 'start') {
+                            if (!timerRunning) toggleTimer();
+                        } else if (data.cmd === 'pause') {
+                            if (timerRunning) toggleTimer();
+                        } else if (data.cmd === 'reset') {
+                            resetTimer();
                         }
-                    } catch(e) {}
-                };
-                dc.onopen = () => {
-                    // Connection confirmed
-                };
-            };
-            pc.onicecandidate = function(ev) {
-                if (!ev.candidate) {
-                    const answer = pc.localDescription;
-                    document.getElementById('answer-output').value = JSON.stringify(answer);
-                    // 生成 Answer 分享链接（可选）
-                    const encoded = encodeURIComponent(btoa(JSON.stringify(answer)));
-                    const shareUrl = `${window.location.origin}/Timer/control.html?answer=${encoded}`;
-                    setConnectionStatus('Answer 已生成，请复制或扫码分享', '#888');
-                }
-            };
-            const offer = JSON.parse(offerText);
-            await pc.setRemoteDescription(offer);
-            const answer = await pc.createAnswer();
-            await pc.setLocalDescription(answer);
+                    } else if (data.type === 'config') {
+                        if (typeof data.remaining === 'number') {
+                            remainingSeconds = data.remaining;
+                            renderTimeText(formatSeconds(remainingSeconds));
+                        }
+                    }
+                } catch(e) {}
+            });
+
+            conn.on('close', () => {
+                setConnectionStatus('连接已断开', '#FF6666');
+            });
+        }
+
+        async function setupPeerAsAnswerer(offerText, setConnectionStatus) {
+            alert('已切换至自动连接模式，请使用房间号连接');
         }
 
         // Initialize

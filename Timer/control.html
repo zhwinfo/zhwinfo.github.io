@@ -39,6 +39,14 @@
     </div>
     <div id="connect" style="display: none;">
       <div style="font-size:1.1rem">跨设备连接 <span id="connection-status" style="font-weight:normal;padding-left:10px;"></span></div>
+      <div style="margin: 10px 0; padding: 10px; border: 1px solid #444; background: #1a1a1a;">
+        <div style="margin-bottom: 8px; color: #00FF88; font-size: 0.95rem;">信令服务器设置 (GitHub Pages 部署必填)</div>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="signal-url" placeholder="例如 http://your-ip:5001" style="flex: 1; min-width: 0;">
+          <button id="btn-save-signal" style="padding: 6px 12px; font-size: 0.9rem;">保存</button>
+        </div>
+        <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">若部署在 GitHub Pages，需填写你自己的云服务器地址。</div>
+      </div>
       <div id="auto-link" style="font-size:0.95rem;color:#ccc"></div>
       <canvas id="qr-canvas" style="display:none;margin-top:6px;width:160px;height:160px"></canvas>
       <button id="btn-gen-offer">生成 Offer</button>
@@ -48,8 +56,11 @@
       <button id="btn-accept-answer">连接</button>
     </div>
   </div>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
   <script>
     let bc = null;
+    let peer = null;
+    let conn = null;
     let running = false;
     let remaining = 0;
     let pc=null, dc=null, pcIceDone=false, pendingCandidates=[];
@@ -71,6 +82,17 @@
     const autoLink=document.getElementById('auto-link');
     const btnQRShare=document.getElementById('btn-qr-share');
     const qrCanvas=document.getElementById('qr-canvas');
+    const signalInput = document.getElementById('signal-url');
+    const btnSaveSignal = document.getElementById('btn-save-signal');
+
+    // 初始化信令服务器地址
+    if (signalInput) {
+        signalInput.value = localStorage.getItem('timer_signal_url') || '';
+        btnSaveSignal.addEventListener('click', () => {
+            localStorage.setItem('timer_signal_url', signalInput.value.trim());
+            alert('信令服务器地址已保存');
+        });
+    }
 
     function setConnectionStatus(text, color) {
         connectionStatus.textContent = text;
@@ -102,10 +124,17 @@
       if(m<0||m>=60||s<0||s>=60||h<0||h>99) return null;
       return h*3600+m*60+s;
     }
-    function send(cmd,value){
-      if(bc) bc.postMessage({type:'command',cmd:cmd,value:value});
-      if(dc && dc.readyState==='open'){
-        try{dc.send(JSON.stringify({type:'command',cmd:cmd,value:value}))}catch(e){}
+    function send(cmd, value) {
+      const msg = { type: 'command', cmd, value };
+      if (bc) bc.postMessage(msg);
+      if (conn && conn.open) {
+        conn.send(msg);
+      }
+    }
+
+    function sendConfig() {
+      if (conn && conn.open) {
+        conn.send({ type: 'config', remaining });
       }
     }
 
@@ -149,8 +178,14 @@
       btnQRShare.addEventListener('click', showQR);
     }
     function signalBase(){
+      const saved = localStorage.getItem('timer_signal_url');
+      if (saved && saved.trim()) return saved.trim().replace(/\/$/, '');
+      
       const host = window.location.hostname;
-      return `http://${host}:5001`;
+      const protocol = window.location.protocol;
+      // 如果页面是 https，信令服务器也尝试 https（除非是 localhost）
+      const sigProtocol = (protocol === 'https:' && host !== 'localhost') ? 'https:' : 'http:';
+      return `${sigProtocol}//${host}:5001`;
     }
     function updateAutoLink(){
       const rid = roomInput.value.trim();
@@ -241,147 +276,60 @@
       poll();
       return { stop(){ stopped = true; } };
     }
-    async function autoConnectControl(){
+    // --- 自动连接逻辑 (使用 PeerJS) ---
+    async function autoConnectControl() {
       const rid = roomInput.value.trim();
-      if(!rid) { status.textContent='请填写房间号'; return; }
-      setConnectionStatus('正在生成 Offer...', '#888');
-      pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
-      pc.oniceconnectionstatechange = e => {
-          switch(pc.iceConnectionState) {
-              case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
-              case "connected": setConnectionStatus("已连接", "#00FF88"); break;
-              case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
-              case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
-              case "closed": setConnectionStatus("连接关闭", "#888"); break;
-              default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
-          }
-      };
-      dc=pc.createDataChannel('timer');
-      dc.onopen=function(){};
-      dc.onmessage=function(ev){
-        try{
-          const msg=JSON.parse(ev.data);
-          if(msg.type==='status'){
-            running=!!msg.running;
-            remaining=msg.remaining||0;
-            render(formatSeconds(remaining));
-            status.textContent=running?'计时中':'已暂停';
-          }
-        }catch(e){}
-      };
-      subscribeEvents(async (type, payload)=>{
-        if(type==='answer' && pc && !pc.currentRemoteDescription){
-          try{
-            await pc.setRemoteDescription(payload);
-          }catch(e){}
+      if (!rid) { status.textContent = '请填写房间号'; return; }
+
+      if (peer) peer.destroy();
+      setConnectionStatus('正在初始化云连接...', '#888');
+
+      // 使用房间号作为 Peer ID
+      peer = new Peer('timer-room-' + rid);
+
+      peer.on('open', (id) => {
+        setConnectionStatus('等待被控端连接 (ID: ' + rid + ')', '#66ccff');
+        updateAutoLink();
+      });
+
+      peer.on('connection', (c) => {
+        conn = c;
+        setupConnection();
+      });
+
+      peer.on('error', (err) => {
+        if (err.type === 'unavailable-id') {
+          setConnectionStatus('房间号已被占用，请更换', '#FF6666');
+        } else {
+          setConnectionStatus('连接出错: ' + err.type, '#FF6666');
         }
       });
-      pc.onicecandidate = async function(ev){
-        if(!ev.candidate){
-          try{
-            await postJSON('/offer', pc.localDescription);
-            setConnectionStatus('Offer 已发布，等待 Answer', '#888');
-          }catch(e){
-            setConnectionStatus('信令服务器不可用', '#FF6666');
-          }
-        }
-      };
-      const offer=await pc.createOffer();
-      await pc.setLocalDescription(offer);
     }
-    // 纯前端连接：将 Offer 编码到 URL 并通过二维码分享，被控端扫码后回传 Answer（手动粘贴一次 Answer 即可）
-    async function genOffer(){
-      setConnectionStatus('正在生成 Offer...', '#888');
-      pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
-      
-      pc.oniceconnectionstatechange = e => {
-          switch(pc.iceConnectionState) {
-              case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
-              case "connected": setConnectionStatus("已连接", "#00FF88"); break;
-              case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
-              case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
-              case "closed": setConnectionStatus("连接关闭", "#888"); break;
-              default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
-          }
-      };
 
-      dc=pc.createDataChannel('timer');
-      dc.onopen=function(){};
-      dc.onmessage=function(ev){
-        try{
-          const msg=JSON.parse(ev.data);
-          if(msg.type==='status'){
-            running=!!msg.running;
-            remaining=msg.remaining||0;
-            render(formatSeconds(remaining));
-            status.textContent=running?'计时中':'已暂停';
-          }
-        }catch(e){}
-      };
-      pc.onicecandidate=function(ev){
-        if(!ev.candidate){
-            offerOutput.value=JSON.stringify(pc.localDescription);
-            setConnectionStatus('Offer 已生成，请复制或扫码分享', '#888');
-            // 将 Offer 编码到 URL 方便扫码
-            const encoded = encodeURIComponent(btoa(JSON.stringify(pc.localDescription)));
-            const shareUrl = `${window.location.origin}/Timer/index.html?offer=${encoded}`;
-            updateAutoLink();
-            drawQR(shareUrl);
-        }
-      };
-      const offer=await pc.createOffer();
-      await pc.setLocalDescription(offer);
-    }
-    async function genOffer(){
-      setConnectionStatus('正在生成 Offer...', '#888');
-      pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
-      
-      pc.oniceconnectionstatechange = e => {
-          switch(pc.iceConnectionState) {
-              case "connecting": setConnectionStatus("连接中...", "#66ccff"); break;
-              case "connected": setConnectionStatus("已连接", "#00FF88"); break;
-              case "failed": setConnectionStatus("连接失败", "#FF6666"); break;
-              case "disconnected": setConnectionStatus("连接断开", "#FF6666"); break;
-              case "closed": setConnectionStatus("连接关闭", "#888"); break;
-              default: setConnectionStatus(pc.iceConnectionState, "#888"); break;
-          }
-      };
+    function setupConnection() {
+      conn.on('open', () => {
+        setConnectionStatus('已连接', '#00FF88');
+        // 发送当前状态
+        sendConfig();
+      });
 
-      dc=pc.createDataChannel('timer');
-      dc.onopen=function(){
-          // This is another way to confirm connection
-      };
-      dc.onmessage=function(ev){
-        try{
-          const msg=JSON.parse(ev.data);
-          if(msg.type==='status'){
-            running=!!msg.running;
-            remaining=msg.remaining||0;
-            render(formatSeconds(remaining));
-            status.textContent=running?'计时中':'已暂停';
-          }
-        }catch(e){}
-      };
-      pc.onicecandidate=function(ev){
-        if(!ev.candidate){
-            offerOutput.value=JSON.stringify(pc.localDescription);
-            setConnectionStatus('Offer 已生成，待连接', '#888');
+      conn.on('data', (data) => {
+        if (data.type === 'status') {
+          running = !!data.running;
+          remaining = data.remaining || 0;
+          render(formatSeconds(remaining));
+          status.textContent = running ? '计时中' : '已暂停';
         }
-      };
-      const offer=await pc.createOffer();
-      await pc.setLocalDescription(offer);
+      });
+
+      conn.on('close', () => {
+        setConnectionStatus('连接已断开', '#FF6666');
+      });
     }
-    async function acceptAnswer(){
-      if(!pc) return;
-      const text=answerInput.value.trim();
-      if(!text) return;
-      try {
-        const ans=JSON.parse(text);
-        await pc.setRemoteDescription(ans);
-      } catch(e) {
-        setConnectionStatus('Answer 无效', '#FF6666');
-      }
-    }
+
+    // 覆盖原有的 WebRTC 逻辑
+    async function genOffer() { alert('已切换至自动连接模式，无需手动生成 Offer'); }
+    async function acceptAnswer() { alert('已切换至自动连接模式，无需手动粘贴 Answer'); }
     init();
     // 若 URL 携带 Answer，自动填充并连接
     const urlParams = new URLSearchParams(window.location.search);
