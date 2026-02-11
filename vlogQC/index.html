@@ -11,11 +11,25 @@
     <style>
         body { background-color: #f4f6f9; font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; margin: 0; }
         .wrapper { flex: 1; display: flex; flex-direction: column; }
-        .sidebar { min-height: 100vh; background: #212529; color: white; padding-top: 20px; }
+        .sidebar { min-height: 100vh; background: #212529; color: white; padding-top: 20px; transition: all 0.3s; }
         .sidebar a { color: rgba(255,255,255,.7); text-decoration: none; padding: 12px 20px; display: block; border-left: 3px solid transparent; display: flex; align-items: center; cursor: pointer; }
         .sidebar a i { margin-right: 10px; font-size: 1.1rem; }
         .sidebar a:hover, .sidebar a.active { background: #2c3034; border-left-color: #0d6efd; color: white; }
-        .main-content { padding: 30px; flex: 1; }
+        .main-content { padding: 30px; flex: 1; transition: all 0.3s; }
+        
+        @media (max-width: 768px) {
+             .sidebar { min-height: auto; padding-bottom: 0; }
+             .sidebar h5 { margin-bottom: 10px !important; font-size: 1.2rem; }
+             .sidebar .text-center.mb-4.text-white-50 { display: none; }
+             .sidebar .nav-container { display: flex; justify-content: center; flex-wrap: wrap; }
+             .sidebar a { padding: 10px 15px; border-left: none; border-bottom: 3px solid transparent; flex: 1; text-align: center; justify-content: center; }
+             .sidebar a.active { border-left-color: transparent; border-bottom-color: #0d6efd; background: #2c3034; }
+             .sidebar .text-danger.mt-5 { margin-top: 0 !important; }
+             .main-content { padding: 15px; }
+             .card-custom { padding: 15px !important; }
+             h3 { font-size: 1.5rem; }
+         }
+
         .card-custom { border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background: white; margin-bottom: 20px; }
         .spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spinner-border .75s linear infinite; margin-right: 5px; }
         @keyframes spinner-border { to { transform: rotate(360deg); } }
@@ -34,8 +48,8 @@
 <body>
 
 <div id="app" class="wrapper">
-    <div v-if="!user" class="container d-flex justify-content-center align-items-center" style="height: 90vh;">
-        <div class="card card-custom p-5 shadow-lg" style="width: 500px; position: relative;">
+    <div v-if="!user" class="container d-flex justify-content-center align-items-center px-3" style="min-height: 90vh;">
+        <div class="card card-custom p-4 p-md-5 shadow-lg" style="max-width: 500px; width: 100%; position: relative;">
             <div class="text-center mb-5">
                 <div class="login-icon-box"><i class="bi bi-camera-reels-fill" style="font-size: 2.5rem; color: #0d6efd;"></i></div>
                 <h3 class="text-primary fw-bold"> </h3>
@@ -70,9 +84,11 @@
                         <i class="bi bi-person-circle fs-4 mb-1 d-block text-white"></i>
                         <div class="badge bg-secondary mt-1">{{ mode === 'single' ? '单用户模式' : '多用户模式' }}</div>
                     </div>
-                    <a @click="view='scan'" :class="{active: view==='scan'}"><i class="bi bi-speedometer2"></i> 检测中心</a>
-                    <a @click="view='history'" :class="{active: view==='history'}"><i class="bi bi-clock-history"></i> 历史记录</a>
-                    <a @click="logout" class="text-danger mt-5"><i class="bi bi-box-arrow-right"></i> 退出登录</a>
+                    <div class="nav-container">
+                        <a @click="view='scan'" :class="{active: view==='scan'}"><i class="bi bi-speedometer2"></i> <span class="d-none d-sm-inline">检测中心</span><span class="d-inline d-sm-none">检测</span></a>
+                        <a @click="view='history'" :class="{active: view==='history'}"><i class="bi bi-clock-history"></i> <span class="d-none d-sm-inline">历史记录</span><span class="d-inline d-sm-none">历史</span></a>
+                        <a @click="logout" class="text-danger mt-md-5"><i class="bi bi-box-arrow-right"></i> <span class="d-none d-sm-inline">退出登录</span><span class="d-inline d-sm-none">退出</span></a>
+                    </div>
                 </div>
 
                 <div class="col-md-10 d-flex flex-column" style="min-height: 100vh;">
@@ -83,16 +99,16 @@
                                 <span class="badge bg-secondary px-3 py-2">标准: 4K (4:3) | 30FPS</span>
                             </div>
 
-                            <div class="card card-custom p-4">
-                                <label class="form-label fw-bold">选择用户ID文件夹（如：IDXXX，请勿选择“IDXXX-日期”文件夹）</label>
-                                <div class="input-group">
-                                    <button class="btn btn-secondary" @click="handleBrowse" :disabled="scanning">
-                                        <span v-if="browsing" class="spinner"></span> 📂浏览文件夹
+                            <div class="card card-custom p-3 p-md-4">
+                                <label class="form-label fw-bold">选择用户ID文件夹（如：ID001，请勿选择“ID001-日期”子文件夹）</label>
+                                <div class="input-group flex-nowrap">
+                                    <button class="btn btn-secondary text-nowrap" @click="handleBrowse" :disabled="scanning">
+                                        <span v-if="browsing" class="spinner"></span> 📂<span class="d-none d-sm-inline">浏览</span>
                                     </button>
-                                    <input type="text" v-model="pickedPath" class="form-control bg-white" placeholder="请选择用户ID文件夹（如：ID001）" readonly>
-                                    <button class="btn btn-primary px-5 fw-bold" @click="startScan" :disabled="scanning || !pickedPath">
+                                    <input type="text" v-model="pickedPath" class="form-control bg-white small" placeholder="请选择用户ID文件夹（如：ID001）" readonly>
+                                    <button class="btn btn-primary fw-bold text-nowrap" @click="startScan" :disabled="scanning || !pickedPath">
                                         <span v-if="scanning" class="spinner"></span> 
-                                        <i class="bi bi-search"></i> 开始检测
+                                        <i class="bi bi-search"></i> <span class="d-none d-sm-inline">开始检测</span>
                                     </button>
                                 </div>
                                 <div class="mt-2" id="pathStatus" v-html="statusText"></div>
@@ -100,26 +116,26 @@
 
                             <div v-if="showResult" id="resultArea">
                                 <div v-if="mode === 'single'">
-                                    <div class="row mb-3">
-                                        <div class="col-md-3">
-                                            <div class="card card-custom p-3 border-start border-success border-5">
-                                                <h6 class="text-success text-uppercase">合格视频</h6>
-                                                <h2 class="fw-bold">{{ passCount }}</h2>
+                                    <div class="row g-2 g-md-3 mb-3">
+                                        <div class="col-6 col-md-3">
+                                            <div class="card card-custom p-2 p-md-3 border-start border-success border-5 h-100">
+                                                <h6 class="text-success text-uppercase small">合格视频</h6>
+                                                <h2 class="fw-bold mb-0">{{ passCount }}</h2>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-custom p-3 border-start border-danger border-5">
-                                                <h6 class="text-danger text-uppercase">不合格视频</h6>
-                                                <h2 class="fw-bold">{{ failCount }}</h2>
+                                        <div class="col-6 col-md-3">
+                                            <div class="card card-custom p-2 p-md-3 border-start border-danger border-5 h-100">
+                                                <h6 class="text-danger text-uppercase small">不合格视频</h6>
+                                                <h2 class="fw-bold mb-0">{{ failCount }}</h2>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="card card-custom p-3 border-start border-info border-5">
-                                                <h6 class="text-info text-uppercase">视频时长 (HH:MM:SS)</h6>
+                                        <div class="col-12 col-md-6">
+                                            <div class="card card-custom p-2 p-md-3 border-start border-info border-5 h-100">
+                                                <h6 class="text-info text-uppercase small">视频时长 (HH:MM:SS)</h6>
                                                 <div class="d-flex justify-content-between">
-                                                    <div><small class="text-muted d-block">总时长</small><span class="fw-bold fs-5">{{ summary.total_duration }}</span></div>
-                                                    <div><small class="text-success d-block">有效时长</small><span class="fw-bold fs-5 text-success">{{ summary.valid_duration }}</span></div>
-                                                    <div><small class="text-danger d-block">无效时长</small><span class="fw-bold fs-5 text-danger">{{ summary.invalid_duration }}</span></div>
+                                                    <div><small class="text-muted d-block">总时长</small><span class="fw-bold">{{ summary.total_duration }}</span></div>
+                                                    <div><small class="text-success d-block">有效时长</small><span class="fw-bold text-success">{{ summary.valid_duration }}</span></div>
+                                                    <div><small class="text-danger d-block">无效时长</small><span class="fw-bold text-danger">{{ summary.invalid_duration }}</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,9 +179,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6"><div class="card card-custom h-100"><div class="card-header bg-danger text-white fw-bold"><i class="bi bi-x-circle-fill"></i> 不合格视频</div><div class="card-body p-0 table-responsive" style="max-height:500px;"><table class="table table-striped small mb-0"><thead><tr><th>文件名</th><th>时长</th><th>原因</th></tr></thead><tbody><tr v-for="v in failList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td class="text-danger">{{v.reason}}</td></tr></tbody></table></div></div></div>
-                                        <div class="col-md-6"><div class="card card-custom h-100"><div class="card-header bg-success text-white fw-bold"><i class="bi bi-check-circle-fill"></i> 合格视频</div><div class="card-body p-0 table-responsive" style="max-height:500px;"><table class="table table-striped small mb-0"><thead><tr><th>文件名</th><th>时长</th><th>详情</th></tr></thead><tbody><tr v-for="v in passList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.width}}x{{v.height}}, {{v.fps}}fps</td></tr></tbody></table></div></div></div>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card card-custom h-100">
+                                                <div class="card-header bg-danger text-white fw-bold"><i class="bi bi-x-circle-fill"></i> 不合格视频</div>
+                                                <div class="card-body p-0 table-responsive" style="max-height:500px;">
+                                                    <table class="table table-striped small mb-0">
+                                                        <thead><tr><th>文件名</th><th>时长</th><th>原因</th></tr></thead>
+                                                        <tbody><tr v-for="v in failList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td class="text-danger">{{v.reason}}</td></tr></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card card-custom h-100">
+                                                <div class="card-header bg-success text-white fw-bold"><i class="bi bi-check-circle-fill"></i> 合格视频</div>
+                                                <div class="card-body p-0 table-responsive" style="max-height:500px;">
+                                                    <table class="table table-striped small mb-0">
+                                                        <thead><tr><th>文件名</th><th>时长</th><th>详情</th></tr></thead>
+                                                        <tbody><tr v-for="v in passList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.width}}x{{v.height}}, {{v.fps}}fps</td></tr></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
