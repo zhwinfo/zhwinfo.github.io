@@ -21,8 +21,13 @@ My research interests focus on human-centered computer vision and graphics, incl
 
 I am looking for self-motivated Ph.D./Master students with strong research interests in 3D Vision, Computer Graphics, and Embodied AI.
 
-<a href='https://ai.bnu.edu.cn/xygk/szdw/fgj/9b9ed1de20d3445fbdd4a57b72b2b885.htm' target="_blank">[中文简介]</a><br />
-欢迎北师大校内外同学联系实习、申请硕士/博士研究生 [<a shape="rect" href="javascript:togglebib('recruitment')" class="togglebib">招生说明</a>]<br />
+<div class="profile-actions">
+<a href='https://ai.bnu.edu.cn/xygk/szdw/fgj/9b9ed1de20d3445fbdd4a57b72b2b885.htm' target="_blank" class="btn btn--small profile-link">中文简介</a>
+<a shape="rect" href="javascript:togglebib('recruitment')" class="btn btn--small togglebib recruitment-link">招生说明</a>
+</div>
+<p class="profile-actions-text">
+欢迎北师大校内外同学联系实习、申请硕士/博士研究生
+</p>
 <!-- <strong style="color:red;">2025年入学本人剩余名额：1名博士；课题组合作指导剩余名额：1名硕士；</strong><br /> -->
 <strong style="color:red;">本科同学可随时进组科研实习，全方位指导科研入门，有意保研的大二/大三同学请尽早联系</strong>
 <!-- <br />

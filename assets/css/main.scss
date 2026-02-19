@@ -153,3 +153,27 @@ h1:before, .anchor:before {
     background-color: #00369f;
     font-size: .8em;
 }
+
+.profile-actions {
+    margin: 0.75rem 0 0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.profile-actions .btn {
+    font-size: $type-size-5;
+    padding: 0.25em 0.7em;
+    background-color: #e6f2ff;
+    color: #0050a0 !important;
+    border: 1px solid #b3d4ff !important;
+}
+
+.profile-actions .btn:hover {
+    background-color: #d0e7ff;
+}
+
+.profile-actions-text {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
