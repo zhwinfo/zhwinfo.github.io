@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Message</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top, #1f2933 0, #0b1015 55%, #05070a 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Roboto, sans-serif;
+            color: #e5e7eb;
+        }
+        .chat-shell {
+            width: 100%;
+            max-width: 960px;
+            height: 90vh;
+            max-height: 640px;
+            background: rgba(15, 23, 42, 0.92);
+            border-radius: 18px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        @media (max-width: 768px) {
+            .chat-shell {
+                grid-template-columns: 1fr;
+                height: 100vh;
+                max-height: none;
+                border-radius: 0;
+            }
+        }
+        .sidebar {
+            background: linear-gradient(180deg, #020617 0%, #020617 35%, #020617 100%);
+            border-right: 1px solid rgba(148, 163, 184, 0.25);
+            padding: 18px 18px 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sidebar-title-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: radial-gradient(circle at 30% 0, #38bdf8 0, #0ea5e9 40%, #1d4ed8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0b1120;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+        .sidebar-sub {
+            font-size: 0.78rem;
+            color: #9ca3af;
+        }
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: #e5e7eb;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #6b7280;
+        }
+        .status-pill.connected .status-dot {
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+        }
+        .status-pill.connecting .status-dot {
+            background: #eab308;
+            box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.25);
+        }
+        .status-pill.disconnected .status-dot {
+            background: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+        }
+        .status-text {
+            letter-spacing: 0.03em;
+        }
+        .card {
+            background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.25), rgba(15, 23, 42, 0.9));
+            border-radius: 12px;
+            padding: 12px 12px 10px 12px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+        .card-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #9ca3af;
+        }
+        .input-row {
+            display: flex;
+            gap: 8px;
+        }
+        .input-text {
+            flex: 1;
+            min-width: 0;
+            border-radius: 999px;
+            border: 1px solid rgba(75, 85, 99, 0.9);
+            padding: 7px 12px;
+            font-size: 0.9rem;
+            background: rgba(15, 23, 42, 0.95);
+            color: #e5e7eb;
+            outline: none;
+        }
+        .input-text::placeholder {
+            color: #6b7280;
+        }
+        .btn {
+            border-radius: 999px;
+            border: none;
+            padding: 7px 14px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: #0b1120;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9, #2563eb);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: default;
+            box-shadow: none;
+        }
+        .btn-ghost {
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            border: 1px solid rgba(75, 85, 99, 0.8);
+            box-shadow: none;
+        }
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.78rem;
+        }
+        .help-text {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        .tips {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+        .tips span {
+            color: #e5e7eb;
+        }
+        .main {
+            padding: 18px 18px 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .chat-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #9ca3af;
+        }
+        .chat-title span {
+            color: #e5e7eb;
+        }
+        .id-badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+            color: #cbd5f5;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .id-code {
+            font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+        .chat-window {
+            flex: 1;
+            min-height: 0;
+            background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.16), rgba(15, 23, 42, 0.98));
+            border-radius: 14px;
+            border: 1px solid rgba(51, 65, 85, 0.9);
+            padding: 10px 10px 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .messages::-webkit-scrollbar-thumb {
+            background: rgba(75, 85, 99, 0.8);
+            border-radius: 999px;
+        }
+        .system-line {
+            text-align: center;
+            margin: 6px 0;
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+        .system-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(30, 64, 175, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.7);
+        }
+        .system-pill span {
+            font-size: 0.7rem;
+        }
+        .msg-row {
+            display: flex;
+            margin-bottom: 4px;
+        }
+        .msg-row.me {
+            justify-content: flex-end;
+        }
+        .msg-row.other {
+            justify-content: flex-start;
+        }
+        .msg-bubble {
+            max-width: 76%;
+            padding: 7px 10px 6px 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-break: break-word;
+            position: relative;
+        }
+        .msg-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        .msg-sender {
+            font-weight: 500;
+        }
+        .msg-time {
+            font-variant-numeric: tabular-nums;
+        }
+        .msg-row.me .msg-bubble {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-bottom-right-radius: 4px;
+            color: #022c22;
+        }
+        .msg-row.other .msg-bubble {
+            background: rgba(31, 41, 55, 0.95);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(75, 85, 99, 0.9);
+            color: #e5e7eb;
+        }
+        .msg-row.me .msg-meta {
+            color: rgba(15, 23, 42, 0.8);
+        }
+        .msg-row.other .msg-meta {
+            color: #9ca3af;
+        }
+        .chat-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-top: 4px;
+            border-top: 1px solid rgba(51, 65, 85, 0.9);
+        }
+        .chat-input {
+            flex: 1;
+            min-height: 36px;
+            max-height: 72px;
+            resize: none;
+            border-radius: 999px;
+            border: 1px solid rgba(75, 85, 99, 0.9);
+            padding: 7px 12px;
+            font-size: 0.9rem;
+            background: rgba(15, 23, 42, 0.96);
+            color: #e5e7eb;
+            outline: none;
+        }
+        .chat-input::placeholder {
+            color: #6b7280;
+        }
+        .send-btn {
+            border-radius: 999px;
+            border: none;
+            padding: 7px 14px;
+            font-size: 0.86rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: #e5e7eb;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            box-shadow: 0 12px 24px rgba(129, 140, 248, 0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .send-btn:disabled {
+            opacity: 0.55;
+            cursor: default;
+            box-shadow: none;
+        }
+        .footer {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-align: right;
+        }
+        .footer a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-shell">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div>
+                    <div class="sidebar-title">
+                        <div class="sidebar-title-icon">📶</div>
+                        通讯
+                    </div>
+                    <div class="sidebar-sub">Instant Message</div>
+                </div>
+                <div id="status-pill" class="status-pill disconnected">
+                    <span class="status-dot"></span>
+                    <span class="status-text" id="status-text">未连接</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">Channel</div>
+                <div class="input-row">
+                    <input id="room-input" class="input-text" type="text" maxlength="12" placeholder="例如 123456">
+                    <button id="btn-join" class="btn">连接</button>
+                </div>
+                <div class="help-text">
+                    任意输入一个数字/短语，两端输入一致即可进入同一Channel。
+                </div>
+            </div>
+
+            <!-- <div class="card">
+                <div class="card-label">连接说明</div>
+                <div class="tips">
+                    <div>1. 打开本页面 A，在上面输入Channel并点击 <span>连接</span>。</div>
+                    <div>2. 在另一台设备 B 上也打开本页面，输入相同房间号并连接。</div>
+                    <div>3. 其中一端会自动成为「房主」，另一端自动加入，随后即可互相聊天。</div>
+                </div>
+            </div> -->
+
+            <div class="card">
+                <div class="card-label">Info</div>
+                <div class="help-text">Connection ID</div>
+                <div class="id-badge">
+                    <span>Status:</span>
+                    <span id="my-id" class="id-code">尚未连接</span>
+                </div>
+                <!-- <div class="help-text" style="margin-top:6px;">对方连接到同一房间后，本页面不会经过任何额外服务器中转聊天内容。</div> -->
+            </div>
+
+            <!-- <div class="footer">
+                使用 <a href="https://peerjs.com" target="_blank" rel="noopener noreferrer">PeerJS 公共信令服务</a>
+            </div> -->
+        </aside>
+
+        <main class="main">
+            <div class="chat-header">
+                <div class="chat-title">
+                    Channel：<span id="current-room">未选择</span>
+                </div>
+                <button id="btn-leave" class="btn btn-ghost btn-sm" disabled>断开连接</button>
+            </div>
+
+            <section class="chat-window">
+                <div id="messages" class="messages">
+                    <div class="system-line">
+                        <span class="system-pill">
+                            <span>👋</span>
+                            <span>输入Channel并点击「连接」，开始通讯</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="chat-input-row">
+                    <textarea id="chat-input" class="chat-input" rows="1" placeholder="输入消息，按 Enter 发送，Shift+Enter 换行" disabled></textarea>
+                    <button id="btn-send" class="send-btn" disabled>
+                        <span>发送</span>
+                        <span>⮞</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script>
+        let peer = null;
+        let conn = null;
+        let currentRoom = null;
+        let isHost = false;
+
+        const roomInput = document.getElementById('room-input');
+        const btnJoin = document.getElementById('btn-join');
+        const btnLeave = document.getElementById('btn-leave');
+        const messagesEl = document.getElementById('messages');
+        const chatInput = document.getElementById('chat-input');
+        const btnSend = document.getElementById('btn-send');
+        const myIdEl = document.getElementById('my-id');
+        const currentRoomEl = document.getElementById('current-room');
+        const statusPill = document.getElementById('status-pill');
+        const statusText = document.getElementById('status-text');
+
+        function setStatus(state, text) {
+            statusPill.classList.remove('connected', 'connecting', 'disconnected');
+            statusPill.classList.add(state);
+            statusText.textContent = text;
+        }
+
+        function appendSystem(text) {
+            const line = document.createElement('div');
+            line.className = 'system-line';
+            line.innerHTML = '<span class="system-pill"><span>ℹ️</span><span>' + text + '</span></span>';
+            messagesEl.appendChild(line);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function appendMessage(fromMe, text) {
+            const row = document.createElement('div');
+            row.className = 'msg-row ' + (fromMe ? 'me' : 'other');
+
+            const bubble = document.createElement('div');
+            bubble.className = 'msg-bubble';
+
+            const meta = document.createElement('div');
+            meta.className = 'msg-meta';
+
+            const sender = document.createElement('span');
+            sender.className = 'msg-sender';
+            sender.textContent = fromMe ? '我' : '对方';
+
+            const time = document.createElement('span');
+            time.className = 'msg-time';
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            time.textContent = hh + ':' + mm;
+
+            meta.appendChild(sender);
+            meta.appendChild(time);
+
+            const body = document.createElement('div');
+            body.textContent = text;
+
+            bubble.appendChild(meta);
+            bubble.appendChild(body);
+            row.appendChild(bubble);
+            messagesEl.appendChild(row);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        function cleanRoomId(raw) {
+            return raw.trim().replace(/\s+/g, '-').slice(0, 20);
+        }
+
+        function enableChat(enabled) {
+            chatInput.disabled = !enabled;
+            btnSend.disabled = !enabled;
+            btnLeave.disabled = !enabled;
+            if (enabled) {
+                chatInput.focus();
+            }
+        }
+
+        function resetConnection() {
+            if (conn) {
+                try { conn.close(); } catch (e) {}
+                conn = null;
+            }
+            if (peer) {
+                try { peer.destroy(); } catch (e) {}
+                peer = null;
+            }
+            currentRoom = null;
+            isHost = false;
+            myIdEl.textContent = '尚未连接';
+            currentRoomEl.textContent = '未选择';
+            enableChat(false);
+            setStatus('disconnected', '未连接');
+        }
+
+        function joinRoom(rawRoom) {
+            const cleaned = cleanRoomId(rawRoom);
+            if (!cleaned) {
+                roomInput.focus();
+                return;
+            }
+            resetConnection();
+
+            currentRoom = cleaned;
+            currentRoomEl.textContent = cleaned;
+            appendSystem('正在加入房间「' + cleaned + '」...');
+            setStatus('connecting', '连接中...');
+            btnJoin.disabled = true;
+
+            const roomPeerId = 'chat-room-' + cleaned;
+
+            isHost = true;
+            peer = new Peer(roomPeerId);
+
+            peer.on('open', id => {
+                myIdEl.textContent = id;
+                setStatus('connecting', '已创建通道，等待对方加入...');
+                appendSystem('通道已创建，在另一设备输入相同Channel即可加入。');
+            });
+
+            peer.on('connection', c => {
+                if (conn && conn.open) {
+                    c.close();
+                    return;
+                }
+                conn = c;
+                setupConnection();
+            });
+
+            peer.on('error', err => {
+                if (err.type === 'unavailable-id') {
+                    appendSystem('检测到Channel已存在，尝试作为加入方连接...');
+                    becomeGuest(roomPeerId);
+                } else {
+                    appendSystem('连接出错：' + err.type);
+                    setStatus('disconnected', '未连接');
+                    btnJoin.disabled = false;
+                }
+            });
+        }
+
+        function becomeGuest(roomPeerId) {
+            isHost = false;
+            if (peer) {
+                try { peer.destroy(); } catch (e) {}
+            }
+            peer = new Peer();
+
+            peer.on('open', id => {
+                myIdEl.textContent = id;
+                appendSystem('作为加入方，正在连接...');
+                setStatus('connecting', '连接中...');
+                conn = peer.connect(roomPeerId);
+                setupConnection();
+            });
+
+            peer.on('error', err => {
+                appendSystem('连接出错：' + err.type);
+                setStatus('disconnected', '未连接');
+                btnJoin.disabled = false;
+            });
+        }
+
+        function setupConnection() {
+            if (!conn) return;
+
+            conn.on('open', () => {
+                appendSystem('已与对方建立连接，现在可以开始聊天。');
+                setStatus('connected', '已连接');
+                enableChat(true);
+                btnJoin.disabled = false;
+            });
+
+            conn.on('data', data => {
+                if (!data) return;
+                if (data.type === 'chat' && typeof data.text === 'string') {
+                    appendMessage(false, data.text);
+                }
+            });
+
+            conn.on('close', () => {
+                appendSystem('对方已断开连接。');
+                setStatus('disconnected', '已断开');
+                enableChat(false);
+            });
+        }
+
+        function sendCurrentMessage() {
+            const text = chatInput.value.replace(/\r\n/g, '\n').trim();
+            if (!text) return;
+            if (!conn || !conn.open) {
+                appendSystem('当前未连接到对方，无法发送消息。');
+                return;
+            }
+            chatInput.value = '';
+            appendMessage(true, text);
+            try {
+                conn.send({ type: 'chat', text });
+            } catch (e) {
+                appendSystem('消息发送失败。');
+            }
+        }
+
+        btnJoin.addEventListener('click', () => {
+            joinRoom(roomInput.value);
+        });
+
+        roomInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                btnJoin.click();
+            }
+        });
+
+        btnLeave.addEventListener('click', () => {
+            if (!peer && !conn) return;
+            appendSystem('你已手动断开连接。');
+            resetConnection();
+            btnJoin.disabled = false;
+        });
+
+        btnSend.addEventListener('click', () => {
+            sendCurrentMessage();
+        });
+
+        chatInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendCurrentMessage();
+            }
+        });
+
+        window.addEventListener('beforeunload', () => {
+            resetConnection();
+        });
+
+        (function initFromUrl() {
+            try {
+                const p = new URLSearchParams(window.location.search);
+                const rid = p.get('room') || '';
+                if (rid) {
+                    roomInput.value = rid;
+                    joinRoom(rid);
+                }
+            } catch (e) {}
+        })();
+    </script>
+</body>
+</html>
+

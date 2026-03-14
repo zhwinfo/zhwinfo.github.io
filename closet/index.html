@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CloSET CVPR 2023</title>
+<!-- Bootstrap -->
+<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
+</head>
+<body>
+<div id="page_container">
+<header>
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-center">CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition</h2>
+          <p class="text-center">&nbsp;</p>
+          <h6 class="text-center"><a href="https://hongwenzhang.github.io" target="_blank">Hongwen Zhang</a><sup>1</sup> &nbsp; <a href="https://jsnln.github.io" target="_blank">Siyou Lin</a><sup>1</sup> &nbsp; <a href="https://dsaurus.github.io/saurus" target="_blank">Ruizhi Shao</a><sup>1</sup> &nbsp; <a href="https://zhangyux15.github.io" target="_blank">Yuxiang Zhang</a><sup>1</sup> &nbsp; <a href="https://zhengzerong.github.io" target="_blank">Zerong Zheng</a><sup>1</sup> <br /><br /> <a href="#">Han Huang</a><sup>2</sup> &nbsp; <a href="#">Yandong Guo</a><sup>2</sup> &nbsp; <a href="https://liuyebin.com" target="_blank">Yebin Liu</a></a><sup>1</sup></h6>
+          <p class="text-center"><sup>1</sup>Tsinghua University&nbsp;&nbsp;<sup>2</sup>OPPO Research Institute</p>
+          <p class="text-center">&nbsp;</p>
+          <h3 class="text-center">CVPR 2023</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="container">
+    <p>&nbsp;</p>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+        <h2>Abstract</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 text-center  offset-xl-0 col-xl-12">
+        <p class="text-left"><em>Creating animatable avatars from static scans requires the modeling of clothing deformations in different poses. Existing learning-based methods typically add pose-dependent deformations upon a minimally-clothed mesh template or a learned implicit template, which have limitations in capturing details or hinder end-to-end learning. In this paper, we revisit point-based solutions and propose to decompose explicit garment-related templates and then add pose-dependent wrinkles to them. In this way, the clothing deformations are disentangled such that the pose-dependent wrinkles can be better learned and applied to unseen poses. Additionally, to tackle the seam artifact issues in recent state-of-the-art point-based methods, we propose to learn point features on a body surface, which establishes a continuous and compact feature space to capture the fine-grained and pose-dependent clothing geometry. To facilitate the research in this field, we also introduce a high-quality scan dataset of humans in real-world clothing. Our approach is validated on two existing datasets and our newly introduced dataset, showing better clothing deformation results in unseen poses.</em></p>
+        <p class="text-left">&nbsp;</p>
+		<h5 class="text-center">
+          <a href="assets/CloSET_CVPR2023.pdf">Paper</a> | 
+          <a href="#">arXiv</a> | 
+          <a href="https://github.com/HongwenZhang/CloSET">Code (coming)</a> | 
+          <a href="https://github.com/HongwenZhang/THuman-CloSET">Dataset (available)</a>
+        </h5>
+        <p class="text-left">&nbsp;</p>
+		<img src="./assets/pipeline.png" width="1080" alt="">
+        <p class="text-left">Fig 1.&nbsp;<b>Overview.</b> Given an input body model, its pose code and garment code are processed hierarchically by point-based pose and garment encoders for the learning of surface features. For any point lying on the template surface, its features are sampled from surface features accordingly and fed into two decoders for the prediction of the explicit garment template and pose-dependent wrinkle displacements, which will be combined and transformed to the clothing point cloud.</p></p>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+        <h2>Results </h2>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 text-center col-xl-12"> 
+		<p>&nbsp;</p>
+    <img src="./assets/explicit_templates.png" width="600" alt="">
+        <p class="text-left">Fig 2.&nbsp; Our method learns to decompose explicit garment templates (top row) and add pose-dependent wrinkles upon them (bottom row).</p>
+        <p>&nbsp;</p>
+		<img src="./assets/surface.png" width="800" alt="">
+        <p class="text-left">Fig 3.&nbsp; Comparison of the approach learned on UV planes (POP) and the approach learned on continuous surfaces (Ours). Our solution alleviates the seam artifacts of POP.</p>
+        <p>&nbsp;</p>
+		<img src="./assets/ablation.png" width="1000" alt="">
+        <p class="text-left">Fig 4.&nbsp; Comparison of the clothing deformation in unseen poses. Explicit template decomposition (ETD) helps to capture more natural
+pose-dependent wrinkle details than POP.</p>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <hr>
+    <!-- <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+        <h2>Technical Paper</h2>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center"> <a href="assets/avatarcap.pdf"><img src="./assets/paper_image.jpg" width="1000" alt=""></a>
+      <p>&nbsp;</p>
+    </div>
+    <hr> -->
+    <div class="row">
+      <div class="col-lg-12 mb-4 mt-2 text-center">
+        <h2>Demo Video</h2>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+      <video controls="controls" width="1024" height="576">
+        <source src="./assets/demo_video.mp4" type="video/mp4">
+      </video>
+      <p>&nbsp;</p>
+    </div>
+	<hr>
+<!--     <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+        <h2>Supplementary Material</h2>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center"> <a href="assets/supp.pdf"><img src="./assets/supp_image.jpg" width="500" alt=""></a>
+      <p>&nbsp;</p>
+    </div>
+    <hr> -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+        <h2>Related/Concurrent Work</h2>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-left">
+      <p>[1] Ma, Q., Yang, J., Tang, S., and Black, M. J., The Power of Points for Modeling Humans in Clothing. In ICCV, 2021</p>
+      <p>[2] Lin, S., Zhang, H., Zheng, Z., Shao, R. and Liu, Y., Learning Implicit Templates for Point-based Clothed Human Modeling. In ECCV 2022</p>
+      <p>[3] Ma, Q., Yang, J., Black, M. J., and Tang, S., Neural Point-based Shape Modeling of Humans in Challenging Clothing. In 3DV, 2022</p>
+      <p>&nbsp;</p>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-center">
+        <h2>Citation</h2>
+      </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 text-left">
+      <p>&nbsp;</p>
+      <p><span style="color:#000000;font-family:&#39;Courier New&#39;;font-size:15px;">
+    <pre><code>
+@inproceedings{zhang2023closet,
+  title={CloSET: Modeling Clothed Humans on Continuous Surface with Explicit Template Decomposition},
+  author={Zhang, Hongwen and Lin, Siyou and Shao, Ruizhi and Zhang, Yuxiang and Zheng, Zerong and Huang, Han and Guo, Yandong and Liu, Yebin},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2023}
+}
+    </code></pre>
+      </span></p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <div class="row"> </div>
+  </div>
+  <div class="jumbotron"> </div>
+</section>	
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="./js/jquery-3.2.1.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="./js/popper.min.js"></script> 
+<script src="./js/bootstrap-4.0.0.js"></script>
+
+<a ><img style="height:0;" src='//www.clustrmaps.com/map_v2.png?d=5jMXqTX-AZQmQUx6FvPgTA16XSrLTTeIra-WqTd7psc&cl=ffffff' /></a>
+
+</body><div style="all: initial;"><div id="__hcfy__" style="all: initial;"></div></div></html>

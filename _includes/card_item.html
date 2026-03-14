@@ -1,0 +1,176 @@
+{% assign dom_id = p.id %}
+{% if include.dom_suffix %}
+  {% assign dom_id = p.id | append: include.dom_suffix %}
+{% endif %}
+{% assign main_url = p.project_page | default: p.paper %}
+{% assign show_ccf = include.show_ccf | default: false %}
+{% if include.simple %}
+<div class='text-box' id='{{ dom_id }}' style="padding:0;">
+  <div class='pub-item' style="display:flex; align-items:baseline; gap:6px;">
+    {% if include.index %}
+      <span class="pub-index" style="display:inline-block; font-size:inherit; width:3em; text-align:right;">[{{ include.index }}]</span>
+    {% endif %}
+    <div class="pub-content" style="flex:1 1 auto;">
+      {% if main_url %}
+        <a class="paper" href='{{ main_url }}' target="_blank"><strong>{{ p.title }}</strong></a><br />
+      {% else %}
+        <strong>{{ p.title }}</strong><br />
+      {% endif %}
+      {% if p.authors %}
+        {% assign _authors = p.authors %}
+        {% if _authors contains '<strong>Hongwen Zhang</strong>' %}
+          {{ _authors }}<br />
+        {% elsif _authors contains 'Hongwen Zhang' %}
+          {{ _authors | replace: 'Hongwen Zhang', '<strong>Hongwen Zhang</strong>' }}<br />
+        {% else %}
+          {{ _authors }}<br />
+        {% endif %}
+      {% endif %}
+      {% assign vname = p.venue_name | default: "" %}
+      {% assign vabbr = p.venue_abbr | default: "" %}
+      {% if vname != "" and vabbr != "" %}
+        {% assign display_venue = vname | append: " (" | append: vabbr | append: ")" %}
+      {% else %}
+        {% assign display_venue = p.venue | default: vname | default: vabbr %}
+      {% endif %}
+      {% if display_venue and vabbr != "" %}
+        {% unless display_venue == vabbr or display_venue contains " (" %}
+          {% assign display_venue = display_venue | append: " (" | append: vabbr | append: ")" %}
+        {% endunless %}
+      {% endif %}
+      {% if display_venue %}
+        {% if show_ccf %}
+          {% assign parts = "" %}
+          {% if p.ccf_rank %}
+            {% assign parts = "CCF-" | append: p.ccf_rank %}
+          {% endif %}
+          {% if p.feature %}
+            {% assign feature_html = "<strong style='color:red;'>☆ " | append: p.feature | append: "</strong>" %}
+            {% if parts != "" %}
+              {% assign parts = parts | append: ", " | append: feature_html %}
+            {% else %}
+              {% assign parts = feature_html %}
+            {% endif %}
+          {% endif %}
+          {% if parts != "" %}
+            {% unless display_venue contains ' [' %}
+              {% assign display_venue = display_venue | append: " [" | append: parts | append: "]" %}
+            {% endunless %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      {% if display_venue and display_venue != "" %}
+        {{ display_venue }}{% if p.year %}, {{ p.year }}{% endif %}{% if show_ccf == false and p.feature %} <strong style="color:red;">☆ {{ p.feature }}</strong>{% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% else %}
+<div class='paper-box' id='{{ dom_id }}'>
+  <div class='paper-box-image'>
+    <div>
+      <img src='{{ p.image | default: "images_/500x300.png" }}' alt='{{ p.title | escape }}' width="100%" loading="lazy" />
+    </div>
+  </div>
+  <div class='paper-box-text'>
+    {% if main_url %}
+      <a class="paper" href='{{ main_url }}' target="_blank"><strong>{{ p.title }}</strong></a><br />
+    {% else %}
+      <strong>{{ p.title }}</strong><br />
+    {% endif %}
+    {% if p.authors %}
+      {% assign _authors = p.authors %}
+      {% if _authors contains '<strong>Hongwen Zhang</strong>' %}
+        {{ _authors }}<br />
+      {% elsif _authors contains 'Hongwen Zhang' %}
+        {{ _authors | replace: 'Hongwen Zhang', '<strong>Hongwen Zhang</strong>' }}<br />
+      {% else %}
+        {{ _authors }}<br />
+      {% endif %}
+    {% endif %}
+
+    {% assign display_venue = p.venue %}
+    {% assign vname = p.venue_name | default: "" %}
+    {% assign vabbr = p.venue_abbr | default: "" %}
+    {% if vname != "" and vabbr != "" %}
+      {% assign display_venue = vname | append: " (" | append: vabbr | append: ")" %}
+    {% else %}
+      {% assign display_venue = p.venue | default: vname | default: vabbr %}
+    {% endif %}
+    {% if display_venue and vabbr != "" %}
+      {% unless display_venue == vabbr or display_venue contains " (" %}
+        {% assign display_venue = display_venue | append: " (" | append: vabbr | append: ")" %}
+      {% endunless %}
+    {% endif %}
+    {% if display_venue %}
+      {% if show_ccf %}
+        {% assign parts = "" %}
+        {% if p.ccf_rank %}
+          {% assign parts = "CCF-" | append: p.ccf_rank %}
+        {% endif %}
+        {% if p.feature %}
+          {% assign feature_html = "<strong style='color:red;'>☆ " | append: p.feature | append: "</strong>" %}
+          {% if parts != "" %}
+            {% assign parts = parts | append: ", " | append: feature_html %}
+          {% else %}
+            {% assign parts = feature_html %}
+          {% endif %}
+        {% endif %}
+        {% if parts != "" %}
+          {% unless display_venue contains ' [' %}
+            {% assign display_venue = display_venue | append: " [" | append: parts | append: "]" %}
+          {% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+    {% if display_venue and display_venue != "" %}
+      {{ display_venue }}{% if p.year %}, {{ p.year }}{% endif %}{% if show_ccf == false and p.feature %} <strong style="color:red;">☆ {{ p.feature }}</strong>{% endif %}<br />
+    {% endif %}
+
+    {% if p.note_html %}
+      {{ p.note_html | raw }}<br />
+    {% endif %}
+
+    {% assign has_links = p.project_page or p.paper or p.code or p.video %}
+    {% assign has_bib_or_cite = p.bibtex or p.citations_data %}
+    {% if has_links or has_bib_or_cite %}
+      {% assign first = true %}
+      {% if p.project_page %}
+        <a href='{{ p.project_page }}' target="_blank">project page</a>
+        {% assign first = false %}
+      {% endif %}
+      {% if p.paper %}
+        {% unless first %} / {% endunless %}
+        <a href='{{ p.paper }}' target="_blank">paper</a>
+        {% assign first = false %}
+      {% endif %}
+      {% if p.code %}
+        {% unless first %} / {% endunless %}
+        <a href='{{ p.code }}' target="_blank">code</a>
+        {% assign first = false %}
+      {% endif %}
+      {% if p.video %}
+        {% unless first %} / {% endunless %}
+        <a href='{{ p.video }}' target="_blank">video</a>
+        {% assign first = false %}
+      {% endif %}
+
+      {% if p.bibtex %}
+        {% unless first %} / {% endunless %}
+        <a shape="rect" href="javascript:togglebib('{{ dom_id }}')" class="togglebib">bibtex</a>
+        {% assign first = false %}
+      {% endif %}
+
+      {% if p.citations_data %}
+        {% unless first %} / {% endunless %}
+        <span class='show_citations' data='{{ p.citations_data }}'></span>
+      {% endif %}
+    {% endif %}
+
+    {% if p.bibtex %}
+      <pre xml:space="preserve">{{ p.bibtex }}
+      </pre>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

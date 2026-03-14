@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>申请加入 | Admission</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #1a56db;
+      --secondary-color: #0e9f6e;
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --card-hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      background: var(--bg-gradient);
+      font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+    
+    .container-narrow {
+      max-width: 960px;
+    }
+    
+    .card-custom {
+      border: none;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+    
+    .card-custom:hover {
+      box-shadow: var(--card-hover-shadow);
+      transform: translateY(-2px);
+    }
+    
+    .tab-btn {
+      min-width: 160px;
+      transition: var(--transition);
+    }
+    
+    .section-title {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .required::after {
+      content: " *";
+      color: #dc3545;
+    }
+    
+    .form-help {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    
+    .btn-primary-soft {
+      background: #eef6ff;
+      color: var(--primary-color);
+      border: 1px solid transparent;
+      transition: var(--transition);
+      border-radius: 8px;
+    }
+    
+    .btn-primary-soft:hover,
+    .btn-primary-soft:focus,
+    .btn-primary-soft.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 86, 219, 0.3);
+    }
+    
+    .badge-soft {
+      background: #eef2f7;
+      color: #6c757d;
+      border-radius: 20px;
+      padding: 0.25rem 0.75rem;
+    }
+    
+    .preview-area {
+      white-space: pre-wrap;
+    }
+    
+    .landing-card {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .option-list {
+      width: 100%;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+      justify-items: center;
+    }
+    
+    .option-btn {
+      padding: 1.25rem 1.5rem;
+      font-size: 1.125rem;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+    
+    .option-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .landing-title {
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .header {
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+    }
+    
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .header-title i {
+      font-size: 1.75rem;
+      color: var(--primary-color);
+    }
+    
+    .header-title h3 {
+      margin: 0;
+      font-weight: 700;
+    }
+    
+    .section-intern,
+    .section-grad {
+      margin-top: 2rem;
+    }
+    
+    .form-container {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .form-container iframe {
+      border-radius: 12px;
+    }
+    
+    .info-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 247, 255, 0.95) 100%);
+      border: 1px solid rgba(26, 86, 219, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+    
+    .info-card::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(26, 86, 219, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    
+    .info-card h5 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .info-title-left {
+      justify-content: flex-start !important;
+    }
+    
+    .info-card p {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+      color: #4a5568;
+    }
+    
+    .back-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .back-link:hover {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-color: transparent;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      #top-tabs .d-flex {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      #top-tabs .tab-btn {
+        width: 100%;
+      }
+      
+      #top-tabs .ms-auto {
+        margin-left: 0 !important;
+      }
+      
+      .landing-card {
+        min-height: 80vh;
+        padding: 1.5rem;
+      }
+      
+      .option-btn {
+        padding: 1rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container container-narrow py-6">
+    <div class="header d-flex align-items-center justify-content-between mb-4">
+      <div class="header-title">
+        <i class="bi bi-people-fill"></i>
+        <h3>申请加入</h3>
+        <span class="badge badge-soft">科研实习生 / 硕博研究生</span>
+      </div>
+      <a href="/" class="back-link btn btn-outline-primary btn-sm">
+        <i class="bi bi-house-door me-1"></i> 返回主页
+      </a>
+    </div>
+
+    <div class="card card-custom p-4 mb-4" id="top-tabs">
+      <div class="d-flex gap-3">
+        <button class="btn btn-primary-soft tab-btn" id="btn-intern">
+          <i class="bi bi-person-workspace me-2"></i> 科研实习生申请
+        </button>
+        <button class="btn btn-primary-soft tab-btn" id="btn-grad">
+          <i class="bi bi-mortarboard-fill me-2"></i> 硕/博研究生申请(含保研)
+        </button>
+        <a class="btn btn-primary-soft tab-btn ms-auto" href="https://zhanghongwen.cn" target="_blank" rel="noopener">
+          <i class="bi bi-info-circle me-2"></i> 了解课题组信息
+        </a>
+      </div>
+    </div>
+    
+    <div id="section-landing" class="card card-custom p-6 mb-4 landing-card">
+      <h4 class="landing-title">申请加入具身运动智能研究组</h4>
+      <div class="option-list d-grid gap-4">
+        <button class="btn btn-primary-soft option-btn" id="btn-go-intern">
+          <i class="bi bi-person-workspace me-2"></i> 本科科研实习生申请
+        </button>
+        <button class="btn btn-primary-soft option-btn" id="btn-go-grad">
+          <i class="bi bi-mortarboard-fill me-2"></i> 硕/博研究生申请(含保研)
+        </button>
+        <button class="btn btn-primary-soft option-btn" id="btn-go-info">
+          <i class="bi bi-info-circle me-2"></i> 了解课题组信息
+        </button>
+      </div>
+      
+      <div class="info-card">
+        <h5 class="section-title mb-3"><i class="bi bi-info-circle"></i> 招生说明</h5>
+        <div class="text-box">
+          <p>招收科研实习生、硕士/博士研究生（含：学硕/专硕/学博/专博）</p>
+          <p>研究方向：三维视觉、图形学、具身智能、构建在三维世界中学习与行动的人形智能体；</p>
+          <p>本校本科同学可随时申请进组科研实习，有意保研的大二/大三同学请尽早联系；</p>
+          <p>由于名额有限，有意通过夏令营/保研/考研等方式进组的同学均需提前在本课题组实习一段时间；</p>
+          <p>由于申请邮件较多，抱歉无法逐一回复，符合条件的候选同学会在三天内收到回复邮件以进一步联系；</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-intern" class="card card-custom p-4 section-intern">
+      <h5 class="section-title mb-4">
+        <i class="bi bi-person-workspace me-2"></i> 科研实习生申请
+      </h5>
+      <div class="form-container" style="height:75vh">
+        <iframe src="https://bnu-3dv-lab.feishu.cn/share/base/form/shrcnUpW5A5epmXOYcc7Qn4DvCb" title="科研实习生申请" style="width:100%;height:100%;border:0" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+      <div class="info-card mt-4">
+        <h5 class="section-title mb-3 info-title-left"><i class="bi bi-info-circle"></i> 招生说明</h5>
+        <div class="text-box">
+          <p>招收科研实习生，硕士/博士研究生（含：学硕/专硕/学博/专博）</p>
+          <p>研究方向：三维视觉、图形学、具身智能、构建在三维世界中学习与行动的人形智能体；</p>
+          <p>本校本科同学可随时申请进组科研实习，有意保研的大二/大三同学请尽早联系；</p>
+          <p>由于名额有限，有意通过夏令营/保研/考研等方式进组的同学均需提前在本课题组实习一段时间；</p>
+          <p>由于申请邮件较多，抱歉无法逐一回复，符合条件的候选同学会在三天内收到回复邮件以进一步联系；</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-grad" class="card card-custom p-4 section-grad">
+      <h5 class="section-title mb-4">
+        <i class="bi bi-mortarboard-fill me-2"></i> 硕/博研究生申请(含保研)
+      </h5>
+      <div class="form-container" style="height:75vh">
+        <iframe src="https://bnu-3dv-lab.feishu.cn/share/base/form/shrcnlBOskuEx32CEzqbie7LD7d" title="硕/博研究生申请" style="width:100%;height:100%;border:0" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+      <div class="info-card mt-4">
+        <h5 class="section-title mb-3 info-title-left"><i class="bi bi-info-circle"></i> 招生说明</h5>
+        <div class="text-box">
+          <p>招收科研实习生，硕士/博士研究生（含：学硕/专硕/学博/专博）</p>
+          <p>研究方向：三维视觉、图形学、具身智能、构建在三维世界中学习与行动的人形智能体；</p>
+          <p>本校本科同学可随时申请进组科研实习，有意保研的大二/大三同学请尽早联系；</p>
+          <p>由于名额有限，有意通过夏令营/保研/考研等方式进组的同学均需提前在本课题组实习一段时间；</p>
+          <p>由于申请邮件较多，抱歉无法逐一回复，符合条件的候选同学会在三天内收到回复邮件以进一步联系；</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-eye"></i> 预览</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="previewContent" class="preview-area"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" id="btn-copy"><i class="bi bi-clipboard"></i> 复制到剪贴板</button>
+          <button class="btn btn-primary" id="btn-mail"><i class="bi bi-envelope"></i> 发送邮件</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const qs = (s) => document.querySelector(s)
+    
+    const showIntern = () => {
+      qs('#section-landing').style.display = 'none'
+      qs('#top-tabs').style.display = 'block'
+      qs('#section-intern').style.display = 'block'
+      qs('#section-grad').style.display = 'none'
+    }
+    
+    const showGrad = () => {
+      qs('#section-landing').style.display = 'none'
+      qs('#top-tabs').style.display = 'block'
+      qs('#section-intern').style.display = 'none'
+      qs('#section-grad').style.display = 'block'
+    }
+    
+    const showLanding = () => {
+      qs('#section-landing').style.display = 'block'
+      qs('#top-tabs').style.display = 'none'
+      qs('#section-intern').style.display = 'none'
+      qs('#section-grad').style.display = 'none'
+    }
+    
+    const navigateTo = (mode) => {
+      const url = new URL(window.location.href)
+      url.searchParams.set('mode', mode)
+      window.location.href = url.toString()
+    }
+    
+    qs('#btn-intern').addEventListener('click', showIntern)
+    qs('#btn-grad').addEventListener('click', showGrad)
+    qs('#btn-go-intern').addEventListener('click', () => navigateTo('intern'))
+    qs('#btn-go-grad').addEventListener('click', () => navigateTo('grad'))
+    qs('#btn-go-info').addEventListener('click', () => {
+      const b = qs('#btn-go-info')
+      b.classList.add('active')
+      window.open('https://zhanghongwen.cn', '_blank', 'noopener')
+    })
+    
+    document.querySelectorAll('#section-landing .option-btn').forEach(btn => {
+      btn.addEventListener('mousedown', () => btn.classList.add('active'))
+      btn.addEventListener('mouseup', () => btn.classList.remove('active'))
+      btn.addEventListener('mouseleave', () => btn.classList.remove('active'))
+    })
+    
+    const params = new URLSearchParams(window.location.search)
+    const mode = params.get('mode')
+    
+    if (mode === 'intern') showIntern()
+    else if (mode === 'grad') showGrad()
+    else showLanding()
+  </script>
+
+<a ><img style="height:0;" src="//www.clustrmaps.com/map_v2.png?d=BXQ58F8bS9rau1y_-RgqipJX-3Yhu3Osuh_9FkqiUvk&cl=ffffff"/></a>
+
+</body>
+</html>
