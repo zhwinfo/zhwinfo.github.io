@@ -197,6 +197,91 @@
             margin: 1.5rem 0;
         }
         
+        /* 作业和Git列表样式优化 */
+        .homework-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .homework-list > li {
+            margin-bottom: 1.5rem;
+            padding-left: 0;
+        }
+        
+        .homework-list > li strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--primary-light);
+        }
+        
+        .homework-list ul {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .homework-list ul li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        
+        .homework-list ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .git-list {
+            background: rgba(240, 247, 255, 0.7);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .git-list > li {
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+            list-style: none;
+        }
+        
+        .git-list ul {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .git-list ul li {
+            margin-bottom: 0.4rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        
+        .git-list ul li::before {
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* 错误示例使用叉号，正确示例使用对号 */
+        .git-list:nth-of-type(2) ul li::before {
+            content: "✗";
+            color: #e53e3e;
+        }
+        
+        .git-list:nth-of-type(3) ul li::before {
+            content: "✓";
+            color: var(--secondary-color);
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -454,19 +539,30 @@
         <section class="section" id="homework">
             <h2>课程作业</h2>
             <div class="course-info">
-                <ul>
+                <ul class="homework-list">
                     <li>
-                        <li><strong>第一次作业</strong></li>
+                        <strong>第一次作业</strong>
                         <ul>
                             <li>作业内容：实验一 图形学开发工具，<a href="/cg/submit" target="_blank">提交页面</a></li>
-                        </ul>
-                        <ul>
                             <li>要求：提交的链接应能直接看到作业的README内容(页面能看到gif等动图效果)；如把多个作业放在一个git工程（通过子文件夹区分不同作业），提交链接应为直达当次作业的页面</li>
-                        </ul>
-                        <ul>
                             <li>截止时间：2026年3月19日18:00（以git commit时间戳为准）</li>
                         </ul>
                     </li>
+                </ul>
+                <ul class="git-list">
+                    <li>Git仓库链接提交常见问题：</li>
+                    <ul>
+                        <li>username/cg-lab（无前缀网址）</li>
+                        <li>https://gitxxx.com/username/cg-lab/blob/main/README.md（不能直接看到工程目录文件）</li>
+                        <li>无法访问的Git仓库</li>
+                    </ul>
+                </ul>
+                <ul class="git-list">
+                    <li>正常Git仓库链接示例：</li>
+                    <ul>
+                        <li>https://gitxxx.com/username/cg-lab</li>
+                        <li>https://gitxxx.com/username/cg-lab/Work1（同一仓库包含多个作业，提交单次作业文件夹）</li>                    
+                    </ul>
                 </ul>
             </div>
         </section>
