@@ -41,6 +41,17 @@ items:
     project_page: ""
     code: ""
 
+  - id: hosig-2026
+    title: "HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception"
+    authors: "Wei Yao, Yunlian Sun, Hongwen Zhang, Yebin Liu, Jinhui Tang"
+    venue_name: "AAAI Conference on Artificial Intelligence"
+    venue_abbr: "AAAI"
+    ccf_rank: "A"
+    year: 2026
+    paper: "https://arxiv.org/abs/2506.01579"
+    topics:
+      - Motion Generation
+    image: "https://yw0208.github.io/images/hosig.jpg"
 
   # 2025
   - id: lodgepp-2025
@@ -164,18 +175,6 @@ items:
     topics:
       - Motion Generation
     image: "https://yunliansun.github.io/images/edmg.png"
-
-  - id: hosig-2025
-    title: "HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception"
-    authors: "Wei Yao, Yunlian Sun, Hongwen Zhang, Yebin Liu, Jinhui Tang"
-    venue_name: "AAAI Conference on Artificial Intelligence"
-    venue_abbr: "AAAI"
-    ccf_rank: "A"
-    year: 2025
-    paper: "https://arxiv.org/abs/2506.01579"
-    topics:
-      - Motion Generation
-    image: "https://yw0208.github.io/images/hosig.jpg"
 
   # 2024
   - id: layga-2024
