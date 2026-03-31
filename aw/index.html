@@ -298,31 +298,62 @@
         
         .links-section {
             background: #f8fafc;
+            border-radius: 8px;
+            overflow: hidden;
         }
         
-        .links-section ul {
+        .links-section h3 {
+            background: linear-gradient(135deg, var(--primary-light), #f0f9ff);
+            padding: 0.8rem 1rem;
+            margin: 0 -2rem 1rem -2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .links-section > ul {
             list-style: none;
             columns: 2;
             column-gap: 2rem;
+            padding: 0 1rem;
         }
         
         @media (max-width: 768px) {
-            .links-section ul {
+            .links-section > ul {
                 columns: 1;
             }
         }
         
-        .links-section li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
+        .links-section > ul > li {
+            margin-bottom: 1.2rem;
+            padding-left: 1.2rem;
             position: relative;
             break-inside: avoid;
         }
         
-        .links-section li:before {
+        .links-section > ul > li:before {
             content: "🔗";
             position: absolute;
-            left: -0.5rem;
+            left: 0;
+            color: var(--primary-color);
+        }
+        
+        .links-section ul ul {
+            list-style: none;
+            padding-left: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        .links-section ul ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.8rem;
+            position: relative;
+        }
+        
+        .links-section ul ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
         }
         
         .links-section a {
@@ -491,14 +522,14 @@
                     <div class="homework-content">
                         <p><strong>提交链接：</strong><a href="https://pan.bnu.edu.cn/l/l16RyP" target="_blank">https://pan.bnu.edu.cn/l/l16RyP</a>，命名方式：学号-姓名-第一次平时作业.pdf，截止时间：2026年4月12日23:59</p>
                         <!-- <p><strong>第一次作业易错题目解析：</strong><a href="https://pan.bnu.edu.cn" target="_blank">https://pan.bnu.edu.cn</a></p> -->
-                        <p>完成以下任务（通过不同章节区分各任务内容，作业文档中包括关键截图），使用以下LaTeX模板：<a href="https://cn.overleaf.com/latex/templates/bnuke-cheng-lun-wen-mo-ban/bcwvxncqffkw" target="_blank">https://cn.overleaf.com/latex/templates/bnuke-cheng-lun-wen-mo-ban/bcwvxncqffkw</a></p>
+                        <p>完成以下任务（通过不同章节区分各任务内容，作业文档中包括关键截图），使用以下LaTeX模板：<a href="https://cn.overleaf.com/latex/templates/bnuke-cheng-lun-wen-mo-ban/bcwvxncqffkw" target="_blank">overleaf平台模板</a>或<a href="https://pan.bnu.edu.cn/l/O1x5CN" target="_blank">https://pan.bnu.edu.cn/l/O1x5CN（支持中文生僻字显示）</a>；如遇编译超时等问题，可使用<a href="http://onlinelatex.com" target="_blank">http://onlinelatex.com</a></p>
                         <ol>
                             <li>出版物和文献的量化指标
                                 <ul>
                                     <li>在JCR官网上查找某一期刊的最新影响因子</li>
                                     <li>查找某一期刊/会议的分区（JCR/CCF，其中选一个即可）</li>
                                     <li>在谷歌学术统计指标(Google Scholar Metrics)上查找某一领域的期刊和会议排行，根据H5-Index了解不同领域的差异</li>
-                                    <li>在JCR官网查找某一篇论文的SCI引用量</li>
+                                    <li>在Web of Science官网上查找某一篇论文的SCI引用量</li>
                                 </ul>
                             </li>
                             <li>学者的检索查找
@@ -622,10 +653,10 @@
                 <li>DBLP：<a href="https://dblp.org" target="_blank">DBLP</a></li>
             </ul>
             
-            <h3>出版物分区</h3>
+            <h3>出版物分区与量化指标</h3>
             <ul>
-                <li>CCF：<a href="https://www.ccf.org.cn/Academic_Evaluation/By_category" target="_blank">CCF推荐分区</a></li>
-                <li>JCR：<a href="http://jcr.clarivate.com/JCRLandingPageAction.action" target="_blank">中科院分区</a></li>
+                <li>CCF：<a href="https://www.ccf.org.cn/Academic_Evaluation/By_category" target="_blank">CCF推荐列表</a></li>
+                <li>JCR：<a href="http://jcr.clarivate.com/JCRLandingPageAction.action" target="_blank">JCR分区</a></li>
             </ul>
             
             <h3>论文阅读</h3>
@@ -643,18 +674,30 @@
             
             <h3>论文写作</h3>
             <ul>
-                <li>LaTeX在线编辑平台：</li>
-                <li><a href="https://www.overleaf.com" target="_blank">https://www.overleaf.com</a></li>
-                <li><a href="https://www.onlinelatex.com" target="_blank">https://www.onlinelatex.com</a></li>
-                <li><a href="https://www.texpage.com" target="_blank">https://www.texpage.com</a></li>
-                <li>LaTeX模板：</li>
-                <li><a href="https://www.overleaf.com/latex/templates/thesis-template-of-beijing-normal-university-in-latex/nrjdjsvfxhms" target="_blank">学校学位论文LaTeX模板</a></li>
-                <li><a href="https://github.com/HongwenZhang/BNU-Beamer-Template" target="_blank">BNU LaTeX Slide模板</a></li>
+                <li>
+                    LaTeX在线编辑平台：
+                    <ul>
+                        <li><a href="https://www.overleaf.com" target="_blank">https://www.overleaf.com</a></li>
+                        <li><a href="https://www.onlinelatex.com" target="_blank">https://www.onlinelatex.com</a></li>
+                        <li><a href="https://www.texpage.com" target="_blank">https://www.texpage.com</a></li>
+                    </ul>
+                </li>
+                <li>
+                    LaTeX模板：
+                    <ul>
+                        <li><a href="https://www.overleaf.com/latex/templates/thesis-template-of-beijing-normal-university-in-latex/nrjdjsvfxhms" target="_blank">学校学位论文LaTeX模板</a></li>
+                        <li><a href="https://github.com/HongwenZhang/BNU-Beamer-Template" target="_blank">BNU LaTeX幻灯片模板</a></li>
+                    </ul>
+                </li>
                 <li>MCP工具：<a href="https://github.com/microsoft/markitdown" target="_blank">markitdown MCP</a></li>
                 <li>Excel转LaTeX插件：<a href="https://ctan.org/pkg/excel2latex?lang=en" target="_blank">https://ctan.org/pkg/excel2latex?lang=en</a></li>
-                <li>获取文献的BibTeX：</li>
-                <li><a href="https://scholar.google.com" target="_blank">谷歌学术</a></li>
-                <li><a href="https://dblp.uni-trier.de" target="_blank">https://dblp.uni-trier.de</a></li>
+                <li>
+                    获取文献的BibTeX：
+                    <ul>
+                        <li><a href="https://scholar.google.com" target="_blank">谷歌学术</a></li>
+                        <li><a href="https://dblp.uni-trier.de" target="_blank">https://dblp.uni-trier.de</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         
