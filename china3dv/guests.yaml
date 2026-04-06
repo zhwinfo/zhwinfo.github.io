@@ -1,0 +1,233 @@
+# 论坛信息
+forums:
+  - name: Keynote-1
+    workshop_questions:
+      - 如何构建具有物理常识的机器人系统？
+      - 机器人如何从仿真环境迁移到真实世界？
+      - 大规模机器人数据采集与学习的挑战与机遇
+    speakers:
+      - name: 苏昊
+        photo: http://china3dv.csig.org.cn/img/guest_pics/haosu.jpg
+        title: 待更新
+        unit: Hillbot
+  - name: Keynote-2
+    workshop_questions:
+      - 如何从3D物体生成扩展到完整的世界模型？
+      - 混元3D在工业应用中的实际效果如何？
+      - 3D生成大模型的未来发展方向是什么？
+    speakers:
+      - name: 郭春超
+        photo: http://china3dv.csig.org.cn/img/guest_pics/guochunchao.webp
+        title: 混元3D：从物体生成到世界模型的探索之路
+        unit: 腾讯
+  - name: Remote Keynote
+    workshop_questions:
+      - 如何构建高效的长上下文视频世界模型？
+      - 物理内在属性如何帮助理解视觉智能？
+      - 视觉与物理世界的统一表示是什么？
+    speakers:
+      - name: Gordon Wetzstein
+        photo: http://china3dv.csig.org.cn/img/guest_pics/gordon-wetzstein.jpg
+        title: Efficient Long-context Video World Models
+        unit: Stanford University
+      - name: Jitendra Malik
+        photo: http://china3dv.csig.org.cn/img/guest_pics/jitendra-malik.jpg
+        unit: University of California, Berkeley
+      - name: 吴佳俊
+        photo: http://china3dv.csig.org.cn/img/guest_pics/jiajun-wu.jpg
+        title: Understanding Visual Intelligence Through Physical Intrinsics
+        unit: Stanford University
+      - name: Andrea Vedaldi
+        photo: http://china3dv.csig.org.cn/img/guest_pics/andrea-vedaldi.jpg
+        unit: University of Oxford
+  - name: Keynote-3
+    workshop_questions:
+      - 如何在计算机图形学中实现真实感渲染？
+      - 3D建模与动画的最新技术趋势是什么？
+      - 如何将AI技术应用到计算机图形学领域？
+    speakers:
+      - name: Daniel Cohen-Or
+        photo: http://china3dv.csig.org.cn/img/guest_pics/daniel-cohen-or.jpg
+        unit: Tel-Aviv University
+  - name: 3DV战略论坛
+    workshop_questions:
+      - 3D视觉技术在未来5年的发展趋势是什么？
+      - 如何构建通用的3D世界模型？
+      - 3D视觉与具身智能的结合点在哪里？
+      - 生成式AI如何赋能3D视觉技术？
+    speakers:
+      - name: 陈宝权
+        photo: http://china3dv.csig.org.cn/img/guest_pics/陈宝权.webp
+        title: About World Models
+        unit: 北京大学
+      - name: 虞晶怡
+        photo: http://china3dv.csig.org.cn/img/guest_pics/yujingyi.jpg
+        title: Towards Agentic 3D Vision
+        unit: 上海科技大学
+      - name: 沈春华
+        photo: http://china3dv.csig.org.cn/img/guest_pics/shenchunhua.jpg
+        title: 生成式AI赋能世界模型
+        unit: 浙江大学
+      - name: 谭平
+        photo: http://china3dv.csig.org.cn/img/guest_pics/tanping.png
+        title: 三维重建与三维生成的统一模型
+        unit: 香港科技大学
+      - name: 刘子纬
+        photo: http://china3dv.csig.org.cn/img/guest_pics/liuziwei.png
+        title: 'From Egocentric Perception to Embodied Intelligence: Building the World in First Person'
+        unit: 南洋理工大学
+      - name: 刘烨斌
+        photo: http://china3dv.csig.org.cn/img/guest_pics/刘烨斌.webp
+        title: 实时动态三维重建：从过去到未来
+        unit: 清华大学
+  - name: 时空重建与世界模型论坛
+    workshop_questions:
+      - 待添加
+    speakers:
+      - name: 徐英豪
+        photo: http://china3dv.csig.org.cn/img/guest_pics/yinghao-xu.jpeg
+        title: Modeling the world from Reconstruction, Simulation and Action
+        unit: 香港科技大学 / 灵波科技
+      - name: 吴尚哲
+        photo: http://china3dv.csig.org.cn/img/guest_pics/shangzhe-wu.jpg
+        title: Learning to Simulate the Dynamic 3D World
+        unit: 剑桥大学
+      - name: 汤思宇
+        photo: http://china3dv.csig.org.cn/img/guest_pics/tangsiyu.png
+        title: 4D Perception as a Foundation for Surgical Intelligence and Beyond
+        unit: ETH Zurich
+  - name: 三维生成论坛
+    workshop_questions:
+      - 待添加
+    speakers:
+      - name: 胡渊明
+        photo: http://china3dv.csig.org.cn/img/guest_pics/yuanming-hu.jpg
+        title: 科研与商业：全球计算机图形学产业概览
+        unit: Meshy
+      - name: 高盛华
+        photo: http://china3dv.csig.org.cn/img/guest_pics/gaoshenghua.jpg
+        title: 'Cupid: Generative 3D Reconstruction via Joint Object and Pose Modeling'
+        unit: 香港大学
+      - name: 廖依伊
+        title: 迈向三维重建与生成一体化
+        unit: 浙江大学
+      - name: 韩晓光
+        photo: http://china3dv.csig.org.cn/img/guest_pics/hxg.jpg
+        title: '三维生成: 我的具身初体验'
+        unit: 香港中文大学（深圳）
+      - name: 杨蛟龙
+        photo: http://china3dv.csig.org.cn/img/guest_pics/yangjiaolong.jpg
+        title: 三维物体生成大模型TRELLIS进展报告
+        unit: 微软亚洲研究院
+      - name: 许岚
+        photo: http://china3dv.csig.org.cn/img/guest_pics/xulan.jpg
+        title: 可控的、所见即所得的三维生成
+        unit: 上海科技大学
+      - name: 张彪
+        photo: http://china3dv.csig.org.cn/img/guest_pics/zhangbiao.webp
+        title: 3D生成与神经网络时代的3D表征
+        unit: 西安交通大学
+      - name: 刘缘
+        photo: http://china3dv.csig.org.cn/img/guest_pics/liuyuan.jpg
+        title: Towards Controllable and Rational 3D Generation via Large Language Models
+        unit: 香港科技大学
+  - name: 空间智能/多模态感知论坛
+    workshop_questions:
+      - 待添加
+    speakers:
+      - name: 赵恒爽
+        photo: http://china3dv.csig.org.cn/img/guest_pics/hszhao.png
+        title: Multimodal Foundation Models with Physical Intelligence
+        unit: 香港大学
+      - name: 康炳易
+        photo: http://china3dv.csig.org.cn/img/guest_pics/bingyi-kang.jpeg
+        title: 'From Seeing to Understanding: Depth Anything 3 and Beyond'
+        unit: AMI Labs
+      - name: 齐晓娟
+        photo: http://china3dv.csig.org.cn/img/guest_pics/xiaojuan-qi.jpg
+        title: 面向世界建模和生成的三维、四维表示
+        unit: 香港大学
+      - name: 王兴刚
+        photo: http://china3dv.csig.org.cn/img/guest_pics/wangxinggang.png
+        title: 探索视觉Tokenizer预训练扩展定律与新型大模型架构
+        unit: 华中科技大学
+      - name: 袁粒
+        photo: http://china3dv.csig.org.cn/img/guest_pics/yuanli.jpg
+        title: 走向多模态原生统一：前景与挑战
+        unit: 北京大学
+      - name: 黄高
+        photo: http://china3dv.csig.org.cn/img/guest_pics/huanggao.jpg
+        title: 面向长序列建模的基础模型架构
+        unit: 清华大学
+  - name: 人形机器人论坛
+    workshop_questions:
+      - 待添加
+    speakers:
+      - name: 叶琦
+        photo: http://china3dv.csig.org.cn/img/guest_pics/yeqi.jpg
+        title: 视觉触觉融合灵巧手操作
+        unit: 浙江大学
+      - name: 黄思远
+        photo: http://china3dv.csig.org.cn/img/guest_pics/huangsiyuan.jpg
+        title: 人形机器人极限控制器
+        unit: 北京通用人工智能研究院
+      - name: Xue Bin Peng
+        photo: http://china3dv.csig.org.cn/img/guest_pics/xuebinpeng.png
+        title: Learning Whole-Body Motion Control with Adversarial Differential Discriminators
+        unit: Simon Fraser University
+  - name: 具身智能论坛
+    workshop_questions:
+      - 待添加
+    speakers:
+      - name: 许华哲
+        photo: http://china3dv.csig.org.cn/img/guest_pics/xuhuazhe.png
+        title: 通向通用家庭机器人
+        unit: 清华大学
+      - name: 卢宗青
+        photo: http://china3dv.csig.org.cn/img/guest_pics/luzongqing.jpg
+        title: Human-centric robot learning
+        unit: 北京大学
+      - name: 苏航
+        photo: http://china3dv.csig.org.cn/img/guest_pics/suhang.jpg
+        title: 视频驱动的具身基座大模型
+        unit: 清华大学
+      - name: 穆尧
+        photo: http://china3dv.csig.org.cn/img/guest_pics/muyao.jpg
+        title: 生成式仿真驱动的大规模并行具身学习
+        unit: 上海交通大学
+      - name: 仉尚航
+        photo: http://china3dv.csig.org.cn/img/guest_pics/zhangshanghang.jpg
+        title: 从一体化到自进化：让机器人像人一样运动与思考
+        unit: 北京大学
+      - name: 张力
+        photo: http://china3dv.csig.org.cn/img/guest_pics/zhangli.jpg
+        title: Towards Generalist Robots with World Modeling
+        unit: 复旦大学
+  - name: 三维重建论坛
+    workshop_questions:
+      - 待添加
+    speakers:
+      - name: 高林
+        title: 基于结构化表征和生成式先验的三维重建
+        unit: 中科院计算所
+      - name: 崔兆鹏
+        title: 物理先验引导的三维动态建模
+        unit: 浙江大学
+      - name: 刘玉身
+        photo: http://china3dv.csig.org.cn/img/guest_pics/liuyushen.jpg
+        title: 基于高斯泼溅的三维重建与生成
+        unit: 清华大学
+      - name: 彭思达
+        title: 空间感知基础模型研究与应用
+        unit: 浙江大学
+      - name: 相里元博
+        photo: http://china3dv.csig.org.cn/img/guest_pics/xiangliyuanbo.jpg
+        title: Towards Robust Geometric Models in the Wild
+        unit: 上海交通大学
+      - name: 连宙辉
+        photo: http://china3dv.csig.org.cn/img/guest_pics/7857B944258B8F5CE54622FF98A_794869E6_14546.jpg
+        title: 基于几何先验与基座大模型的单目视觉三维重建
+        unit: 北京大学
+      - name: 郭裕兰
+        title: 大模型驱动的高精度场景重建
+        unit: 中山大学
