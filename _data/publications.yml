@@ -11,6 +11,28 @@ years_order:
 
 items:
   # 2026
+  - id: MetricHMSR-2026
+    title: "MetricHMSR:Metric Human Mesh and Scene Recovery from Monocular Images"
+    authors: "Chentao Song*, He Zhang*, Haolei Yuan, Haozhe Lin, Jianhua Tao, Hongwen Zhang, Tao Yu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2026
+    project_page: "https://metaverse-ai-lab-thu.github.io/MetricHMSR"
+    paper: "https://arxiv.org/pdf/2506.09919"
+    image: "https://metaverse-ai-lab-thu.github.io/MetricHMSR/assets/teaser.png"
+
+  - id: SharpTimeGS-2026
+    title: "SharpTimeGS: Sharp and Stable Dynamic Gaussian Splatting via Lifespan Modulation"
+    authors: "Zhanfeng Liao, Jiajun Zhang, Hanzhang Tu, Zhixi Wang, Yunqi Gao, Hongwen Zhang, Yebin Liu"
+    venue: "IEEE Conference on Computer Vision and Pattern Recognition"
+    venue_abbr: "CVPR"
+    ccf_rank: "A"
+    year: 2026
+    project_page: "https://arxiv.org/html/2602.02989"
+    paper: "https://arxiv.org/pdf/2602.02989"
+    image: "https://arxiv.org/html/2602.02989v2/x1.png"
+
   - id: gaf-2026
     title: "GAF: Gaussian Action Field as a Dynamic World Model for Robotic Manipulation"
     authors: "Ying Chai*, Litao Deng*, Ruizhi Shao, Jiajun Zhang, Liangjun Xing, Hongwen Zhang, Yebin Liu"
@@ -21,6 +43,18 @@ items:
     paper: "https://arxiv.org/pdf/2506.14135"
     image: "https://raw.githubusercontent.com/ChaiYing1/GAF.github.io/refs/heads/main/project_page/files/start.png"
 
+  - id: OmniHands-2026
+    title: "OmniHands: Robust Motion Capture of Interactive Hands via A Versatile Transformer"
+    authors: "Dixuan Lin, Yuxiang Zhang, Mengcheng Li, Wei Jing, Qi Yan, Qianying Wang, Yebin Liu, Hongwen Zhang"
+    venue_name: "ACM Transactions on Graphics"
+    venue_abbr: "TOG"
+    ccf_rank: "A"
+    year: 2026
+    project_page: "https://arxiv.org/pdf/2405.20330"
+    paper: "https://arxiv.org/pdf/2405.20330"
+    code: "https://github.com/LinDixuan/OmniHands"
+    image: "https://raw.githubusercontent.com/LinDixuan/OmniHands/refs/heads/main/assets/demo.png"
+
   - id: physicshap-2026
     title: "PhysicsHap: A Modular Haptic Interaction Framework for Enhancing Student Learning in Immersive Virtual Physics Experiments"
     authors: "Yihang Li, Hailin Ji, Yiran Zhang, Yanhong Luo, Xiaoyan Hu, and Hongwen Zhang"
@@ -30,6 +64,7 @@ items:
     year: 2026
     project_page: "https://github.com/lyh-12/PhysicsHap"
     code: "https://github.com/lyh-12/PhysicsHap"
+    image: "https://raw.githubusercontent.com/lyh-12/PhysicsHap/master/images/exps.png"
 
   - id: momentumtouch-2026
     title: "MomentumTouch: How Consistent Haptic Feedback Empowers VR Embodied Learning through Cognitive Resource Reconstruction"
@@ -38,8 +73,10 @@ items:
     venue_abbr: "CHI"
     ccf_rank: "A"
     year: 2026
-    project_page: ""
-    code: ""
+    project_page: "https://dl.acm.org/doi/10.1145/3772318.3791751"
+    paper: "https://dl.acm.org/doi/10.1145/3772318.3791751"
+    image: "https://dl.acm.org/cms/10.1145/3772318.3791751/asset/9b3f5024-b2f6-4793-9178-34ed7c45a88d/assets/images/medium/chi26-1459-fig1.jpg"
+    code: "https://github.com/zheliku/MomentumTouch"
 
   - id: hosig-2026
     title: "HOSIG: Full-Body Human-Object-Scene Interaction Generation with Hierarchical Scene Perception"
@@ -75,6 +112,7 @@ items:
     ccf_rank: "A"
     year: 2025
     paper: "https://arxiv.org/abs/2410.23836"
+    image: "https://arxiv.org/html/2410.23836v1/extracted/5968100/img/teasor3.png"
     topics:
       - Animatable Avatar
 
@@ -87,6 +125,7 @@ items:
     year: 2025
     project_page: "https://liaozhanfeng.github.io/HHAvatar"
     paper: "https://arxiv.org/abs/2312.03029"
+    image: "https://arxiv.org/html/2312.03029v3/x1.png"
     topics:
       - Animatable Avatar
 

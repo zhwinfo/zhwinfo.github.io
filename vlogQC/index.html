@@ -79,7 +79,7 @@
         <div class="container-fluid p-0">
             <div class="row g-0">
                 <div class="col-md-2 sidebar">
-                    <h5 class="text-center mb-4"><i class="bi bi-film"></i> 视频检测系统v2.3</h5>
+                    <h5 class="text-center mb-4"><i class="bi bi-film"></i> 视频检测系统{{ VERSION }}</h5>
                     <div class="text-center mb-4 text-white-50 small">
                         <i class="bi bi-person-circle fs-4 mb-1 d-block text-white"></i>
                         <div class="badge bg-secondary mt-1">{{ mode === 'single' ? '单用户模式' : '多用户模式' }}</div>
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="card card-custom p-3 p-md-4">
-                                <label class="form-label fw-bold">选择用户ID文件夹（如：ID001，请勿选择“ID001-日期”子文件夹）</label>
+                                <label class="form-label fw-bold">选择用户ID文件夹（如：ID001，请勿选择“ID001-日期”子文件夹；检测程序仅运行在本地浏览器，不会上传视频数据，几乎不消耗流量）</label>
                                 <div class="input-group flex-nowrap">
                                     <button class="btn btn-secondary text-nowrap" @click="handleBrowse" :disabled="scanning">
                                         <span v-if="browsing" class="spinner"></span> 📂<span class="d-none d-sm-inline">浏览</span>
@@ -159,7 +159,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <h6 class="text-muted">各文件夹详情(检测版本号v2.3)：</h6>
+                                        <h6 class="text-muted">各文件夹详情(检测版本号{{ VERSION }})：</h6>
                                         <div class="table-responsive" style="max-height: 200px;">
                                             <table class="table table-sm table-hover mb-0">
                                                 <thead class="table-light">
@@ -185,8 +185,8 @@
                                                 <div class="card-header bg-danger text-white fw-bold"><i class="bi bi-x-circle-fill"></i> 不合格视频</div>
                                                 <div class="card-body p-0 table-responsive" style="max-height:500px;">
                                                     <table class="table table-striped small mb-0">
-                                                        <thead><tr><th>文件名</th><th>时长</th><th>原因</th></tr></thead>
-                                                        <tbody><tr v-for="v in failList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td class="text-danger">{{v.reason}}</td></tr></tbody>
+                                                        <thead><tr><th>文件名</th><th>时长</th><th>录制时间</th><th>日期状态</th><th>原因</th></tr></thead>
+                                                        <tbody><tr v-for="v in failList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.lastModified}}</td><td><span :class="v.dateMatch ? 'text-success' : 'text-danger'"> {{v.dateMatchInfo}} </span></td><td class="text-danger">{{v.reason}}</td></tr></tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -196,8 +196,8 @@
                                                 <div class="card-header bg-success text-white fw-bold"><i class="bi bi-check-circle-fill"></i> 合格视频</div>
                                                 <div class="card-body p-0 table-responsive" style="max-height:500px;">
                                                     <table class="table table-striped small mb-0">
-                                                        <thead><tr><th>文件名</th><th>时长</th><th>详情</th></tr></thead>
-                                                        <tbody><tr v-for="v in passList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.width}}x{{v.height}}, {{v.fps}}fps</td></tr></tbody>
+                                                        <thead><tr><th>文件名</th><th>时长</th><th>录制时间</th><th>日期状态</th><th>详情</th></tr></thead>
+                                                        <tbody><tr v-for="v in passList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.lastModified}}</td><td><span :class="v.dateMatch ? 'text-success' : 'text-danger'"> {{v.dateMatchInfo}} </span></td><td>{{v.width}}x{{v.height}}, {{v.fps}}fps</td></tr></tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -321,6 +321,7 @@ const { createApp, ref, computed, onMounted } = Vue;
 
 createApp({
     setup() {
+        const VERSION = 'v2.4';
         const STANDARDS = { target_fps: 30, fps_tolerance: 0.5, format: ".mp4", min_width: 2800, min_height: 2100, target_ratio: 4/3, ratio_tolerance: 0.05 };
         const DURATION_Threshold_Folder = 6 * 3600; 
         const DURATION_Threshold_Avg = 7 * 3600;
@@ -614,14 +615,146 @@ createApp({
                 if(w < STANDARDS.min_width || h < STANDARDS.min_height) reasons.push(`分辨率不足(${w}x${h})`);
                 if(Math.abs(r - STANDARDS.target_ratio) > STANDARDS.ratio_tolerance) reasons.push(`比例错误(${r.toFixed(2)})`);
                 
+                // 获取文件录制时间
+                const lastModified = file.lastModified;
+                const lastModifiedDate = new Date(lastModified);
+                const formattedDate = lastModifiedDate.toLocaleString('zh-CN');
+                
+                // 从文件名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
+                let dateMatch = true;
+                let dateMatchInfo = '日期一致';
+                
+                const pattern = /^(.+)-(\d{6})-(\d{2})\.(mp4|mov|avi|mkv)$/i;
+                const match = file.name.match(pattern);
+                if (match) {
+                    const fileDateStr = match[2]; // 从文件名提取的6位日期
+                    const fileYear = parseInt('20' + fileDateStr.substring(0, 2));
+                    const fileMonth = parseInt(fileDateStr.substring(2, 4));
+                    const fileDay = parseInt(fileDateStr.substring(4, 6));
+                    
+                    // 创建文件日期对象
+                    const fileDate = new Date(fileYear, fileMonth - 1, fileDay);
+                    
+                    // 获取录制日期
+                    const modifyDate = new Date(lastModified);
+                    const modifyHour = modifyDate.getHours();
+                    
+                    // 创建两个可能的日期：当天和前一天（如果是凌晨4点前）
+                    const possibleDates = [new Date(modifyDate)];
+                    if (modifyHour < 4) {
+                        const prevDayDate = new Date(modifyDate);
+                        prevDayDate.setDate(prevDayDate.getDate() - 1);
+                        possibleDates.push(prevDayDate);
+                    }
+                    
+                    // 检查文件日期是否与任何一个可能的日期匹配
+                    let isMatch = false;
+                    let matchedDate = null;
+                    
+                    for (const date of possibleDates) {
+                        const year = date.getFullYear();
+                        const month = date.getMonth() + 1;
+                        const day = date.getDate();
+                        
+                        if (fileYear === year && fileMonth === month && fileDay === day) {
+                            isMatch = true;
+                            matchedDate = date;
+                            break;
+                        }
+                    }
+                    
+                    // 比较日期
+                    if (!isMatch) {
+                        dateMatch = false;
+                        const modifyYear = modifyDate.getFullYear();
+                        const modifyMonth = modifyDate.getMonth() + 1;
+                        const modifyDay = modifyDate.getDate();
+                        dateMatchInfo = `日期不一致 (文件: ${fileYear}-${String(fileMonth).padStart(2, '0')}-${String(fileDay).padStart(2, '0')}, 实际日期: ${modifyYear}-${String(modifyMonth).padStart(2, '0')}-${String(modifyDay).padStart(2, '0')})`;
+                        // 将日期不一致添加到原因中
+                        reasons.push(dateMatchInfo);
+                    }
+                }
+                
                 res({
                     filename: file.name, width: w, height: h, fps: 30, 
                     duration_sec: d, duration_str: formatDuration(d),
                     passed: reasons.length === 0,
-                    reason: reasons.join(' | ') || '合格'
+                    reason: reasons.join(' | ') || '合格',
+                    lastModified: formattedDate,
+                    dateMatch: dateMatch,
+                    dateMatchInfo: dateMatchInfo
                 });
             };
-            v.onerror = () => res({ filename: file.name, duration_sec: 0, duration_str: '00:00:00', passed: false, reason: '读取异常' });
+            v.onerror = () => {
+                // 即使读取异常也要获取录制时间和日期比较
+                const lastModified = file.lastModified;
+                const lastModifiedDate = new Date(lastModified);
+                const formattedDate = lastModifiedDate.toLocaleString('zh-CN');
+                
+                // 从文件名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
+                let dateMatch = true;
+                let dateMatchInfo = '日期一致';
+                
+                const pattern = /^(.+)-(\d{6})-(\d{2})\.(mp4|mov|avi|mkv)$/i;
+                const match = file.name.match(pattern);
+                if (match) {
+                    const fileDateStr = match[2]; // 从文件名提取的6位日期
+                    const fileYear = parseInt('20' + fileDateStr.substring(0, 2));
+                    const fileMonth = parseInt(fileDateStr.substring(2, 4));
+                    const fileDay = parseInt(fileDateStr.substring(4, 6));
+                    
+                    // 创建文件日期对象
+                    const fileDate = new Date(fileYear, fileMonth - 1, fileDay);
+                    
+                    // 获取录制日期
+                    const modifyDate = new Date(lastModified);
+                    const modifyHour = modifyDate.getHours();
+                    
+                    // 创建两个可能的日期：当天和前一天（如果是凌晨4点前）
+                    const possibleDates = [new Date(modifyDate)];
+                    if (modifyHour < 4) {
+                        const prevDayDate = new Date(modifyDate);
+                        prevDayDate.setDate(prevDayDate.getDate() - 1);
+                        possibleDates.push(prevDayDate);
+                    }
+                    
+                    // 检查文件日期是否与任何一个可能的日期匹配
+                    let isMatch = false;
+                    let matchedDate = null;
+                    
+                    for (const date of possibleDates) {
+                        const year = date.getFullYear();
+                        const month = date.getMonth() + 1;
+                        const day = date.getDate();
+                        
+                        if (fileYear === year && fileMonth === month && fileDay === day) {
+                            isMatch = true;
+                            matchedDate = date;
+                            break;
+                        }
+                    }
+                    
+                    // 比较日期
+                    if (!isMatch) {
+                        dateMatch = false;
+                        const modifyYear = modifyDate.getFullYear();
+                        const modifyMonth = modifyDate.getMonth() + 1;
+                        const modifyDay = modifyDate.getDate();
+                        dateMatchInfo = `日期不一致 (文件: ${fileYear}-${String(fileMonth).padStart(2, '0')}-${String(fileDay).padStart(2, '0')}, 实际日期: ${modifyYear}-${String(modifyMonth).padStart(2, '0')}-${String(modifyDay).padStart(2, '0')})`;
+                    }
+                }
+                
+                res({ 
+                    filename: file.name, 
+                    duration_sec: 0, 
+                    duration_str: '00:00:00', 
+                    passed: false, 
+                    reason: '读取异常',
+                    lastModified: formattedDate,
+                    dateMatch: dateMatch,
+                    dateMatchInfo: dateMatchInfo
+                });
+            };
         });
 
         const saveHistory = () => {
@@ -636,7 +769,7 @@ createApp({
 
         return { 
             user, mode, view, browsing, scanning, pickedPath, statusText, showResult, folderResults, globalStats, historyData, summary,
-            errorDebugInfo, multiUserStats,
+            errorDebugInfo, multiUserStats, VERSION,
             login, logout, handleBrowse, startScan,
             passList: computed(() => videoResults.value.filter(r=>r.passed)),
             failList: computed(() => videoResults.value.filter(r=>!r.passed)),
