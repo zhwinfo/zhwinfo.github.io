@@ -12,7 +12,7 @@ years_order:
 items:
   # 2026
   - id: MetricHMSR-2026
-    title: "MetricHMSR:Metric Human Mesh and Scene Recovery from Monocular Images"
+    title: "MetricHMSR: Metric Human Mesh and Scene Recovery from Monocular Images"
     authors: "Chentao Song*, He Zhang*, Haolei Yuan, Haozhe Lin, Jianhua Tao, Hongwen Zhang, Tao Yu"
     venue: "IEEE Conference on Computer Vision and Pattern Recognition"
     venue_abbr: "CVPR"

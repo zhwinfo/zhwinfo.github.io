@@ -430,6 +430,7 @@
             
             stopFlash();
             renderTimeText(formatSeconds(remainingSeconds));
+            fitTimerToWidth();
             timeInput.value = formatSeconds(remainingSeconds); // Normalize input
             statusLabel.textContent = "Timer reset.";
             broadcastStatus();
