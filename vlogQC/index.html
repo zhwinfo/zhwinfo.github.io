@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>视频质量检测系统v2.3</title>
+    <title>视频质量检测系统</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -115,7 +115,18 @@
                             </div>
 
                             <div v-if="showResult" id="resultArea">
-                                <div v-if="mode === 'single'">
+                                <!-- 日期不匹配视频表格 -->
+                                <div v-if="dateMismatchVideos.length > 0" class="card card-custom p-4 mb-4 border-start border-warning border-5">
+                                    <h5 class="fw-bold mb-3 text-warning"><i class="bi bi-exclamation-triangle-fill"></i> 日期不匹配视频</h5>
+                                    <div class="table-responsive" style="max-height: 500px;">
+                                        <table class="table table-striped small mb-0">
+                                            <thead><tr><th>文件名</th><th>时长</th><th>录制时间</th><th>日期状态</th><th>原因</th></tr></thead>
+                                            <tbody><tr v-for="v in dateMismatchVideos"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.lastModified}}</td><td class="text-danger">{{v.dateMatchInfo}}</td><td class="text-danger">{{v.reason}}</td></tr></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div v-else-if="mode === 'single'">
                                     <div class="row g-2 g-md-3 mb-3">
                                         <div class="col-6 col-md-3">
                                             <div class="card card-custom p-2 p-md-3 border-start border-success border-5 h-100">
@@ -205,7 +216,7 @@
                                     </div>
                                 </div>
 
-                                <div v-if="mode === 'multi'">
+                                <div v-else-if="mode === 'multi'">
                                     <div class="alert alert-info border-0 shadow-sm">
                                         <i class="bi bi-info-circle-fill me-2"></i> 多用户模式下，系统已根据文件名ID自动分类统计。合格标准：该用户平均有效时长≥7小时，且单文件夹≥6小时。
                                     </div>
@@ -345,6 +356,7 @@ createApp({
         const historyData = ref(JSON.parse(localStorage.getItem('qc_history') || '[]'));
         
         const errorDebugInfo = ref(null);
+        const dateMismatchVideos = ref([]);
         let currentDirHandle = null;
 
         // Login Logic: Auto ID Generation
@@ -472,18 +484,28 @@ createApp({
 
                 if(!foundVideos) throw new Error("未找到视频文件");
 
-                // --- 数据统计逻辑 ---
-                if (mode.value === 'single') {
-                    // 单用户逻辑 (保持原有)
-                    processSingleUserStats(results);
+                // 检查是否有日期不匹配的视频
+                dateMismatchVideos.value = results.filter(info => !info.dateMatch);
+                
+                if (dateMismatchVideos.value.length > 0) {
+                    // 有日期不匹配的视频，只显示日期不匹配表格
+                    statusText.value = `<span class='text-warning fw-bold'>检测完成，发现 ${dateMismatchVideos.value.length} 个日期不匹配的视频。</span>`;
+                    showResult.value = true;
                 } else {
-                    // 多用户逻辑 (新增)
-                    processMultiUserStats(results);
-                }
+                    // 没有日期不匹配的视频，正常显示检测结果
+                    // --- 数据统计逻辑 ---
+                    if (mode.value === 'single') {
+                        // 单用户逻辑 (保持原有)
+                        processSingleUserStats(results);
+                    } else {
+                        // 多用户逻辑 (新增)
+                        processMultiUserStats(results);
+                    }
 
-                statusText.value = `<span class='text-success fw-bold'>检测完成，共发现 ${results.length} 个视频。</span>`;
-                showResult.value = true;
-                saveHistory();
+                    statusText.value = `<span class='text-success fw-bold'>检测完成，共发现 ${results.length} 个视频。</span>`;
+                    showResult.value = true;
+                    saveHistory();
+                }
 
             } catch (e) {
                 if(e.message === "STRUCTURE_ERROR") {
@@ -769,7 +791,7 @@ createApp({
 
         return { 
             user, mode, view, browsing, scanning, pickedPath, statusText, showResult, folderResults, globalStats, historyData, summary,
-            errorDebugInfo, multiUserStats, VERSION,
+            errorDebugInfo, multiUserStats, dateMismatchVideos, VERSION,
             login, logout, handleBrowse, startScan,
             passList: computed(() => videoResults.value.filter(r=>r.passed)),
             failList: computed(() => videoResults.value.filter(r=>!r.passed)),
