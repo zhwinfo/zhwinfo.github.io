@@ -59,7 +59,7 @@ I am looking for self-motivated Ph.D./Master students with strong research inter
 
 <span class='anchor' id='-motion-capture'></span>
 
-🎉&ensp; 8 paper accepted to <strong style="color:red;">TOG/SIGGRAPH/CVPR/ICRA/TVCG/CHI/AAAI 2026</strong>
+🎉&ensp; 9 paper accepted to <strong style="color:red;">TOG/TVCG/SIGGRAPH/CVPR/ICRA/CHI/AAAI 2026</strong>
 
 🎉&ensp; 10 paper accepted to <strong style="color:red;">TPAMI/TVCG/CVPR/ICCV/NeurIPS/MM 2025</strong>
 
