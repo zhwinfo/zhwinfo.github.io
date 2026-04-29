@@ -485,7 +485,7 @@ createApp({
                 if(!foundVideos) throw new Error("未找到视频文件");
 
                 // 检查是否有日期不匹配的视频
-                dateMismatchVideos.value = results.filter(info => !info.dateMatch);
+                dateMismatchVideos.value = results.filter(info => !info.dateMatch).sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
                 
                 if (dateMismatchVideos.value.length > 0) {
                     // 有日期不匹配的视频，只显示日期不匹配表格
@@ -793,8 +793,8 @@ createApp({
             user, mode, view, browsing, scanning, pickedPath, statusText, showResult, folderResults, globalStats, historyData, summary,
             errorDebugInfo, multiUserStats, dateMismatchVideos, VERSION,
             login, logout, handleBrowse, startScan,
-            passList: computed(() => videoResults.value.filter(r=>r.passed)),
-            failList: computed(() => videoResults.value.filter(r=>!r.passed)),
+            passList: computed(() => videoResults.value.filter(r=>r.passed).sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))),
+            failList: computed(() => videoResults.value.filter(r=>!r.passed).sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))),
             passCount: computed(() => videoResults.value.filter(r=>r.passed).length), 
             failCount: computed(() => videoResults.value.length - videoResults.value.filter(r=>r.passed).length)
         };
