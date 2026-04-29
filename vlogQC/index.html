@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="card card-custom p-3 p-md-4">
-                                <label class="form-label fw-bold">选择用户ID文件夹（如：ID001，请勿选择“ID001-日期”子文件夹；检测程序仅运行在本地浏览器，不会上传视频数据，几乎不消耗流量，打开本页面后可断网检测）</label>
+                                <label class="form-label fw-bold">选择用户ID文件夹（如：ID001，请勿选择“ID001-日期”子文件夹;检测程序仅运行在本地浏览器，不会上传视频数据，几乎不消耗流量，打开本页面后可断网检测）</label>
                                 <div class="input-group flex-nowrap">
                                     <button class="btn btn-secondary text-nowrap" @click="handleBrowse" :disabled="scanning">
                                         <span v-if="browsing" class="spinner"></span> 📂<span class="d-none d-sm-inline">浏览</span>
@@ -309,10 +309,10 @@
                         </div>
                         
                         <div class="text-muted small fst-italic mt-2 p-2 bg-white rounded border">
-                            <strong><i class="bi bi-info-circle"></i> 检测标准 (倒数三级):</strong><br>
-                            1. <strong>文件名</strong>: [ID]-[日期]-[序号].mp4<br>
-                            2. <strong>父文件夹</strong>: [ID]-[日期]<br>
-                            3. <strong>爷爷文件夹</strong>: [ID]<br>
+                            <strong><i class="bi bi-info-circle"></i> 检测标准 (倒数三级文件夹命名):</strong><br>
+                            1. <strong>视频文件</strong>: MP4格式文件<br>
+                            2. <strong>父文件夹</strong>: [ID]-[日期] (如: ID001-251201)<br>
+                            3. <strong>爷爷文件夹</strong>: [ID] (如: ID001)<br>
                             * 三级以上的文件夹名称不限
                         </div>
                     </div>
@@ -332,7 +332,7 @@ const { createApp, ref, computed, onMounted } = Vue;
 
 createApp({
     setup() {
-        const VERSION = 'v2.5';
+        const VERSION = 'v3';
         const STANDARDS = { target_fps: 30, fps_tolerance: 0.5, format: ".mp4", min_width: 2800, min_height: 2100, target_ratio: 4/3, ratio_tolerance: 0.05 };
         const DURATION_Threshold_Folder = 6 * 3600; 
         const DURATION_Threshold_Avg = 7 * 3600;
@@ -418,8 +418,8 @@ createApp({
             
             try {
                 const results = [];
-                // 校验规则: ID(任意字符)-日期(6位)-序号(2位)
-                const pattern = /^(.+)-(\d{6})-(\d{2})\.(mp4|mov|avi|mkv)$/i;
+                // 校验规则: 父文件夹格式为 ID-日期 (如 ID001-251201)，爷爷文件夹格式为 ID (如 ID001)
+                const folderPattern = /^([^-\s]+)-(\d{6})$/;
                 let foundVideos = false;
 
                 const scan = async (dirHandle, pathStack = []) => {
@@ -427,34 +427,31 @@ createApp({
                         if (/^\./.test(entry.name)) continue;
                         if (entry.kind === 'directory') {
                             await scan(entry, [...pathStack, dirHandle]);
-                        } else if (entry.kind === 'file' && /\.(mp4|mov|avi|mkv)$/i.test(entry.name)) {
+                        } else if (entry.kind === 'file' && /\.(mp4)$/i.test(entry.name)) {
                             foundVideos = true;
                             
-                            // --- 检测逻辑 (仅倒数三级) ---
-                            const match = entry.name.match(pattern);
-                            const currentFolderName = dirHandle.name; 
+                            // --- 检测逻辑 (仅倒数三级文件夹，视频文件任意命名) ---
+                            const currentFolderName = dirHandle.name;
+                            const folderMatch = currentFolderName.match(folderPattern);
                             let structureError = false;
 
-                            // 1. 文件名格式检查 (Level 3)
-                            if (!match) structureError = true;
-                            else {
-                                const fileId = match[1];   // e.g. XX001
-                                const fileDate = match[2]; // e.g. 251201
-                                const expectedFolderName = `${fileId}-${fileDate}`; 
-                                const expectedParentName = fileId;
+                            if (!folderMatch) {
+                                // 父文件夹格式不符合 ID-日期
+                                structureError = true;
+                            } else {
+                                const folderId = folderMatch[1];   // e.g. ID001
+                                const folderDate = folderMatch[2]; // e.g. 251201
+                                const expectedParentName = folderId;
 
-                                // 2. 直接父级检查 (Level 2)
-                                if (currentFolderName !== expectedFolderName) {
-                                    structureError = true;
-                                }
-
-                                // 3. 祖父级检查 (Level 1)
-                                if (!structureError && pathStack.length > 0) {
-                                    const parentEntry = pathStack[pathStack.length - 1]; 
-                                    // 仅当爷爷级存在时检查 (如果是Level 2直接上传，pathStack可能为空，但这在逻辑上也是一种错误因为必须有ID文件夹)
+                                // 祖父级检查 (Level 1)
+                                if (pathStack.length > 0) {
+                                    const parentEntry = pathStack[pathStack.length - 1];
                                     if (parentEntry.name !== expectedParentName) {
                                         structureError = true;
                                     }
+                                } else {
+                                    // 没有祖父级文件夹，结构错误
+                                    structureError = true;
                                 }
                             }
 
@@ -469,9 +466,9 @@ createApp({
                             }
                             // --- 检测结束 ---
 
-                            const info = await analyzeVideo(await entry.getFile());
-                            // 注入ID，用于多用户聚合
-                            if(match) info.userId = match[1]; 
+                            const info = await analyzeVideo(await entry.getFile(), currentFolderName);
+                            // 从文件夹名中提取ID，用于多用户聚合
+                            if(folderMatch) info.userId = folderMatch[1];
                             // 注入日期文件夹Key，用于聚合
                             info.folderKey = currentFolderName;
                             
@@ -625,7 +622,7 @@ createApp({
             };
         };
 
-        const analyzeVideo = (file) => new Promise(res => {
+        const analyzeVideo = (file, folderName) => new Promise(res => {
             const v = document.createElement('video');
             v.preload = 'metadata';
             v.src = URL.createObjectURL(file);
@@ -642,20 +639,18 @@ createApp({
                 const lastModifiedDate = new Date(lastModified);
                 const formattedDate = lastModifiedDate.toLocaleString('zh-CN');
                 
-                // 从文件名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
+                // 从文件夹名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
                 let dateMatch = true;
                 let dateMatchInfo = '日期一致';
                 
-                const pattern = /^(.+)-(\d{6})-(\d{2})\.(mp4|mov|avi|mkv)$/i;
-                const match = file.name.match(pattern);
-                if (match) {
-                    const fileDateStr = match[2]; // 从文件名提取的6位日期
+                // 从文件夹名中提取日期，格式如 ID001-251201
+                const folderPattern = /^([^-\s]+)-(\d{6})$/;
+                const folderMatch = folderName ? folderName.match(folderPattern) : null;
+                if (folderMatch) {
+                    const fileDateStr = folderMatch[2]; // 从文件夹名提取的6位日期
                     const fileYear = parseInt('20' + fileDateStr.substring(0, 2));
                     const fileMonth = parseInt(fileDateStr.substring(2, 4));
                     const fileDay = parseInt(fileDateStr.substring(4, 6));
-                    
-                    // 创建文件日期对象
-                    const fileDate = new Date(fileYear, fileMonth - 1, fileDay);
                     
                     // 获取录制日期
                     const modifyDate = new Date(lastModified);
@@ -669,9 +664,8 @@ createApp({
                         possibleDates.push(prevDayDate);
                     }
                     
-                    // 检查文件日期是否与任何一个可能的日期匹配
+                    // 检查文件夹日期是否与任何一个可能的日期匹配
                     let isMatch = false;
-                    let matchedDate = null;
                     
                     for (const date of possibleDates) {
                         const year = date.getFullYear();
@@ -680,7 +674,6 @@ createApp({
                         
                         if (fileYear === year && fileMonth === month && fileDay === day) {
                             isMatch = true;
-                            matchedDate = date;
                             break;
                         }
                     }
@@ -691,7 +684,7 @@ createApp({
                         const modifyYear = modifyDate.getFullYear();
                         const modifyMonth = modifyDate.getMonth() + 1;
                         const modifyDay = modifyDate.getDate();
-                        dateMatchInfo = `日期不一致 (文件: ${fileYear}-${String(fileMonth).padStart(2, '0')}-${String(fileDay).padStart(2, '0')}, 实际日期: ${modifyYear}-${String(modifyMonth).padStart(2, '0')}-${String(modifyDay).padStart(2, '0')})`;
+                        dateMatchInfo = `日期不一致 (文件夹: ${fileYear}-${String(fileMonth).padStart(2, '0')}-${String(fileDay).padStart(2, '0')}, 实际日期: ${modifyYear}-${String(modifyMonth).padStart(2, '0')}-${String(modifyDay).padStart(2, '0')})`;
                         // 将日期不一致添加到原因中
                         reasons.push(dateMatchInfo);
                     }
@@ -713,20 +706,18 @@ createApp({
                 const lastModifiedDate = new Date(lastModified);
                 const formattedDate = lastModifiedDate.toLocaleString('zh-CN');
                 
-                // 从文件名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
+                // 从文件夹名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
                 let dateMatch = true;
                 let dateMatchInfo = '日期一致';
                 
-                const pattern = /^(.+)-(\d{6})-(\d{2})\.(mp4|mov|avi|mkv)$/i;
-                const match = file.name.match(pattern);
-                if (match) {
-                    const fileDateStr = match[2]; // 从文件名提取的6位日期
+                // 从文件夹名中提取日期，格式如 ID001-251201
+                const folderPattern = /^([^-\s]+)-(\d{6})$/;
+                const folderMatch = folderName ? folderName.match(folderPattern) : null;
+                if (folderMatch) {
+                    const fileDateStr = folderMatch[2]; // 从文件夹名提取的6位日期
                     const fileYear = parseInt('20' + fileDateStr.substring(0, 2));
                     const fileMonth = parseInt(fileDateStr.substring(2, 4));
                     const fileDay = parseInt(fileDateStr.substring(4, 6));
-                    
-                    // 创建文件日期对象
-                    const fileDate = new Date(fileYear, fileMonth - 1, fileDay);
                     
                     // 获取录制日期
                     const modifyDate = new Date(lastModified);
@@ -740,9 +731,8 @@ createApp({
                         possibleDates.push(prevDayDate);
                     }
                     
-                    // 检查文件日期是否与任何一个可能的日期匹配
+                    // 检查文件夹日期是否与任何一个可能的日期匹配
                     let isMatch = false;
-                    let matchedDate = null;
                     
                     for (const date of possibleDates) {
                         const year = date.getFullYear();
@@ -751,7 +741,6 @@ createApp({
                         
                         if (fileYear === year && fileMonth === month && fileDay === day) {
                             isMatch = true;
-                            matchedDate = date;
                             break;
                         }
                     }
@@ -762,7 +751,7 @@ createApp({
                         const modifyYear = modifyDate.getFullYear();
                         const modifyMonth = modifyDate.getMonth() + 1;
                         const modifyDay = modifyDate.getDate();
-                        dateMatchInfo = `日期不一致 (文件: ${fileYear}-${String(fileMonth).padStart(2, '0')}-${String(fileDay).padStart(2, '0')}, 实际日期: ${modifyYear}-${String(modifyMonth).padStart(2, '0')}-${String(modifyDay).padStart(2, '0')})`;
+                        dateMatchInfo = `日期不一致 (文件夹: ${fileYear}-${String(fileMonth).padStart(2, '0')}-${String(fileDay).padStart(2, '0')}, 实际日期: ${modifyYear}-${String(modifyMonth).padStart(2, '0')}-${String(modifyDay).padStart(2, '0')})`;
                     }
                 }
                 
