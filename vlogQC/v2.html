@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>视频质量检测系统v2.3</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f4f6f9; font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; margin: 0; }
+        .wrapper { flex: 1; display: flex; flex-direction: column; }
+        .sidebar { min-height: 100vh; background: #212529; color: white; padding-top: 20px; transition: all 0.3s; }
+        .sidebar a { color: rgba(255,255,255,.7); text-decoration: none; padding: 12px 20px; display: block; border-left: 3px solid transparent; display: flex; align-items: center; cursor: pointer; }
+        .sidebar a i { margin-right: 10px; font-size: 1.1rem; }
+        .sidebar a:hover, .sidebar a.active { background: #2c3034; border-left-color: #0d6efd; color: white; }
+        .main-content { padding: 30px; flex: 1; transition: all 0.3s; }
+        
+        @media (max-width: 768px) {
+             .sidebar { min-height: auto; padding-bottom: 0; }
+             .sidebar h5 { margin-bottom: 10px !important; font-size: 1.2rem; }
+             .sidebar .text-center.mb-4.text-white-50 { display: none; }
+             .sidebar .nav-container { display: flex; justify-content: center; flex-wrap: wrap; }
+             .sidebar a { padding: 10px 15px; border-left: none; border-bottom: 3px solid transparent; flex: 1; text-align: center; justify-content: center; }
+             .sidebar a.active { border-left-color: transparent; border-bottom-color: #0d6efd; background: #2c3034; }
+             .sidebar .text-danger.mt-5 { margin-top: 0 !important; }
+             .main-content { padding: 15px; }
+             .card-custom { padding: 15px !important; }
+             h3 { font-size: 1.5rem; }
+         }
+
+        .card-custom { border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background: white; margin-bottom: 20px; }
+        .spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spinner-border .75s linear infinite; margin-right: 5px; }
+        @keyframes spinner-border { to { transform: rotate(360deg); } }
+        .footer-info { text-align: center; padding: 10px; color: #adb5bd; font-size: 0.85rem; margin-top: auto; border-top: 1px solid #e9ecef; background-color: #fff; width: 100%; }
+        .login-footer { position: absolute; bottom: 10px; width: 100%; text-align: center; color: #adb5bd; font-size: 0.8rem; background: transparent; }
+        .login-icon-box { width: 80px; height: 80px; background: #e7f1ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; }
+        
+        .btn-light-primary { background-color: #e7f1ff; color: #0d6efd; border: 1px solid transparent; transition: all 0.3s ease; }
+        .btn-light-primary:hover { background-color: #0d6efd; color: white; border-color: #0d6efd; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(13, 110, 253, 0.25); }
+
+        .error-detail-box { background: #fff3cd; border: 1px solid #ffecb5; border-radius: 6px; padding: 15px; margin-top: 15px; text-align: left; font-size: 0.9rem; }
+        .error-path-item { font-family: Consolas, Monaco, 'Courier New', monospace; background: rgba(0,0,0,0.08); padding: 4px 8px; border-radius: 4px; font-weight: bold; color: #d63384; display: inline-block; margin: 2px 0; }
+        .error-arrow { color: #6c757d; margin: 0 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="app" class="wrapper">
+    <div v-if="!user" class="container d-flex justify-content-center align-items-center px-3" style="min-height: 90vh;">
+        <div class="card card-custom p-4 p-md-5 shadow-lg" style="max-width: 500px; width: 100%; position: relative;">
+            <div class="text-center mb-5">
+                <div class="login-icon-box"><i class="bi bi-camera-reels-fill" style="font-size: 2.5rem; color: #0d6efd;"></i></div>
+                <h3 class="text-primary fw-bold"> </h3>
+                <p class="text-muted small"> </p>
+            </div>
+            
+            <div class="d-grid gap-3 mb-4">
+                <button @click="login('single')" class="btn btn-light-primary btn-lg py-3 fw-bold shadow-sm">
+                    <i class="bi bi-person-fill me-2"></i> 单用户检测模式
+                </button>
+                <button @click="login('multi')" class="btn btn-light-primary btn-lg py-3 fw-bold shadow-sm">
+                    <i class="bi bi-people-fill me-2"></i> 多用户批量检测
+                </button>
+                <a href="https://zhanghongwen.cn" target="_blank" class="btn btn-light-primary btn-lg py-3 fw-bold shadow-sm d-flex align-items-center justify-content-center text-decoration-none">
+                    <i class="bi bi-globe me-2"></i> 了解课题组研究
+                </a>
+            </div>
+            <div class="text-center text-muted small mt-2"> </div>
+        </div>
+        <div class="login-footer">
+            <p class="mb-0">网页开发：吕佳忆</p>
+            <p class="mb-0">指导老师：张鸿文@BNU具身运动智能研究组</p>
+        </div>
+    </div>
+
+    <template v-else>
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-md-2 sidebar">
+                    <h5 class="text-center mb-4"><i class="bi bi-film"></i> 视频检测系统v2.3</h5>
+                    <div class="text-center mb-4 text-white-50 small">
+                        <i class="bi bi-person-circle fs-4 mb-1 d-block text-white"></i>
+                        <div class="badge bg-secondary mt-1">{{ mode === 'single' ? '单用户模式' : '多用户模式' }}</div>
+                    </div>
+                    <div class="nav-container">
+                        <a @click="view='scan'" :class="{active: view==='scan'}"><i class="bi bi-speedometer2"></i> <span class="d-none d-sm-inline">检测中心</span><span class="d-inline d-sm-none">检测</span></a>
+                        <a @click="view='history'" :class="{active: view==='history'}"><i class="bi bi-clock-history"></i> <span class="d-none d-sm-inline">历史记录</span><span class="d-inline d-sm-none">历史</span></a>
+                        <a @click="logout" class="text-danger mt-md-5"><i class="bi bi-box-arrow-right"></i> <span class="d-none d-sm-inline">退出登录</span><span class="d-inline d-sm-none">退出</span></a>
+                    </div>
+                </div>
+
+                <div class="col-md-10 d-flex flex-column" style="min-height: 100vh;">
+                    <div class="main-content">
+                        <div v-if="view==='scan'">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3 class="fw-bold text-dark"><i class="bi bi-grid-1x2-fill text-primary"></i> 检测控制台</h3>
+                                <span class="badge bg-secondary px-3 py-2">标准: 4K (4:3) | 30FPS</span>
+                            </div>
+
+                            <div class="card card-custom p-3 p-md-4">
+                                <label class="form-label fw-bold">选择用户ID文件夹（如：ID001，请勿选择“ID001-日期”子文件夹）</label>
+                                <div class="input-group flex-nowrap">
+                                    <button class="btn btn-secondary text-nowrap" @click="handleBrowse" :disabled="scanning">
+                                        <span v-if="browsing" class="spinner"></span> 📂<span class="d-none d-sm-inline">浏览</span>
+                                    </button>
+                                    <input type="text" v-model="pickedPath" class="form-control bg-white small" placeholder="请选择用户ID文件夹（如：ID001）" readonly>
+                                    <button class="btn btn-primary fw-bold text-nowrap" @click="startScan" :disabled="scanning || !pickedPath">
+                                        <span v-if="scanning" class="spinner"></span> 
+                                        <i class="bi bi-search"></i> <span class="d-none d-sm-inline">开始检测</span>
+                                    </button>
+                                </div>
+                                <div class="mt-2" id="pathStatus" v-html="statusText"></div>
+                            </div>
+
+                            <div v-if="showResult" id="resultArea">
+                                <div v-if="mode === 'single'">
+                                    <div class="row g-2 g-md-3 mb-3">
+                                        <div class="col-6 col-md-3">
+                                            <div class="card card-custom p-2 p-md-3 border-start border-success border-5 h-100">
+                                                <h6 class="text-success text-uppercase small">合格视频</h6>
+                                                <h2 class="fw-bold mb-0">{{ passCount }}</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <div class="card card-custom p-2 p-md-3 border-start border-danger border-5 h-100">
+                                                <h6 class="text-danger text-uppercase small">不合格视频</h6>
+                                                <h2 class="fw-bold mb-0">{{ failCount }}</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="card card-custom p-2 p-md-3 border-start border-info border-5 h-100">
+                                                <h6 class="text-info text-uppercase small">视频时长 (HH:MM:SS)</h6>
+                                                <div class="d-flex justify-content-between">
+                                                    <div><small class="text-muted d-block">总时长</small><span class="fw-bold">{{ summary.total_duration }}</span></div>
+                                                    <div><small class="text-success d-block">有效时长</small><span class="fw-bold text-success">{{ summary.valid_duration }}</span></div>
+                                                    <div><small class="text-danger d-block">无效时长</small><span class="fw-bold text-danger">{{ summary.invalid_duration }}</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card card-custom p-4 mb-3 border-start border-warning border-5">
+                                        <h5 class="fw-bold mb-3"><i class="bi bi-folder2-open text-warning"></i> 文件夹时长统计</h5>
+                                        <div class="mb-3">
+                                            <span class="badge bg-dark me-2">平均标准: ≥7小时</span>
+                                            <span class="badge bg-secondary">单文件夹标准: ≥6小时</span>
+                                        </div>
+                                        <div class="row align-items-center mb-3">
+                                            <div class="col-md-6">
+                                                <h6 class="text-muted">平均时长 (达标文件夹)</h6>
+                                                <div id="avgFolderStatus">
+                                                    <h3 :class="globalStats.avg_passed ? 'text-success' : 'text-danger'" class="fw-bold">
+                                                        <i :class="globalStats.avg_passed ? 'bi bi-check-circle-fill' : 'bi bi-x-circle-fill'"></i>
+                                                        {{ globalStats.avg_duration_str }}
+                                                    </h3>
+                                                    <small class="text-muted">{{ globalStats.avg_passed ? '平均有效采集时长达标' : '平均有效采集时长未达标 (需≥7小时)' }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h6 class="text-muted">各文件夹详情(检测版本号v2.3)：</h6>
+                                        <div class="table-responsive" style="max-height: 200px;">
+                                            <table class="table table-sm table-hover mb-0">
+                                                <thead class="table-light">
+                                                    <tr><th>文件夹名称</th><th>总时长</th><th class="text-success">有效采集时长</th><th>状态 (有效时长≥6h)</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="f in folderResults">
+                                                        <td class="fw-bold">{{ f.name }}</td><td>{{ f.duration_str }}</td><td class="text-success fw-bold">{{ f.valid_duration_str }}</td>
+                                                        <td><span class="badge" :class="f.passed?'bg-success':'bg-danger'">{{ f.passed?'合格':'不合格 (有效不足6h)' }}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="mt-3 pt-3 border-top text-center">
+                                            <h5 class="text-secondary">最终合格天数 (有效时长达标)</h5>
+                                            <h2 class="fw-bold text-primary">{{ globalStats.qualified_days }} 天</h2>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card card-custom h-100">
+                                                <div class="card-header bg-danger text-white fw-bold"><i class="bi bi-x-circle-fill"></i> 不合格视频</div>
+                                                <div class="card-body p-0 table-responsive" style="max-height:500px;">
+                                                    <table class="table table-striped small mb-0">
+                                                        <thead><tr><th>文件名</th><th>时长</th><th>原因</th></tr></thead>
+                                                        <tbody><tr v-for="v in failList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td class="text-danger">{{v.reason}}</td></tr></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card card-custom h-100">
+                                                <div class="card-header bg-success text-white fw-bold"><i class="bi bi-check-circle-fill"></i> 合格视频</div>
+                                                <div class="card-body p-0 table-responsive" style="max-height:500px;">
+                                                    <table class="table table-striped small mb-0">
+                                                        <thead><tr><th>文件名</th><th>时长</th><th>详情</th></tr></thead>
+                                                        <tbody><tr v-for="v in passList"><td>{{v.filename}}</td><td>{{v.duration_str}}</td><td>{{v.width}}x{{v.height}}, {{v.fps}}fps</td></tr></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div v-if="mode === 'multi'">
+                                    <div class="alert alert-info border-0 shadow-sm">
+                                        <i class="bi bi-info-circle-fill me-2"></i> 多用户模式下，系统已根据文件名ID自动分类统计。合格标准：该用户平均有效时长≥7小时，且单文件夹≥6小时。
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card card-custom border-start border-success border-5 h-100">
+                                                <div class="card-header bg-white border-0 pt-3 pb-0">
+                                                    <h5 class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> 合格用户 ({{ multiUserStats.passed.length }})</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover align-middle">
+                                                            <thead class="table-light"><tr><th>用户ID</th><th>平均时长</th><th>合格天数</th></tr></thead>
+                                                            <tbody>
+                                                                <tr v-for="u in multiUserStats.passed" :key="u.id">
+                                                                    <td class="fw-bold text-dark">{{ u.id }}</td>
+                                                                    <td class="text-success">{{ u.avgStr }}</td>
+                                                                    <td><span class="badge bg-success rounded-pill">{{ u.qualifiedDays }}天</span></td>
+                                                                </tr>
+                                                                <tr v-if="multiUserStats.passed.length===0"><td colspan="3" class="text-center text-muted py-4">暂无合格用户</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="card card-custom border-start border-danger border-5 h-100">
+                                                <div class="card-header bg-white border-0 pt-3 pb-0">
+                                                    <h5 class="text-danger fw-bold"><i class="bi bi-x-circle-fill"></i> 未合格用户 ({{ multiUserStats.failed.length }})</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover align-middle">
+                                                            <thead class="table-light"><tr><th>用户ID</th><th>平均时长</th><th>合格天数</th></tr></thead>
+                                                            <tbody>
+                                                                <tr v-for="u in multiUserStats.failed" :key="u.id">
+                                                                    <td class="fw-bold text-dark">{{ u.id }}</td>
+                                                                    <td class="text-danger">{{ u.avgStr }}</td>
+                                                                    <td><span class="badge bg-secondary rounded-pill">{{ u.qualifiedDays }}天</span></td>
+                                                                </tr>
+                                                                <tr v-if="multiUserStats.failed.length===0"><td colspan="3" class="text-center text-muted py-4">暂无不合格用户</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="view==='history'">
+                            <div class="card card-custom p-4">
+                                <h4><i class="bi bi-clock-history text-primary"></i> 历史检测记录</h4>
+                                <table class="table table-hover mt-3 align-middle">
+                                    <thead class="table-light"><tr><th>时间</th><th>用户ID</th><th>模式</th><th>检测路径</th><th>结果(合格/总数)</th></tr></thead>
+                                    <tbody><tr v-for="h in historyData"><td>{{h.time}}</td><td>{{h.user}}</td><td><span class="badge bg-light text-dark border">{{h.mode==='single'?'单用户':'多用户'}}</span></td><td class="text-muted small">{{h.path}}</td><td><span class="text-success">{{h.pass_count}}</span> / {{h.total}}</td></tr></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-info">
+                        <p class="mb-1">网页开发：吕佳忆</p>
+                        <p class="mb-0">指导老师：张鸿文@BNU具身运动智能研究组</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <div class="modal fade" id="namingErrorModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-warning text-dark"><h5 class="modal-title fw-bold"><i class="bi bi-exclamation-triangle-fill"></i> 目录或文件结构错误</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body text-center p-4">
+                    <h4 class="text-danger mb-3">文件位置或命名不符合规范</h4>
+                    
+                    <div v-if="errorDebugInfo" class="error-detail-box text-center">
+                        <h6 class="text-dark fw-bold pb-2 mb-2"><i class="bi bi-search"></i> 系统读取到的完整路径：</h6>
+                        
+                        <div class="mb-3">
+                            <span v-for="(item, index) in errorDebugInfo.pathList" :key="index">
+                                <span class="error-path-item">{{ item }}</span>
+                                <span v-if="index < errorDebugInfo.pathList.length - 1" class="error-arrow"><i class="bi bi-chevron-right"></i></span>
+                            </span>
+                        </div>
+                        
+                        <div class="text-muted small fst-italic mt-2 p-2 bg-white rounded border">
+                            <strong><i class="bi bi-info-circle"></i> 检测标准 (倒数三级):</strong><br>
+                            1. <strong>文件名</strong>: [ID]-[日期]-[序号].mp4<br>
+                            2. <strong>父文件夹</strong>: [ID]-[日期]<br>
+                            3. <strong>爷爷文件夹</strong>: [ID]<br>
+                            * 三级以上的文件夹名称不限
+                        </div>
+                    </div>
+
+                    <img src="static/structure_guide.png" class="img-fluid border rounded shadow-sm mt-3" style="max-height: 250px;" alt="结构示意图">
+                </div>
+                <div class="modal-footer justify-content-center"><button class="btn btn-primary px-5" data-bs-dismiss="modal">好的，我去检查</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const { createApp, ref, computed, onMounted } = Vue;
+
+createApp({
+    setup() {
+        const STANDARDS = { target_fps: 30, fps_tolerance: 0.5, format: ".mp4", min_width: 2800, min_height: 2100, target_ratio: 4/3, ratio_tolerance: 0.05 };
+        const DURATION_Threshold_Folder = 6 * 3600; 
+        const DURATION_Threshold_Avg = 7 * 3600;
+
+        const user = ref('');
+        const mode = ref('single'); // 'single' or 'multi'
+        const view = ref('scan');
+        const browsing = ref(false);
+        const scanning = ref(false);
+        const pickedPath = ref('');
+        const statusText = ref('');
+        const showResult = ref(false);
+        
+        // Data Storage
+        const videoResults = ref([]);
+        const folderResults = ref([]); // For Single User Mode
+        const multiUserStats = ref({ passed: [], failed: [] }); // For Multi User Mode
+        
+        const summary = ref({ total_duration: '00:00:00', valid_duration: '00:00:00', invalid_duration: '00:00:00' });
+        const globalStats = ref({ avg_duration_str: '00:00:00', avg_passed: false, qualified_days: 0 });
+        const historyData = ref(JSON.parse(localStorage.getItem('qc_history') || '[]'));
+        
+        const errorDebugInfo = ref(null);
+        let currentDirHandle = null;
+
+        // Login Logic: Auto ID Generation
+        const login = (selectedMode) => {
+            const prefix = selectedMode === 'single' ? 'SU-' : 'MU-';
+            const countKey = selectedMode === 'single' ? 'qc_su_count' : 'qc_mu_count';
+            
+            // Get last count, increment, and save
+            let currentCount = parseInt(localStorage.getItem(countKey) || '0');
+            currentCount++;
+            localStorage.setItem(countKey, currentCount.toString());
+
+            // Generate ID: Prefix + 001, 002...
+            const newId = prefix + String(currentCount).padStart(3, '0');
+            
+            user.value = newId;
+            mode.value = selectedMode;
+            
+            // Persist session (disabled for always-ask behavior)
+            // localStorage.setItem('qc_current_user', newId);
+            // localStorage.setItem('qc_mode', selectedMode);
+        };
+
+        const logout = () => { 
+            user.value = ''; 
+            localStorage.removeItem('qc_current_user'); 
+            location.reload(); 
+        };
+
+        const formatDuration = (s) => {
+            const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = Math.floor(s%60);
+            return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+        };
+
+        const handleBrowse = async () => {
+            try {
+                browsing.value = true;
+                currentDirHandle = await window.showDirectoryPicker();
+                const name = currentDirHandle.name;
+                // 禁止选择带“-”的文件夹（如 ID001-251201）
+                if (name.includes('-')) {
+                    alert('请勿选择“ID-日期”子文件夹，请返回上一级选择用户ID文件夹（如：ID001）');
+                    currentDirHandle = null;
+                    pickedPath.value = '';
+                    return;
+                }
+                pickedPath.value = name;
+            } catch (e) { console.warn("Browse cancelled"); }
+            finally { browsing.value = false; }
+        };
+
+        const startScan = async () => {
+            if(!currentDirHandle) return alert("请先选择用户ID文件夹（如：ID001）");
+            
+            scanning.value = true;
+            showResult.value = false;
+            errorDebugInfo.value = null;
+            statusText.value = '<span class="text-primary">正在扫描分析...</span>';
+            
+            try {
+                const results = [];
+                // 校验规则: ID(任意字符)-日期(6位)-序号(2位)
+                const pattern = /^(.+)-(\d{6})-(\d{2})\.(mp4|mov|avi|mkv)$/i;
+                let foundVideos = false;
+
+                const scan = async (dirHandle, pathStack = []) => {
+                    for await (const entry of dirHandle.values()) {
+                        if (/^\./.test(entry.name)) continue;
+                        if (entry.kind === 'directory') {
+                            await scan(entry, [...pathStack, dirHandle]);
+                        } else if (entry.kind === 'file' && /\.(mp4|mov|avi|mkv)$/i.test(entry.name)) {
+                            foundVideos = true;
+                            
+                            // --- 检测逻辑 (仅倒数三级) ---
+                            const match = entry.name.match(pattern);
+                            const currentFolderName = dirHandle.name; 
+                            let structureError = false;
+
+                            // 1. 文件名格式检查 (Level 3)
+                            if (!match) structureError = true;
+                            else {
+                                const fileId = match[1];   // e.g. XX001
+                                const fileDate = match[2]; // e.g. 251201
+                                const expectedFolderName = `${fileId}-${fileDate}`; 
+                                const expectedParentName = fileId;
+
+                                // 2. 直接父级检查 (Level 2)
+                                if (currentFolderName !== expectedFolderName) {
+                                    structureError = true;
+                                }
+
+                                // 3. 祖父级检查 (Level 1)
+                                if (!structureError && pathStack.length > 0) {
+                                    const parentEntry = pathStack[pathStack.length - 1]; 
+                                    // 仅当爷爷级存在时检查 (如果是Level 2直接上传，pathStack可能为空，但这在逻辑上也是一种错误因为必须有ID文件夹)
+                                    if (parentEntry.name !== expectedParentName) {
+                                        structureError = true;
+                                    }
+                                }
+                            }
+
+                            if (structureError) {
+                                const fullPathNames = pathStack.map(h => h.name);
+                                fullPathNames.push(currentFolderName);
+                                fullPathNames.push(entry.name);
+
+                                errorDebugInfo.value = { pathList: fullPathNames };
+                                new bootstrap.Modal(document.getElementById('namingErrorModal')).show();
+                                throw new Error("STRUCTURE_ERROR");
+                            }
+                            // --- 检测结束 ---
+
+                            const info = await analyzeVideo(await entry.getFile());
+                            // 注入ID，用于多用户聚合
+                            if(match) info.userId = match[1]; 
+                            // 注入日期文件夹Key，用于聚合
+                            info.folderKey = currentFolderName;
+                            
+                            results.push(info);
+                        }
+                    }
+                };
+
+                await scan(currentDirHandle, []);
+
+                if(!foundVideos) throw new Error("未找到视频文件");
+
+                // --- 数据统计逻辑 ---
+                if (mode.value === 'single') {
+                    // 单用户逻辑 (保持原有)
+                    processSingleUserStats(results);
+                } else {
+                    // 多用户逻辑 (新增)
+                    processMultiUserStats(results);
+                }
+
+                statusText.value = `<span class='text-success fw-bold'>检测完成，共发现 ${results.length} 个视频。</span>`;
+                showResult.value = true;
+                saveHistory();
+
+            } catch (e) {
+                if(e.message === "STRUCTURE_ERROR") {
+                    statusText.value = `<span class='text-danger fw-bold'>目录结构错误</span>`;
+                } else {
+                    statusText.value = `<span class='text-danger'>${e.message}</span>`;
+                }
+            } finally {
+                scanning.value = false;
+            }
+        };
+
+        const processSingleUserStats = (results) => {
+            const folderDurationMap = new Map();
+            const folderValidDurationMap = new Map();
+
+            results.forEach(info => {
+                const k = info.folderKey;
+                folderDurationMap.set(k, (folderDurationMap.get(k) || 0) + info.duration_sec);
+                if(info.passed) {
+                    folderValidDurationMap.set(k, (folderValidDurationMap.get(k) || 0) + info.duration_sec);
+                } else if (!folderValidDurationMap.has(k)) {
+                    folderValidDurationMap.set(k, 0);
+                }
+            });
+
+            let totalQualifiedValidDur = 0;
+            let qualifiedDaysCount = 0;
+            const fResults = [];
+
+            folderDurationMap.forEach((duration, folderName) => {
+                const validDuration = folderValidDurationMap.get(folderName) || 0;
+                const isPassed = validDuration >= DURATION_Threshold_Folder;
+                if(isPassed) {
+                    qualifiedDaysCount++;
+                    totalQualifiedValidDur += validDuration;
+                }
+                fResults.push({
+                    name: folderName,
+                    duration_str: formatDuration(duration),
+                    valid_duration_str: formatDuration(validDuration),
+                    passed: isPassed
+                });
+            });
+
+            const avgDur = qualifiedDaysCount > 0 ? (totalQualifiedValidDur / qualifiedDaysCount) : 0;
+            
+            // Update UI State
+            folderResults.value = fResults;
+            videoResults.value = results;
+            updateSummary(results);
+            
+            globalStats.value = {
+                avg_duration_str: formatDuration(avgDur),
+                avg_passed: avgDur >= DURATION_Threshold_Avg,
+                qualified_days: qualifiedDaysCount
+            };
+        };
+
+        const processMultiUserStats = (results) => {
+            // Group by UserID
+            const users = {}; // { 'ID001': { passedFolders: [], validDurSum: 0 } }
+            
+            results.forEach(info => {
+                const uid = info.userId;
+                if(!users[uid]) users[uid] = { folderMap: new Map() };
+                
+                // Aggregate by folder within user
+                const k = info.folderKey;
+                if(!users[uid].folderMap.has(k)) users[uid].folderMap.set(k, 0);
+                
+                if(info.passed) {
+                    users[uid].folderMap.set(k, users[uid].folderMap.get(k) + info.duration_sec);
+                }
+            });
+
+            const passedList = [];
+            const failedList = [];
+
+            for (const uid in users) {
+                const folderMap = users[uid].folderMap;
+                let qualifiedDays = 0;
+                let totalQualifiedValidDur = 0;
+
+                folderMap.forEach(dur => {
+                    if (dur >= DURATION_Threshold_Folder) {
+                        qualifiedDays++;
+                        totalQualifiedValidDur += dur;
+                    }
+                });
+
+                const avgDur = qualifiedDays > 0 ? (totalQualifiedValidDur / qualifiedDays) : 0;
+                const isUserQualified = avgDur >= DURATION_Threshold_Avg;
+                
+                const userObj = {
+                    id: uid,
+                    avgStr: formatDuration(avgDur),
+                    qualifiedDays: qualifiedDays
+                };
+
+                if (isUserQualified) passedList.push(userObj);
+                else failedList.push(userObj);
+            }
+
+            multiUserStats.value = { passed: passedList, failed: failedList };
+            videoResults.value = results; // Store full results anyway for pass/fail counts
+            updateSummary(results); // Update top summary cards
+        };
+
+        const updateSummary = (results) => {
+            const totalSec = results.reduce((a, b) => a + b.duration_sec, 0);
+            const validSec = results.filter(r => r.passed).reduce((a, b) => a + b.duration_sec, 0);
+            summary.value = {
+                total_duration: formatDuration(totalSec),
+                valid_duration: formatDuration(validSec),
+                invalid_duration: formatDuration(totalSec - validSec)
+            };
+        };
+
+        const analyzeVideo = (file) => new Promise(res => {
+            const v = document.createElement('video');
+            v.preload = 'metadata';
+            v.src = URL.createObjectURL(file);
+            v.onloadedmetadata = () => {
+                URL.revokeObjectURL(v.src);
+                const d = v.duration || 0, w = v.videoWidth, h = v.videoHeight, r = w/h;
+                let reasons = [];
+                if(!file.name.toLowerCase().endsWith(STANDARDS.format)) reasons.push(`格式错误`);
+                if(w < STANDARDS.min_width || h < STANDARDS.min_height) reasons.push(`分辨率不足(${w}x${h})`);
+                if(Math.abs(r - STANDARDS.target_ratio) > STANDARDS.ratio_tolerance) reasons.push(`比例错误(${r.toFixed(2)})`);
+                
+                res({
+                    filename: file.name, width: w, height: h, fps: 30, 
+                    duration_sec: d, duration_str: formatDuration(d),
+                    passed: reasons.length === 0,
+                    reason: reasons.join(' | ') || '合格'
+                });
+            };
+            v.onerror = () => res({ filename: file.name, duration_sec: 0, duration_str: '00:00:00', passed: false, reason: '读取异常' });
+        });
+
+        const saveHistory = () => {
+            const h = { 
+                time: new Date().toLocaleString(), user: user.value, mode: mode.value,
+                path: pickedPath.value, total: videoResults.value.length, 
+                pass_count: videoResults.value.filter(r=>r.passed).length 
+            };
+            historyData.value.unshift(h);
+            localStorage.setItem('qc_history', JSON.stringify(historyData.value.slice(0, 50)));
+        };
+
+        return { 
+            user, mode, view, browsing, scanning, pickedPath, statusText, showResult, folderResults, globalStats, historyData, summary,
+            errorDebugInfo, multiUserStats,
+            login, logout, handleBrowse, startScan,
+            passList: computed(() => videoResults.value.filter(r=>r.passed)),
+            failList: computed(() => videoResults.value.filter(r=>!r.passed)),
+            passCount: computed(() => videoResults.value.filter(r=>r.passed).length), 
+            failCount: computed(() => videoResults.value.length - videoResults.value.filter(r=>r.passed).length)
+        };
+    }
+}).mount('#app');
+</script>
+</body>
+</html>
