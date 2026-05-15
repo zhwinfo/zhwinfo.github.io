@@ -336,6 +336,7 @@ createApp({
         const STANDARDS = { target_fps: 30, fps_tolerance: 0.5, format: ".mp4", min_width: 2800, min_height: 2100, target_ratio: 4/3, ratio_tolerance: 0.05 };
         const DURATION_Threshold_Folder = 6 * 3600; 
         const DURATION_Threshold_Avg = 7 * 3600;
+        const DATE_MATCH_HOUR_THRESHOLD = 6;
 
         const user = ref('');
         const mode = ref('single'); // 'single' or 'multi'
@@ -639,7 +640,7 @@ createApp({
                 const lastModifiedDate = new Date(lastModified);
                 const formattedDate = lastModifiedDate.toLocaleString('zh-CN');
                 
-                // 从文件夹名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
+                // 从文件夹名中提取日期并与录制日期比较（宽松判断：凌晨DATE_MATCH_HOUR_THRESHOLD点前录制的视频可以认为是前一日或当天的视频）
                 let dateMatch = true;
                 let dateMatchInfo = '日期一致';
                 
@@ -656,9 +657,9 @@ createApp({
                     const modifyDate = new Date(lastModified);
                     const modifyHour = modifyDate.getHours();
                     
-                    // 创建两个可能的日期：当天和前一天（如果是凌晨4点前）
+                    // 创建两个可能的日期：当天和前一天（如果是凌晨DATE_MATCH_HOUR_THRESHOLD点前）
                     const possibleDates = [new Date(modifyDate)];
-                    if (modifyHour < 4) {
+                    if (modifyHour < DATE_MATCH_HOUR_THRESHOLD) {
                         const prevDayDate = new Date(modifyDate);
                         prevDayDate.setDate(prevDayDate.getDate() - 1);
                         possibleDates.push(prevDayDate);
@@ -706,7 +707,7 @@ createApp({
                 const lastModifiedDate = new Date(lastModified);
                 const formattedDate = lastModifiedDate.toLocaleString('zh-CN');
                 
-                // 从文件夹名中提取日期并与录制日期比较（宽松判断：凌晨4点前录制的视频可以认为是前一日或当天的视频）
+                // 从文件夹名中提取日期并与录制日期比较（宽松判断：凌晨DATE_MATCH_HOUR_THRESHOLD点前录制的视频可以认为是前一日或当天的视频）
                 let dateMatch = true;
                 let dateMatchInfo = '日期一致';
                 
@@ -723,9 +724,9 @@ createApp({
                     const modifyDate = new Date(lastModified);
                     const modifyHour = modifyDate.getHours();
                     
-                    // 创建两个可能的日期：当天和前一天（如果是凌晨4点前）
+                    // 创建两个可能的日期：当天和前一天（如果是凌晨DATE_MATCH_HOUR_THRESHOLD点前）
                     const possibleDates = [new Date(modifyDate)];
-                    if (modifyHour < 4) {
+                    if (modifyHour < DATE_MATCH_HOUR_THRESHOLD) {
                         const prevDayDate = new Date(modifyDate);
                         prevDayDate.setDate(prevDayDate.getDate() - 1);
                         possibleDates.push(prevDayDate);
@@ -780,7 +781,7 @@ createApp({
 
         return { 
             user, mode, view, browsing, scanning, pickedPath, statusText, showResult, folderResults, globalStats, historyData, summary,
-            errorDebugInfo, multiUserStats, dateMismatchVideos, VERSION,
+            errorDebugInfo, multiUserStats, dateMismatchVideos, VERSION, DATE_MATCH_HOUR_THRESHOLD,
             login, logout, handleBrowse, startScan,
             passList: computed(() => videoResults.value.filter(r=>r.passed).sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))),
             failList: computed(() => videoResults.value.filter(r=>!r.passed).sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))),
