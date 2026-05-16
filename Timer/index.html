@@ -163,6 +163,7 @@
                 <button id="btn-toggle-connect">跨设备</button>
                 <input type="text" id="room-id" placeholder="房间号" style="width:120px">
                 <button id="btn-auto-connect">自动连接</button>
+                <button id="btn-ring">响铃</button>
             </div>
             <div id="status"></div>
         </div>
@@ -184,6 +185,7 @@
         let bcSync = null;
         let peer = null;
         let conn = null;
+        let continuousRinging = false;
         
         // --- DOM Elements ---
         const timerLabel = document.getElementById('timer-container');
@@ -220,6 +222,7 @@
             document.getElementById('btn-reset').addEventListener('click', resetTimer);
             document.getElementById('btn-set').addEventListener('click', setTimer);
             btnFullscreen.addEventListener('click', toggleFullscreen);
+            document.getElementById('btn-ring').addEventListener('click', toggleRing);
             document.addEventListener('fullscreenchange', () => {
                 btnFullscreen.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
             });
@@ -504,7 +507,46 @@
             notifySound.play().catch(e => console.error("Audio play failed", e));
         }
 
+        function startContinuousRing() {
+            continuousRinging = true;
+            document.getElementById('btn-ring').textContent = "停止响铃";
+            
+            // 播放音频
+            notifySound.currentTime = 0;
+            
+            notifySound.onended = function() {
+                if (continuousRinging) {
+                    notifySound.currentTime = 0;
+                    notifySound.play().catch(e => console.error("Audio play failed", e));
+                }
+            };
+            
+            notifySound.play().catch(e => console.error("Audio play failed", e));
+        }
+
+        function stopContinuousRing() {
+            continuousRinging = false;
+            document.getElementById('btn-ring').textContent = "响铃";
+            
+            // 移除事件监听器
+            notifySound.onended = null;
+            
+            // 停止音频
+            notifySound.pause();
+            notifySound.currentTime = 0;
+        }
+
+        function toggleRing() {
+            unlockAudio();
+            if (continuousRinging) {
+                stopContinuousRing();
+            } else {
+                startContinuousRing();
+            }
+        }
+
         function stopAudio() {
+            stopContinuousRing();
             notifySound.pause();
             notifySound.currentTime = 0;
             notifySound.onended = null;
