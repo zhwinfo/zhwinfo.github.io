@@ -39,9 +39,9 @@ items:
     venue_name: "IEEE International Conference on Robotics & Automation"
     venue_abbr: "ICRA"
     year: 2026
-    project_page: "https://chaiying1.github.io/GAF.github.io/project_page"
+    project_page: "https://chaiying1.github.io/projects/GAF"
     paper: "https://arxiv.org/pdf/2506.14135"
-    image: "https://raw.githubusercontent.com/ChaiYing1/GAF.github.io/refs/heads/main/project_page/files/start.png"
+    image: "https://chaiying1.github.io/projects/GAF/static/images/overview.jpg"
 
   - id: OmniHands-2026
     title: "OmniHands: Robust Motion Capture of Interactive Hands via A Versatile Transformer"
