@@ -21,5 +21,6 @@ redirect_from:
 <br />
 <br />
 
-<a ><img style="height:0;" src="//www.clustrmaps.com/map_v2.png?d=b8WkSwwIaLk33Yal_OURunpuzq7_52m1J4ZniDEWW3w&cl=ffffff" /></a>
+<!-- <a ><img style="height:0;" src="//www.clustrmaps.com/map_v2.png?d=b8WkSwwIaLk33Yal_OURunpuzq7_52m1J4ZniDEWW3w&cl=ffffff" /></a> -->
+<a ><img style="height:0;" src="//mapmyvisitors.com/map.png?d=Kn1Mid2xtuWrKP1BsiG8n6kB3ivjpa9e-6cPJPuu6sg&cl=ffffff" /></a>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "385e827cdf6f457a882e0a2b8d77e05e"}'></script>

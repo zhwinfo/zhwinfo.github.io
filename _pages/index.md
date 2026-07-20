@@ -254,5 +254,6 @@ B.E., <strong>South China University of Technology</strong> -->
 <br />
 <br />
 
-<a ><img style="height:0;" src='//clustrmaps.com/map_v2.png?cl=080808&w=109&t=n&d=YixTrW_BMdr5L3rb__AgAOkCfxEXKHagTEWHnPVvoAI&co=ffffff&ct=808080'></a>
+<!-- <a ><img style="height:0;" src='//clustrmaps.com/map_v2.png?cl=080808&w=109&t=n&d=YixTrW_BMdr5L3rb__AgAOkCfxEXKHagTEWHnPVvoAI&co=ffffff&ct=808080'></a> -->
+<a ><img style="height:0;" src='//mapmyvisitors.com/map.png?d=i1bF9bL-rQMk4i4Jv-cZ4Yox8C518HbKUH4q6O6FimY&cl=ffffff'></a>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "385e827cdf6f457a882e0a2b8d77e05e"}'></script>
